@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PricingItem>
+@using RasmiOnline.Console.Enum
+@{
+    ViewBag.title = "استعلام قیمت و ثبت سفارش";
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.detailed_add_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.order_item_css)" rel="stylesheet" />
+}
+<div class="order-row">
+    @{Html.RenderPartial(MVC.Order.Views.Partials._DetailedAddTimeLine, DetailedAddOrderTimeLine.SelectOrderItem);}
+    <div class="col-md-9 time-line-content panels">
+        <div class="add panel active">
+            @{Html.RenderPartial(MVC.Order.Views.Partials._AddOrderItem, Model); }
+            @if (!((bool)ViewBag.Client))
+            {
+                <input type="hidden" name="OfficeUserId" id="OfficeUserId" value="@((User as ICurrentUserPrincipal).UserId)" />
+            }
+            <div class="nav-actions m-t-10">
+                <button class="btn-action rtl waves-effect next-panel" type="button" data-strategy="save" data-url="@Url.Action(MVC.Order.ActionNames.DetailedAdd,MVC.Order.Name)">
+                    <div class="text">
+                        ثبت نهایی سفارش
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-arrow-left"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="summary panel">
+            <!-- in this place summary partial will appear. -->
+            <div class="nav-actions" style="position: absolute;top: 25px;left: 30px;">
+                <a class="btn-action rtl waves-effect" href="@Url.Action(MVC.Order.ActionNames.History,MVC.Order.Name)">
+                    <div class="text">
+                        @LocalMessage.OrderHistory
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-long-arrow-return"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.detailed_add_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.order_item_js)"></script>
+}
+

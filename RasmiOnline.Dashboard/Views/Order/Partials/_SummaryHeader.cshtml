@@ -1,0 +1,12 @@
+﻿ @model SummaryHeader
+@{ 
+    Layout = null;
+}
+<div class="summary-success row" style="border:@(Model.Border);background-color:@(Model.BGColor);color:@(Model.Color);">
+    <div class="col-2 col-md-1 icon">
+        <i class="zmdi @Model.Icon f-s-45" style="color:@(Model.IconColor);"></i>
+    </div>
+    <div class="col-10 col-md-11" style="padding-top:@(Model.PaddingTop);">
+        @Html.Raw(Model.Message)
+    </div>
+</div>

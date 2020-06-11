@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KSD53X2');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-180x180.png" />
+    <title>ورود به سیستم</title>
+    <link href="~/Content/Styles/Shared/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Shared/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Shared/animate.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Console/OAuth/index.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Console/common.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KSD53X2"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- go -->
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+
+                @{
+                    Html.RenderPartial(MVC.OAuth.Views.Partials._SignIn, new SignInModel { RememberMe = true });
+                    Html.RenderPartial(MVC.OAuth.Views.Partials._SignUp, new SignUpModel());
+                    //Html.RenderPartial(MVC.OAuth.Views.Partials._Verification, new ConfirmVerificationCode());
+                    Html.RenderPartial(MVC.OAuth.Views.Partials._RecovePassword, new RecoverPasswordModel());
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+    <!--go2-->
+
+    <footer class="c-footer-light">
+        <div class="container">
+            <ul class="c-footer-light__links">
+                <li><a href="http://www.rasmionline.com/%D8%AA%D9%85%D8%A7%D8%B3-%D8%A8%D8%A7-%D9%85%D8%A7/" title="درباره رسمی آنلاین">درباره رسمی آنلاین</a></li>
+                <li><a href="http://www.rasmionline.com/%D8%AA%D9%85%D8%A7%D8%B3-%D8%A8%D8%A7-%D9%85%D8%A7/" title="تماس با ما">تماس با ما</a></li>
+                <li><a href="http://www.rasmionline.com" target="_blank" title="صفحه اصلی">صفحه اصلی</a></li>
+
+            </ul>
+            <div class="c-footer-light__text">
+                كليه حقوق مادي و معنوي اين سايت متعلق به تیم تخصصی وب سایت رسمی آنلاین مي باشد.
+                <span class="m-r-20">
+                    Copyright © @DateTime.Now.Year RasmiOnline.com
+                </span>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/Console/common.js"></script>
+    <script src="~/Scripts/Console/OAuth/index.js"></script>
+    <script type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "34ac150e-7894-45a0-b8ac-e678e0233774"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
+</body>
+</html>

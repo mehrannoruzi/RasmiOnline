@@ -1,0 +1,23 @@
+﻿@model IActionResponse<Setting>
+
+@{
+    ViewBag.Title = LocalMessage.SettingManagment;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.SettingDescription;
+}
+
+@{
+    if (Model.IsNotNull().And(Model.IsSuccessful))
+    {
+        Html.RenderPartial(MVC.Setting.Views.Partials._Form, Model.Result);
+    }
+    else
+    {
+        <div class="text-center text-danger">@LocalMessage.RecordsNotFound</div>
+    }
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Console.common_js"></script>
+    <script src="@Links.Scripts.Own.SettingController_js"></script>
+}

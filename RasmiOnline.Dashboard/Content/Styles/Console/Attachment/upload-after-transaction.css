@@ -1,0 +1,20 @@
+﻿.upload-wrapper{
+    display:block;
+    overflow:hidden;
+    width:100%;
+}
+.uploader{
+    display:none;
+}
+.btn-upload{
+    float:right!important;
+    margin-bottom:10px;
+    margin-left:7.5px;
+}
+.uploader-thumb{
+    width: 80px;
+    height: 36px;
+    padding: 0 7.5px;
+    margin-bottom:10px;
+}
+

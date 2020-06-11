@@ -1,0 +1,12 @@
+﻿@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.Address.common_css)" rel="stylesheet" />
+}
+
+@{Html.RenderAction(MVC.OfficeAddress.ActionNames.ListOfAddress, MVC.OfficeAddress.Name); }
+
+@section Scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_C42jDWvco-ZAni9pltEALfP9kQvv8g"></script>
+    <script src="@Url.Content(Links.Scripts.Console.user_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.OfficeAddress.address_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.validator_js)"></script>
+}

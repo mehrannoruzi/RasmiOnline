@@ -1,0 +1,124 @@
+﻿@model List<OrderDetailsModel>
+
+@{
+    Layout = null;
+}
+
+<div class="card d-none d-md-block d-lg-block">
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                    <thead class="thead-default">
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().OrderNumber)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().UserFullName)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().MobileNumber)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().OrderStatus)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().InsertDateMi)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.OrderDetail</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        @if (Model.Any())
+                        {
+                            int count = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td>@item.OrderNumber</td>
+                                    <td>@item.UserFullName</td>
+                                    <td dir="ltr">@($"{item.MobileNumber}")</td>
+                                    <td>
+                                        @if ((byte)item.OrderStatus == 0)
+                                        {
+                                            <span>
+                                                ...
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                @($"{item.OrderStatus.GetLocalizeDescription()}")
+                                            </div>
+                                        }
+                                    </td>
+                                    <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateTime)}")</td>
+                                    <td>
+                                        <a class="btn-action rtl detail waves-effect" href="@(@Url.Action(MVC.OrderAdmin.ActionNames.Edit,MVC.OrderAdmin.Name,new { orderId = item.OrderId}))">
+                                            <div class="text">
+                                                @LocalMessage.OrderDetail
+                                            </div>
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-apps"></i>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Any())
+{
+    <div class="d-none d-768px m-t-45">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@($"{Html.DisplayNameFor(x => item.OrderNumber)} : {item.OrderNumber}")</h3>
+                    <small class="card-subtitle under-border">@(item.UserFullName ?? "---")</small>
+                </div>
+
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-smartphone-android f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().MobileNumber)} : {item.MobileNumber}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-markunread-mailbox f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().DeliverType)} : {item.DeliverType.GetLocalizeDescription()}")
+                    </div>
+
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-spellcheck f-s-20"></i>
+
+
+                        @if ((byte)item.OrderStatus == 0)
+                        {
+                            <span>
+                                ...
+                            </span>
+                        }
+                        else
+                        {
+                            <div>
+                                @($"{Html.DisplayNameFor(x => x.FirstOrDefault().OrderStatus)} : {item.OrderStatus.GetLocalizeDescription()}")
+                            </div>
+                        }
+
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().InsertDateMi)} : {PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateTime)}")
+                    </div>
+                </div>
+                <a href="@Url.Action(MVC.OrderAdmin.ActionNames.Edit,MVC.OrderAdmin.Name, new { orderId = item.OrderId })" class="dropdown-item card-status card-status-gray text-center">
+                    <i class="zmdi zmdi-apps"></i>
+                    <span>
+                        @LocalMessage.OrderDetail
+                    </span>
+                </a>
+            </div>
+        }
+    </div>
+}

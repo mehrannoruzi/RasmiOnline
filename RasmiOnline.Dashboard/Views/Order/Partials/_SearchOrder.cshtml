@@ -1,0 +1,72 @@
+﻿@model FilterOrderModel
+
+@{
+    <div class="row">
+        <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Email) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20 hidden-xs-down" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.FirstName)
+                @Html.TextBoxFor(x => x.FirstName, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.FirstName) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.LastName)
+                @Html.TextBoxFor(x => x.LastName, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.LastName) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.OrderNumber)
+                @Html.TextBoxFor(x => x.OrderNumber, null, new { @class = "form-control ltr-dir only-digit" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.OrderNumber) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20 hidden-xs-down" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.NationalCode)
+                @Html.TextBoxFor(x => x.NationalCode, null, new { @class = "form-control ltr-dir nationalCode" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.NationalCode) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20 hidden-xs-down">
+            <div class="form-group">
+                @Html.LabelFor(x => x.DeliverType)
+                <div class="select">
+                    @Html.DropDownListFor(x => x.DeliverType, (List<SelectListItem>)ViewBag.DeliverPaymentByMyselfStatus, new { @class = "form-control" })
+                    <i class="form-group__bar"></i>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.DeliverType) </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20 hidden-xs-down">
+            <div class="form-group">
+                @Html.LabelFor(x => x.OrderStatus)
+                <div class="select">
+                    @Html.DropDownListFor(x => x.OrderStatus, (List<SelectListItem>)ViewBag.OrderStatuses, new { @class = "form-control" })
+                    <i class="form-group__bar"></i>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.OrderStatus) </small>
+                </div>
+            </div>
+        </div>
+    </div>
+}

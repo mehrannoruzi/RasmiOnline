@@ -1,0 +1,75 @@
+﻿@model IEnumerable<OrderItem>
+
+@{
+    Layout = null;
+    OrderDetail orderDetail;
+
+}
+<form class="wrapper-frm">
+    @if (Model != null && Model.Count(x => x.OrderItemType == OrderItemType.PricingItem) > 0)
+    {
+        <table class="order-items table table-border text-center tbl-order-details table-gray" data-remove-url="@Url.Action(MVC.OrderDetail.ActionNames.Delete,MVC.OrderDetail.Name)">
+            <tr>
+                <th width="150px">@LocalMessage.Items</th>
+                <th width="50px">@LocalMessage.Row</th>
+                <th width="100px">@LocalMessage.Title</th>
+                <th width="70px">@Html.DisplayNameFor(x => x.Count)</th>
+                <th width="70px">@Html.DisplayNameFor(x => x.Copy)</th>
+                <th>@LocalMessage.Description</th>
+            </tr>
+            @foreach (var item in Model.Where(x => x.OrderItemType == OrderItemType.PricingItem))
+            {
+                orderDetail = null;
+                <tr class="order-item" data-id="@item.OrderItemId">
+                    <td width="150px" class="text-right">@item.Name</td>
+                    <td colspan="5">
+                        <table class="table order-details-table">
+                            @for (int i = 0; i < item.Count; i++)
+                            {
+                                if (item.OrderDetails != null && item.OrderDetails.Count() > 0)
+                                {
+                                    orderDetail = item.OrderDetails.OrderByDescending(x => x.OrderDetailId).Skip(i).FirstOrDefault();
+                                }
+                                if (orderDetail == null)
+                                {
+                                    orderDetail = new OrderDetail();
+                                }
+                                <tr class="order-detail" data-id="@orderDetail.OrderDetailId">
+                                    <td width="50px">@(i + 1)</td>
+                                    <td width="100px">
+                                        <input type="text" name="title_@(item.OrderItemId)_@(i+1)" value="@orderDetail.Title" class="detail-title" style="width:100px;" data-val="true" data-val-required="*" />
+                                    </td>
+                                    <td width="70px">
+                                        <div class="select-count">
+                                            <select class="doc-count">
+                                                @for (int j = 1; j <= 100; j++)
+                                                {
+                                                    <option @(j == orderDetail.Count ? "selected" : "") value="@j">@j</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td width="70px">
+                                        <div class="select-copy-count">
+                                            <select class="copy-count">
+                                                @for (int j = 0; j <= 100; j++)
+                                                {
+                                                    <option @(j == orderDetail.Copy ? "selected" : "") value="@j">@j</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <textarea class="description" name="description" rows="1">@orderDetail.Description</textarea>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+
+            }
+        </table>
+    }
+</form>
+

@@ -1,0 +1,19 @@
+﻿
+<div class="order-item-add-modal animated">
+    @{ Html.RenderAction(MVC.PricingItem.ActionNames.MustlyUsed, MVC.PricingItem.Name);}
+
+    <div class="w-full sec-header add-wrapper-label">
+        <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+        جستجو
+    </div>
+    <div class="add-wrapper w-full">
+        <input class="add-doc ajax-auto-complete text-right" type="text" value="" placeholder="@LocalMessage.AddNewPricingItem" data-url="@Url.Action(MVC.PricingItem.ActionNames.Get,MVC.PricingItem.Name,new { isPricingItem = ViewBag.Client })" />
+
+        <ul class="auto-complete-items">
+            <!-- ajax call result in here -->
+        </ul>
+    </div>
+    <button class="close-modal w-full">
+        <i class="zmdi zmdi-chevron-down"></i>
+    </button>
+</div>

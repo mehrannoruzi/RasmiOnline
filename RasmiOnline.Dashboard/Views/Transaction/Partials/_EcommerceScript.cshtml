@@ -1,0 +1,27 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+
+<script>
+    window.dataLayer = window.dataLayer || []
+    dataLayer.push({
+        'transactionId': @Model.OrderId,
+        'transactionTotal': @ViewBag.Price,
+        'transactionProducts':
+            [
+                @foreach (var item in Model.OrderItems)
+                {
+                <text>
+                         {
+                             'sku': '@Model.LangType'+'_'+'@item.Name',
+                             'name': '@item.Name',
+                             'category': '@Model.LangType',
+                             'price': '@item.Price',
+                             'quantity': '@item.Count'
+                         },
+                 </text>
+                }
+            ]
+    });
+</script>

@@ -1,0 +1,90 @@
+﻿@*موقتا اضافه شده است*@
+@model IEnumerable<OrderItem>
+@{
+    Layout = null;
+    var langType = ((LangType?)ViewBag.LangType) ?? LangType.Fa_En;
+    var items = new List<OrderItemType> {
+    OrderItemType.PricingItem,
+};
+}
+<div class="factor">
+    <div class="switches">
+        @foreach (var item in items)
+        {
+            <label for="@(item.GetDescription())_switch">@item.GetDescription() <input name="@(item.ToString())_switch" class="order-item-type" /></label>
+        }
+        <label for="official_item_switch">@LocalMessage.OfficialCost <input name="official_item_switch" class="order-item-switch" /></label>
+        <label for="official_item_switch">@LocalMessage.Discount <input name="official_item_switch" class="order-item-switch" /></label>
+    </div>
+
+    <table class="order-items table table-border text-center table-hover table-gray">
+
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Name)</th>
+                <th width="90px">@Html.DisplayNameFor(x => x.PricingItemUnitText)</th>
+                <th width="100px">@Html.DisplayNameFor(x => x.Price) (@LocalMessage.MoneyCurrency)</th>
+                <th width="70px">@Html.DisplayNameFor(x => x.Count)</th>
+                <th width="70px">@Html.DisplayNameFor(x => x.Copy)</th>
+                <th width="120px">@LocalMessage.TotalCopyPrice (@LocalMessage.MoneyCurrency)</th>
+                <th width="80px">@Html.DisplayNameFor(x => x.TotalPrice) (@LocalMessage.MoneyCurrency)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var type in items)
+            {
+                <tr class="add_@type.ToString()">
+                    <td class="td_add_ajax" colspan="7">
+                        <i class="zmdi zmdi-plus"></i>
+                        <input class="ajax-auto-complete text-right" type="text" value="" placeholder="@LocalMessage.AddNewPricingItem" data-url="@Url.Action(MVC.PricingItem.ActionNames.Get,MVC.PricingItem.Name,new { type = type.ToString() })" />
+
+                        <ul class="auto-complete-items">
+                            <!-- ajax call result in here -->
+                        </ul>
+                    </td>
+                </tr>
+                foreach (var item in Model.Where(x => x.OrderItemType == type))
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@(item.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</td>
+                        <td class="price" dir="ltr">
+                            @((langType == LangType.Fa_En ? item.Price : item.Price_OthersLang).ToString("N0"))
+                        </td>
+                        <td>
+                            <div class="select-count">
+                                <select class="doc-count">
+                                    @for (int j = 1; j <= 100; j++)
+                                    {
+                                        <option value="@j" @(j == item.Count ? "selected" : "")>@j</option>
+                                    }
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="select-copy-count">
+                                <select class="copy-count">
+                                    @for (int j = 0; j <= 100; j++)
+                                    {
+                                        <option value="@j" @(j == item.Copy ? "selected" : "")>@j</option>
+                                    }
+                                </select>
+                            </div>
+                        </td>
+                        <td class="total-copy-price">@(item.CalculateTotalCopyPrice(langType).ToString("N0")) </td>
+                        <td dir="ltr" class="total-price">
+                            <input type="number" value=" @item.TotalPrice" />
+                        </td>
+                    </tr>
+                }
+
+            }
+            <tr></tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+</script>

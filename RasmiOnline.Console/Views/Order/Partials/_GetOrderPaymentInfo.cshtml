@@ -1,0 +1,36 @@
+﻿@model Dictionary<string, string>
+@{
+    Layout = null;
+}
+<div class="col-md-6 orderPaymentInfo">
+    <div class="row">
+        <div class="col-md-6 subject">
+            جمع کل فاکتور
+        </div>
+        <div class="col-md-6 number">
+            @Model["TotalPrice"]
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 subject">
+            جمع کل پرداختی
+            <i class="text-danger f-s-20 float-left zmdi zmdi-alert-triangle @((int.Parse(Model["TotalPrice"].Replace(",",""))>int.Parse(Model["TotalPayment"].Replace(",",""))) ? "" : "hide" )"></i>
+        </div>
+        <div class="col-md-6 number">
+            @Model["TotalPayment"]
+        </div>
+    </div>
+    @*@if (!string.IsNullOrWhiteSpace(@Model["Description"]))
+    {
+        <div class="row">
+            <div class="col-sm-12 desc">
+                <p>
+                    <strong>@LocalMessage.Description:</strong>&nbsp;@Model["Description"]
+                </p>
+            </div>
+
+        </div>
+    }*@
+</div>
+

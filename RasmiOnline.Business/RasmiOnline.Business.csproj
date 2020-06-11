@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99E097BB-A9ED-4775-8265-1C817022B0C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rasmi724.Business</RootNamespace>
+    <AssemblyName>Rasmi724.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Gnu.Framework.AspNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.AspNet.2.3.2\lib\Gnu.Framework.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Gnu.Framework.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.Core.2.4.1\lib\Gnu.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gnu.Framework.EntityFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.EntityFramework.2.2.1\lib\Gnu.Framework.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Gnu.Framework.EntityFramework.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.EntityFramework.DataAccess.2.2.1\lib\Gnu.Framework.EntityFramework.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Gnu.Framework.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.Messaging.2.2.0\lib\Gnu.Framework.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telegram.Bot, Version=14.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telegram.Bot.14.12.0\lib\net45\Telegram.Bot.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\TrezSmsProvider\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Implement\BankCardBusiness.cs" />
+    <Compile Include="Implement\ChannelBusiness.cs" />
+    <Compile Include="Implement\DiscountBusiness.cs" />
+    <Compile Include="Implement\OfficeAddressBusiness.cs" />
+    <Compile Include="Implement\OrderBusiness.cs" />
+    <Compile Include="Implement\OrderCommentBusiness.cs" />
+    <Compile Include="Implement\OrderDetailBusiness.cs" />
+    <Compile Include="Implement\RoleBusiness.cs" />
+    <Compile Include="Implement\ShortLinkBusiness.cs" />
+    <Compile Include="Implement\UserInRoleBusiness.cs" />
+    <Compile Include="Implement\VerificationCodeBusiness.cs" />
+    <Compile Include="Implement\ViewBusiness.cs" />
+    <Compile Include="Implement\ViewInRoleBusiness.cs" />
+    <Compile Include="Protocol\IBankCardBusiness.cs" />
+    <Compile Include="Protocol\IChannelBusiness.cs" />
+    <Compile Include="Protocol\IOfficeAddressBusiness.cs" />
+    <Compile Include="Protocol\IOrderDetailBusiness.cs" />
+    <Compile Include="Protocol\IOrderItemBusiness.cs" />
+    <Compile Include="Implement\OrderItemBusiness.cs" />
+    <Compile Include="Protocol\IOrderCommentBusiness.cs" />
+    <Compile Include="Protocol\IOrderNameBusiness.cs" />
+    <Compile Include="Implement\MessagingStrategy\IMessagingStrategy.cs" />
+    <Compile Include="Implement\MessagingStrategy\MessageFactory.cs" />
+    <Compile Include="Implement\MessagingStrategy\NullObjectStrategy.cs" />
+    <Compile Include="Implement\MessagingStrategy\RoboTeleStrategy.cs" />
+    <Compile Include="Implement\MessagingStrategy\SmsStrategy.cs" />
+    <Compile Include="Implement\OrderNameBusiness.cs" />
+    <Compile Include="Protocol\IExportTableBusiness.cs" />
+    <Compile Include="Protocol\IPricingItemBusiness.cs" />
+    <Compile Include="Implement\AddressBusiness.cs" />
+    <Compile Include="Implement\PricingItemBusiness.cs" />
+    <Compile Include="Implement\SettingBusiness.cs" />
+    <Compile Include="Implement\TransactionBusiness.cs" />
+    <Compile Include="Implement\UserBusiness.cs" />
+    <Compile Include="Properties\BusinessMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Implement\ActivityLogBusiness.cs" />
+    <Compile Include="Implement\AttachmentBusiness.cs" />
+    <Compile Include="Implement\MessageBusiness.cs" />
+    <Compile Include="Implement\PaymentGatewayBusiness.cs" />
+    <Compile Include="Observers\AdminRoboTeleObserver.cs" />
+    <Compile Include="Observers\IObserver.cs" />
+    <Compile Include="Observers\IObserverManager.cs" />
+    <Compile Include="Observers\ObserverManager.cs" />
+    <Compile Include="Observers\SmsObserver.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\IActivityLogBusiness.cs" />
+    <Compile Include="Protocol\IAddressBusiness.cs" />
+    <Compile Include="Protocol\IAttachmentBusiness.cs" />
+    <Compile Include="Protocol\IDiscountBusiness.cs" />
+    <Compile Include="Protocol\IMessageBusiness.cs" />
+    <Compile Include="Protocol\IOrderBusiness.cs" />
+    <Compile Include="Protocol\IPaymentGatewayBusiness.cs" />
+    <Compile Include="Protocol\IRoleBusiness.cs" />
+    <Compile Include="Protocol\ISettingBusiness.cs" />
+    <Compile Include="Protocol\IShortLinkBusiness.cs" />
+    <Compile Include="Protocol\ITransactionBusiness.cs" />
+    <Compile Include="Protocol\IUserBusiness.cs" />
+    <Compile Include="Protocol\IUserInRoleBusiness.cs" />
+    <Compile Include="Protocol\IVerificationCodeBusiness.cs" />
+    <Compile Include="Protocol\IViewBusiness.cs" />
+    <Compile Include="Protocol\IViewInRoleBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.ArrayOfInt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.ArrayOfLong.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.GetCreditResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.GetMessageStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.GetReciveMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.GetSmsPriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.GetUnReciveMessageCountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SaveContactResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendCourseMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendMessageForPhpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendMessagesWithUDHResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendMessageWithUDHResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendMultiMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendOneMessageQuicklyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendOneMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendSchaduleMessageForPhpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\Rasmi724.Business.TrezSmsProvider.SendSchaduleMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrezSmsProvider\TrezSmsService.wsdl" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\BusinessMessage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusinessMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\TrezSmsProvider\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrezSmsProvider\TrezSmsService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrezSmsProvider\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrezSmsProvider\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrezSmsProvider\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RasmiOnline.Data\RasmiOnline.Data.csproj">
+      <Project>{261d2408-3f55-46d2-a404-3d2f560fc6d2}</Project>
+      <Name>RasmiOnline.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RasmiOnline.Domain\RasmiOnline.Domain.csproj">
+      <Project>{fb6ccbf6-0ccb-4a8f-bfef-44a6d480c653}</Project>
+      <Name>RasmiOnline.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RasmiOnline.SharedPreference\RasmiOnline.SharedPreference.csproj">
+      <Project>{c5c3f3f4-3d29-4a4c-b7b3-a53620c3abb0}</Project>
+      <Name>RasmiOnline.SharedPreference</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

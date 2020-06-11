@@ -1,0 +1,160 @@
+﻿@model IEnumerable<OrderItem>
+@{ 
+    Layout = null;
+    var langType = ((LangType?)ViewBag.LangType) ?? LangType.Fa_En;
+}
+@if (Model != null)
+{
+    var disItem = Model.FirstOrDefault(x => x.OrderItemType == OrderItemType.DiscountItem);
+    if (disItem != null)
+    {
+        <div class="item mobile-item discount-item"
+             data-IsPricingItem="@disItem.IsPricingItem" data-info="@(new {
+                                    orderItemId = disItem.OrderItemId,
+                                    pricingItemId = disItem.PricingItemId,
+                                    copyPrice = disItem.CopyPrice,
+                                    price = disItem.Price,
+                                    serverSideRemove = ((bool?)ViewBag.RemoveFromServer??true).ToString().ToLower()
+
+                                }.SerializeToJson())" data-id="@disItem.PricingItemId" data-order-item-id="@disItem.OrderItemId" data-changed="false">
+            <div class="title">
+                <h5 class="text">@disItem.Name</h5>
+                <div class="remove">
+                    <i class="zmdi zmdi-close-circle"></i>
+                </div>
+            </div>
+            <div class="props">
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Count):</span>
+                    <div class="val count">@disItem.Count</div>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Price):</span>
+                    <span class="val price" dir="ltr">@disItem.Price.ToString("N0")</span>
+                </div>
+                <div class="total">
+                    <span class="lbl">@LocalMessage.TotalPrice:</span>
+                    <span class="val total-price"  dir="ltr">@disItem.CalculateTotalPrice(langType).ToString("N0")</span>
+                </div>
+            </div>
+        </div>
+    }
+    var oRItem = Model.First(x => x.OrderItemType == OrderItemType.OfficialRecordItem);
+    <div class="item mobile-item official-record-item" data-editable="true" data-info="@(new {
+                                    orderItemId = oRItem.OrderItemId,
+                                    pricingItemId = oRItem.PricingItemId,
+                                    copyPriceInOtherLangs = oRItem.CopyPrice_OthersLang,
+                                    copyPrice = oRItem.CopyPrice,
+                                    priceInOtherLangs = oRItem.Price_OthersLang,
+                                    price = oRItem.Price,
+                                }.SerializeToJson())">
+        <div class="title">
+            <h5 class="text">@oRItem.Name</h5>
+        </div>
+        <div class="props">
+            <div class="prop-group w-mob-half">
+                <span class="lbl">@Html.DisplayNameFor(x => x.PricingItemUnitText):</span>
+                <span>@(oRItem.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</span>
+            </div>
+            <div class="prop-group w-mob-half">
+                <span class="lbl">@Html.DisplayNameFor(x => x.Price):</span>
+                <span class="val price" dir="ltr">@oRItem.Price.ToString("N0")</span>
+            </div>
+            <div class="prop-group w-mob-half">
+                <span class="lbl">@Html.DisplayNameFor(x => x.Count):</span>
+                <div class="val count">
+                    <select class="doc-count">
+                        @for (int j = 1; j <= 100; j++)
+                        {
+                            <option value="@j" @(j == oRItem.Count ? "selected" : "")>@j</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="prop-group w-mob-half">
+                <span class="lbl">@Html.DisplayNameFor(x => x.Copy):</span>
+                <div class="val copy">
+                    <select class="copy-count">
+                        @for (int j = 0; j <= 100; j++)
+                        {
+                            <option value="@j" @(j == oRItem.Copy ? "selected" : "")>@j</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="total">
+                <span class="lbl">@LocalMessage.TotalPrice:</span>
+                <span class="val total-price" dir="ltr">@oRItem.CalculateTotalPrice(langType).ToString("N0")</span>
+            </div>
+        </div>
+    </div>
+
+    foreach (var item in Model.Where(x => x.OrderItemType == OrderItemType.PricingItem))
+    {
+
+        <div class="item mobile-item pricing-item" data-IsPricingItem="@item.IsPricingItem" data-info="@(new {
+                                    orderItemId = item.OrderItemId,
+                                    pricingItemId = item.PricingItemId,
+                                    copyPrice = item.CopyPrice,
+                                    copyPriceInOtherLangs = item.CopyPrice_OthersLang,
+                                    price = item.Price,
+                                    priceInOtherLangs = item.Price_OthersLang,
+                                    serverSideRemove = ((bool?)ViewBag.RemoveFromServer??true).ToString().ToLower()
+
+                                }.SerializeToJson())" data-id="@item.PricingItemId" data-order-item-id="@item.OrderItemId" data-changed="false">
+            <div class="title">
+                <h5 class="text">@item.Name</h5>
+                <div class="remove">
+                    <i class="zmdi zmdi-close-circle"></i>
+                </div>
+            </div>
+            <div class="props">
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.PricingItemUnitText):</span>
+                    <span>@(item.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</span>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Price):</span>
+                    <span class="val price" dir="ltr">@((langType == LangType.Fa_En ? item.Price : item.Price_OthersLang).ToString("N0"))</span>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Count):</span>
+                    <div class="val count">
+                        <select class="doc-count">
+                            @for (int j = 1; j <= 100; j++)
+                            {
+                                <option value="@j" @(j == item.Count ? "selected" : "")>@j</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Copy):</span>
+                    <div class="val copy">
+                        <select class="copy-count">
+                            @for (int j = 0; j <= 100; j++)
+                            {
+                                <option value="@j" @(j == item.Copy ? "selected" : "")>@j</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                @if (item.OrderItemType == OrderItemType.PricingItem)
+                {
+                    <div class="prop-group">
+                        <span class="lbl">@LocalMessage.TotalCopyPrice:</span>
+                        <span class="val total-copy-price">@item.CalculateTotalCopyPrice(langType)</span>
+                    </div>
+                }
+
+                <div class="total">
+                    <span class="lbl">@LocalMessage.TotalPrice:</span>
+                    <span class="val total-price" dir="ltr">@item.CalculateTotalPrice(langType).ToString("N0")</span>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+

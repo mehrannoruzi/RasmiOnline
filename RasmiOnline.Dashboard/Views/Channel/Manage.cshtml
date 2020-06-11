@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = LocalMessage.ChannelManagement;
+}
+
+@{Html.RenderAction(MVC.Channel.ActionNames.ListOfChannel, MVC.Channel.Name); }
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_custom_modal_js" type="text/javascript"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Channel.manage_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.validator_js)"></script>
+}

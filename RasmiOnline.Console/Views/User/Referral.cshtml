@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ReferralModel>
+@{
+    ViewBag.Title = LocalMessage.UserReferral;
+}
+
+<div class="card">
+    <div class="card-block">
+        <div class="card-header">
+            <h3 class="card-title">لیست کد های دعوتی</h3>
+        </div>
+        @{
+            Html.RenderAction(MVC.Channel.ActionNames.GetAllUserChannel, MVC.Channel.Name);
+        }
+        <div class="card-header">
+            <h3 class="card-title">لیست کاربران دعوتی</h3>
+            <small class="card-subtitle">در زیر کلیه کاربرانی که با کد شما در سایت رسمی آنلاین ثبت نام کرده اند لیست شده اند</small>
+        </div>
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <table class="table-striped table">
+                    <thead class="thead-default">
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">کد معرف</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">نام کاربر</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">شماره موبایل</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">نام کاربری</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">شماره سفارش</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">زبان سفارش</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">وضعیت سفارش</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">مبلغ سفارش</th>
+
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">سهم معرف</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        @{ int count = 1;}
+                        @foreach (var item in Model)
+                        {
+                            <tr role="row">
+                                <td class="sorting_1">
+                                    @count
+                                </td>
+                                <td class="sorting_1">
+                                    @item.ReferralCode
+                                </td>
+                                <td align="right">
+                                    @item.FirstName @item.LastName
+                                </td>
+                                <td dir="ltr" align="right">
+                                    @item.MobileNumber.ToString().CustomMask(new MaskOption
+                           {
+                               Mode = MaskMode.Middle,
+                               MaskWith = '*',
+                               MaskLength = (item.MobileNumber.ToString().Length - 7),
+                               MaxMaskLength = 4
+                           })
+                                </td>
+                                <td>
+                                    @item.Email.ToString().CustomMask(new MaskOption
+                           {
+                               Mode = MaskMode.Middle,
+                               MaskWith = '*',
+                               MaskLength = (item.Email.ToString().Length - 10),
+                               MaxMaskLength = 4
+                           })
+                                </td>
+                                <td>
+                                    @item.OrderId
+                                </td>
+                                <td dir="ltr" align="right">
+                                    @if (item.LangType != 0)
+                                    {
+                                        <span>@item.LangType.GetLocalizeDescription()</span>
+                                    }
+                                    else
+                                    {
+                                        <span>سفارشی ثبت نکرده است</span>
+                                    }
+
+                                </td>
+                                <td dir="rtl" align="right">
+                                    @if (item.OrderStatus != 0)
+                                    {
+                                        <span>@item.OrderStatus.GetLocalizeDescription()</span>
+                                    }
+                                    else
+                                    {
+                                        <span>سفارشی ثبت نکرده است</span>
+                                    }
+                                </td>
+                                <td align="right">
+                                    @item.GetTotalPrice()
+                                </td>
+                                <td>
+                                    @item.GetReferralTotalPrice()
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

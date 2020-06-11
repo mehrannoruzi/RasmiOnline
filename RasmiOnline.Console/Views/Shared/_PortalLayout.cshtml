@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-180x180.png" />
+
+    <title>@ViewBag.Title</title>
+
+    @RenderSection("head", false)
+</head>
+<body>
+    @{Html.RenderPartial(MVC.Shared.Views.Partials._PortalHeader); }
+    <main>
+        <section class="container contents">
+            @RenderBody()
+        </section>
+    </main>
+    @{Html.RenderPartial(MVC.Shared.Views.Partials._PortalFooter); }
+    @RenderSection("footer", false)
+</body>
+</html>

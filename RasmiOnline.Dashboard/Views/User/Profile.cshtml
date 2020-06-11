@@ -1,0 +1,81 @@
+﻿@model ProfileModel
+@{
+    ViewBag.Title = LocalMessage.Profile;
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.User.profile_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Address.common_css)" rel="stylesheet" />
+}
+<div class="card current-user">
+    <div class="row">
+
+        <div class="col-12 col-sm-12 col-lg-12">
+            <img class="user__img pull-right" src="/Content/Images/avatar64.jpg" alt="">
+            <h4 class="full-name m-t-10">@($"{Model.FirstName} {Model.LastName}")</h4>
+            <div class="row" style="padding-right:45px">
+                <div class="col-12 m-t-10 p-t-10">
+                    <i class="zmdi zmdi-email f-s-20 m-l-5"></i>
+                    نام کاربری :
+                    @((User as ICurrentUserPrincipal).UserName)
+                </div>
+                <div class="col-12 m-t-10 p-t-10">
+                    <i class="zmdi zmdi-calendar-note f-s-20 m-l-5"></i>
+                    تاریخ ثبت نام :
+                    @PersianDateTime.Parse(ViewBag.RegisterDateMi).ToString(PersianDateTimeFormat.FullDate)
+                </div>
+                <div class="col-12 m-t-10 p-t-10 ">
+                    <i class="zmdi zmdi-calendar-note f-s-20 m-l-5"></i>
+                    تاریخ آخرین ورود به سیستم :
+                    @PersianDateTime.Parse(ViewBag.LastLoginDateMi).ToString(PersianDateTimeFormat.FullDate)
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-30 border-top">
+        <div class="col-12 col-sm-12 col-lg-12">
+            <div class="tab-container toolbar p-0 border-0">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#Profile" role="tab" aria-expanded="true">
+                            <i class="zmdi zmdi-account-o icon-profile d-sm-none d-md-block"></i>
+                            @LocalMessage.Props
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" role="tab" aria-expanded="false" href="#Addresses">
+                            <i class="zmdi zmdi-gps-dot icon-profile d-sm-none d-md-block"></i>@LocalMessage.Addresses
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#Security">
+                            <i class="zmdi zmdi-shield-security icon-profile d-sm-none d-md-block"></i>
+                            @LocalMessage.Security
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="Profile" role="tabpanel" aria-expanded="true">
+                    @{Html.RenderPartial(MVC.User.Views.Partials._Profile, Model); }
+                </div>
+                <div class="tab-pane fade " id="Addresses" role="tabpanel" aria-expanded="false">
+                    @{Html.RenderAction(MVC.Address.ActionNames.ListOfAddress, MVC.Address.Name, new { userId = (User as ICurrentUserPrincipal).UserId }); }
+                </div>
+                <div class="tab-pane fade" id="Security" role="tabpanel" aria-expanded="false">
+                    @{Html.RenderPartial(MVC.User.Views.Partials._Security, new ChangeCurrentPassword());}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+
+@section Scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_C42jDWvco-ZAni9pltEALfP9kQvv8g"></script>
+    <script src="@Url.Content(Links.Scripts.Console.user_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Own.UserController_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.address_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.validator_js)"></script>
+}

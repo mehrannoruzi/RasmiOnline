@@ -1,0 +1,25 @@
+﻿@model AddButtonModel
+
+@{ Layout = null; }
+
+@if (!Model.IsDisableAddButton)
+{
+<div class="text-left m-b-20 o-f-h">
+    <a class="btn-action rtl waves-effect next-panel"  id="addNewItem" add-new-item-modal="@($"{Model.EntityName ?? "EntityName"}")" data-form-url="@(Model.FormUrl)" data-modal-title="@Model.ModalTitle" href="">
+        <div class="text">
+            @Model.Title
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-plus"></i>
+        </div>
+    </a>
+    @*<a id="addNewItem" add-new-item-modal="@($"{Model.EntityName ?? "EntityName"}")" data-form-url="@(Model.FormUrl)" data-modal-title="@Model.ModalTitle" href="" class="btn btn-success waves-effect p-0">
+        <i class="zmdi zmdi-plus btn-icon"></i>
+        <div class="btn-text">
+            @Model.Title
+        </div>
+    </a>*@
+</div>
+}
+
+@{Html.RenderPartial(MVC.Shared.Views.Partials._SharedModal, Model.ModalConfig);}

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Attachment>
+<div class="row attachments">
+
+
+    @if (Model != null && Model.Where(x => !x.IsDeleted).Count() > 0)
+    {
+        foreach (var item in Model.Where(x => !x.IsDeleted))
+        {
+            <div class="attch-item col-md-3">
+                <div class='@(item.AttachmentType)'>
+                    <img src="@Url.Content(GlobalMethod.GetDefaultImageUrl(item.Address))" alt="@item.Address" />
+                    <div class="hover">
+                        <a href="@Url.Action(MVC.Attachment.ActionNames.Download,MVC.Attachment.Name,new { attachmentId = item.AttachmentId, orderId = item.OrderId })">
+                            <i class="zmdi zmdi-download" title="@LocalMessage.Download"></i>
+                        </a>
+                    </div>
+                    @if ((bool?)ViewBag.RemoveFromServer != false)
+                    {
+                        <div class="remove" data-url="@Url.Action(MVC.Attachment.ActionNames.Delete, MVC.Attachment.Name, new { id = item.AttachmentId, orderId = item.OrderId })"><i class="zmdi zmdi-close"></i></div>
+                    }
+
+                    <div class="overlay">
+                        <p class="file-title">
+                            @item.OriginalFileName
+                            <i class="zmdi zmdi-file-text m-r-5 f-s-20"></i>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-warning warning-box">
+            هیچ فایلی آپلود نشده است
+        </div>
+    }
+</div>

@@ -1,0 +1,146 @@
+﻿@model Order
+@{
+    ViewBag.Title = LocalMessage.OrderDetail;
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.flickity_min_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderItems.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderName.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Attachment.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.detail_mobile_css)" rel="stylesheet" />
+}
+<div class="order-row">
+    @if (Model != null)
+    {
+        <div class="w-full m-t-20">
+            <div class="tab-container toolbar p-0 border-0">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item p-0">
+                        <a class="nav-link active  p-b-0" data-toggle="tab" href="#order-detail" role="tab" aria-expanded="true">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            شرح سفارش
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#items-wrapper" role="tab" aria-expanded="true">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            آیتم ها
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" role="tab" aria-expanded="false" href="#Transactions">
+                            <i class="zmdi zmdi-money icon-profile d-sm-none d-md-block"></i>
+                            پرداخت ها
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" role="tab" aria-expanded="false" href="#@(AttachmentType.OrderFiles.ToString())">
+                            <i class="zmdi zmdi-file icon-profile d-sm-none d-md-block"></i>
+                            اسکن مدارک
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" role="tab" aria-expanded="false" href="#@(AttachmentType.Identity.ToString())">
+                            <i class="zmdi zmdi-file icon-profile d-sm-none d-md-block"></i>
+                            اسکن پاسپورت ها
+                        </a>
+                    </li>
+                    <li class="nav-item p-0" style="min-width:195px">
+                        <a style="min-width:195px" class="nav-link p-b-0" data-toggle="tab" role="tab" aria-expanded="false" href="#@(AttachmentType.Translation.ToString())">
+                            <i class="zmdi zmdi-file icon-profile d-sm-none d-md-block"></i>
+                            فایل های ترجمه (پیش نویس)
+                        </a>
+                    </li>
+                    <li class="nav-item p-0" style="min-width:185px">
+                        <a style="min-width:185px" class="nav-link p-b-0" data-toggle="tab" role="tab" aria-expanded="false" href="#Names">
+                            <i class="zmdi zmdi-accounts icon-profile d-sm-none d-md-block"></i>
+                            اسامی موجود در ترجمه
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade  active show" id="order-detail" role="tabpanel" aria-expanded="true">
+                    @{ Html.RenderPartial(MVC.Order.Views.Partials._Show, Model);}
+                </div>
+                <div class="tab-pane fade" id="items-wrapper" role="tabpanel" aria-expanded="true">
+                    <br />
+                    @if (Model.OrderItems != null)
+                    {
+                        <div class="order-items">
+                            @{Html.RenderPartial(MVC.OrderItem.Views.Partials._List_Mobile, Model.OrderItems.ToList());}
+                        </div>
+
+                    }
+                </div>
+                <div class="tab-pane fade " id="Transactions" role="tabpanel" aria-expanded="false">
+                    <br />
+                    @{Html.RenderPartial(MVC.Transaction.Views.Partials._List, Model.Transactions);}
+                </div>
+                <div class="tab-pane fade " id="@(AttachmentType.OrderFiles.ToString())" role="tabpanel" aria-expanded="false">
+                    <br />
+                    <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.OrderFiles })">
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.OrderFiles));}
+                    </div>
+                </div>
+                <div class="tab-pane fade " id="@(AttachmentType.Identity.ToString())" role="tabpanel" aria-expanded="false">
+                    <br />
+                    <div class="dropzone-uploader" id="upload-identity-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.Identity })">
+                    </div>
+                    <br />
+                    <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.Identity })">
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.Identity));}
+                    </div>
+                </div>
+                <div class="tab-pane fade " id="@(AttachmentType.Translation.ToString())" role="tabpanel" aria-expanded="false">
+                    <br />
+                    <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.Translation })">
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.Translation));}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Names" role="tabpanel" aria-expanded="false">
+                    <br />
+                    <br />
+                    <div class="row">
+                        @{
+                            if (Model != null && Model.OrderNames.Count() > 0)
+                            {
+                                foreach (var item in Model.OrderNames)
+                                {
+                                    Html.RenderPartial(MVC.OrderName.Views.Partials._ShowItem, item);
+                                }
+                            }
+                        }
+                        <div class="col-xs-12 col-sm-6 col-md-4 add-order-name">
+                            <div class="wrapper wrapper-border">
+                                @{Html.RenderPartial(MVC.OrderName.Views.Partials._OrderName, new OrderName { OrderId = Model.OrderId });}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="empty-row">@LocalMessage.ThereIsNoRecord</div>
+    }
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        window.CRISP_READY_TRIGGER = () => {
+            $crisp.push(["do", "chat:hide"]);
+        };
+    </script>
+    <script src="@Url.Content(Links.Scripts.Plugins.Flickity.flickity_pkgd_min_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.OrderName.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.fire_dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.detail_mobile_js)"></script>
+}

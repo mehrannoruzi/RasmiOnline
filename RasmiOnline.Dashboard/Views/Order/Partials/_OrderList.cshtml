@@ -1,0 +1,164 @@
+﻿@model IActionResponse<IEnumerable<Order>>
+@using Gnu.Framework.Core
+@{ Layout = null; }
+
+@if (Model.IsSuccessful)
+{
+    <div class="card d-none d-md-block d-lg-block">
+        <div class="card-block">
+            <div class="card-header p-b-0">
+                <h3 class="card-title">@LocalMessage.OrderHistory</h3>
+                <small class="card-subtitle">@LocalMessage.OrderHistoryDescription</small>
+            </div>
+            <div class="table-responsive">
+                <div id="data-table_wrapper" class="dataTables_wrapper">
+                    <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                        <thead class="thead-default">
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderId)</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderTitle)</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().InsertDateSh)</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().DeliverFiles_DateSh)</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderStatus)</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@(LocalMessage.Action)</th>
+                                <th tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.OrderDetail</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            @{ int count = 1;}
+                            @foreach (var item in Model.Result)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td class="sorting_1" dir="ltr" align="right">@($"{item.OrderId}")</td>
+                                    <td dir="rtl">@item.OrderTitle.CustomSubstring(15)</td>
+                                    <td dir="ltr" align="right">@($"{item.InsertDateSh}")</td>
+                                    <td dir="rtl" align="right" class="@(item.DeliverFiles_DateSh==null?"text-danger":"")">@(item.DeliverFiles_DateSh == null ? string.Format(LocalMessage.DayToDeliveryFormat, item.DayToDelivery) : item.DeliverFiles_DateSh)</td>
+                                    <td align="right">@($"{item.OrderStatus.GetLocalizeDescription()}")</td>
+                                    <td style="width:100px;">
+                                        @switch (item.OrderStatus)
+                                        {
+                                            case OrderStatus.WaitForPayment:
+                                                <a class="btn-action warning ltr waves-effect" href="@(@Url.Action(MVC.Order.ActionNames.CompleteOrder,MVC.Order.Name,new { orderId = item.OrderId}))" style="font-size:10px;">
+                                                    <div class="text">
+                                                        پرداخت
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi zmdi-card"></i>
+                                                    </div>
+                                                </a>
+                                                break;
+
+                                            case OrderStatus.PayAllFactor:
+                                                <a class="btn-action warning ltr waves-effect" href="@(@Url.Action(MVC.Order.ActionNames.PayAllFactor,MVC.Order.Name,new { orderId = item.OrderId}))" style="font-size:10px;">
+                                                    <div class="text">
+                                                        تسویه سفارش
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-money"></i>
+                                                    </div>
+                                                </a>
+                                                break;
+                                            case OrderStatus.SubmitDraft:
+                                                <a class="btn-action warning ltr waves-effect" href="@(@Url.Action(MVC.Order.ActionNames.ConfirmDraft,MVC.Order.Name,new { orderId = item.OrderId}))" style="font-size:10px;">
+                                                    <div class="text">
+                                                        تایید سفارش
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-money"></i>
+                                                    </div>
+                                                </a>
+                                                break;
+
+                                        }
+                                        @if (item.OrderStatus != OrderStatus.WaitForPayment && item.OrderStatus != OrderStatus.PayAllFactor && item.OrderStatus < OrderStatus.StartTranslation)
+                                        {
+                                            <a class="btn-action warning ltr waves-effect" href="/Upload/@item.OrderId" style="font-size:10px;">
+                                                <div class="text">
+                                                    بارگذاری مدارک
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi zmdi-card"></i>
+                                                </div>
+                                            </a>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a class="btn-action ltr waves-effect detail min-w-45" href="@(@Url.Action(MVC.Order.ActionNames.Detail,MVC.Order.Name,new { orderId = item.OrderId}))" style="font-size:10px;">
+
+                                            <div class="icon">
+                                                <i class="zmdi zmdi zmdi-info-outline"></i>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none d-768px">
+        <div class="toolbar">
+            <div class="toolbar__label">
+                @LocalMessage.OrderHistory
+            </div>
+        </div>
+        @foreach (var item in Model.Result)
+        {
+            <div class="card card-margin-bottom-15">
+                <div class="card-header">
+                    <h3 class="card-title under-border">@($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderId)} : {item.OrderId}")</h3>
+                </div>
+
+                <div class="card-block">
+
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-email f-s-20 m-l-5"></i>
+                        @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().DeliveryType)} : {($"{item.DeliveryType.GetLocalizeDescription()}")}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                        @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().DeliverFiles_DateSh)} : {item.DeliverFiles_DateSh ?? LocalMessage.Unknown}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                        @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().InsertDateSh)} : {item.InsertDateSh}")
+                    </div>
+
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-gamepad f-s-20 m-l-5"></i>
+                        <span>
+                            @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderStatus)} : {item.OrderStatus.GetLocalizeDescription()}")
+                        </span>
+                    </div>
+                </div>
+                @if (item.OrderStatus == OrderStatus.WaitForPayment)
+                {
+                    <a href="" class="card-status card-status-yellow text-center">
+                        <i class="zmdi zmdi-apps"></i>
+                        <span>
+                            پرداخت سفارش
+                        </span>
+                    </a>
+                }
+                <a href="@Url.Action(MVC.Order.ActionNames.Detail,MVC.Order.Name, new { orderId = item.OrderId })" class="dropdown-item card-status card-status-gray text-center">
+                    <i class="zmdi zmdi-apps"></i>
+                    <span>
+                        @LocalMessage.OrderDetail
+                    </span>
+                </a>
+            </div>
+        }
+    </div>
+                                }
+                                else
+                                {
+                                    <div class="empty-row">
+                                        @Model.Message
+                                    </div>
+                                }

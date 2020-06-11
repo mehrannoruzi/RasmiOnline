@@ -1,0 +1,83 @@
+﻿@model IEnumerable<OrderItem>
+@{
+    Layout = null;
+    var langType = ((LangType?)ViewBag.LangType) ?? LangType.Fa_En;
+}
+<table class="order-items table text-center table-hover tbl-order-items" data-remove-url="@Url.Action(MVC.OrderItem.ActionNames.Delete,MVC.OrderItem.Name)">
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.Name)</th>
+        <th>@Html.DisplayNameFor(x => x.PricingItemUnitText)</th>
+        <th width="110px">@Html.DisplayNameFor(x => x.Price) (تومان)</th>
+        <th width="70px">@Html.DisplayNameFor(x => x.Count)</th>
+        <th width="70px">@Html.DisplayNameFor(x => x.Copy)</th>
+        <th width="120px">@LocalMessage.TotalCopyPrice</th>
+        <th width="80px">@LocalMessage.TotalPrice (تومان)</th>
+    </tr>
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model.Where(x => x.OrderItemType == OrderItemType.PricingItem))
+        {
+            <tr class="content-row" data-id="@item.PricingItemId" data-order-item-id="@item.OrderItemId" data-remove-from-server="@(((bool?)ViewBag.RemoveFromServer??true).ToString().ToLower())">
+                <td class="text-right">@item.Name</td>
+                <td class="text-right">@(item.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</td>
+                <td data-price="@item.Price">@((langType == LangType.Fa_En ? item.Price : item.Price_OthersLang).ToString("N0"))</td>
+                <td>
+                    @if (item.OrderItemType == OrderItemType.PricingItem)
+                    {
+                        <div>
+                            @item.Count
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.OrderItemType == OrderItemType.PricingItem)
+                    {
+                        <div class="">
+                            @item.Copy
+                        </div>
+                    }
+                </td>
+                <td>@(item.CalculateTotalCopyPrice(langType).ToString("0,0")) </td>
+                <td dir="ltr" class="total-price">@item.CalculateTotalPrice(langType).ToString("N0")</td>
+            </tr>
+        }
+    }
+
+    @{
+        var excludeOfficialRecord = (bool)(ViewBag.ExcludeOfficialRecord ?? false);
+        if (!excludeOfficialRecord)
+        {
+            var oRItem = Model.FirstOrDefault(x => x.OrderItemType == OrderItemType.OfficialRecordItem);
+            if (oRItem != null)
+            {
+                <tr class="official-record-row" data-id="@oRItem.PricingItemId" data-order-item-id="@oRItem.OrderItemId">
+                    <td class="text-right">@oRItem.Name</td>
+                    <td class="text-right">---</td>
+                    <td>@oRItem.Price.ToString("0,0")</td>
+                    <td>@oRItem.Count</td>
+                    <td class="copy">@oRItem.Copy</td>
+                    <td class="text-right">---</td>
+                    <td class="total-price" data-sum="@oRItem.CalculateTotalPrice(langType)">@oRItem.CalculateTotalPrice(langType).ToString("N0") </td>
+                </tr>
+            }
+        }
+        var totalSum = Model.Where(x => (excludeOfficialRecord ? x.OrderItemType != OrderItemType.OfficialRecordItem : true)).Sum(x => x.CalculateTotalPrice(langType));
+        var disItem = Model.FirstOrDefault(x => x.OrderItemType == OrderItemType.DiscountItem);
+        if (disItem != null)
+        {
+            <tr class="item discount-item">
+                <td class="text-right">@disItem.Name</td>
+                <td class="text-right">@(disItem.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</td>
+                <td class="price" dir="ltr">@disItem.Price.ToString("N0")</td>
+                <td>1</td>
+                <td colspan="2"></td>
+                <td dir="ltr" class="total-price">@disItem.CalculateTotalPrice(langType).ToString("N0")</td>
+            </tr>
+        }
+    }
+    <tr class="total-row">
+        <td colspan="4" class="font-bold"><div class="text-right"></div> </td>
+        <td colspan="3" class="total-sum font-bold p-l-40 text-left" data-total-sum="@totalSum">(تومان) @totalSum.ToString("N0") </td>
+    </tr>
+</table>
+

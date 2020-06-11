@@ -1,0 +1,50 @@
+﻿@model IEnumerable<OrderItem>
+@{
+    var langType = ((LangType?)ViewBag.LangType) ?? LangType.Fa_En;
+}
+@if (Model != null)
+{
+    foreach (var item in Model.OrderBy(x => x.OrderItemType))
+    {
+
+        <div class="mobile-item">
+            <div class="title">
+                <h5 class="text">@item.Name</h5>
+            </div>
+            <div class="props">
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.PricingItemUnitText):</span>
+                    <span>@(item.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</span>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Price):</span>
+                    <span class="val price">@((langType == LangType.Fa_En ? item.Price : item.Price_OthersLang).ToString("N0"))</span>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Count):</span>
+                    <div class="val count">
+                        @item.Count
+                    </div>
+                </div>
+                <div class="prop-group w-mob-half">
+                    <span class="lbl">@Html.DisplayNameFor(x => x.Copy):</span>
+                    <div class="val copy">
+                        @item.Copy
+                    </div>
+                </div>
+                @if (item.OrderItemType == OrderItemType.PricingItem)
+                {
+                    <div class="prop-group">
+                        <span class="lbl">@LocalMessage.TotalCopyPrice:</span>
+                        <span class="val total-copy-price">@item.CalculateTotalCopyPrice(langType)</span>
+                    </div>
+                }
+
+                <div class="total">
+                    <span class="lbl">@LocalMessage.TotalPrice:</span>
+                    <span class="val total-copy-price">@item.CalculateTotalPrice(langType).ToString("N0")</span>
+                </div>
+            </div>
+        </div>
+    }
+}

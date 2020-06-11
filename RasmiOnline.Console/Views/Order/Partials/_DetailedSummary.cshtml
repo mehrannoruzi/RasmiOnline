@@ -1,0 +1,62 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+<div class="info">
+    <div class="col-xs-12 col-sm-12 order-title">
+        <div class="title">سفارش شماره @Model.OrderId</div>
+        <span class="dt float-left">تاریخ ثبت سفارش  @PersianDateTime.Now.ToString(PersianDateTimeFormat.Date)</span>
+    </div>
+
+    <div class="row m-0 p-2" style="">
+
+
+        <!-- description -->
+        <div class="col-md-2 order-detail-key">
+            <label class="lbl">@Html.DisplayNameFor(x => x.OrderTitle)</label>
+        </div>
+        <div class="col-md-2 order-detail-value border-left">
+            <label class="val desc">@Model.OrderTitle</label>
+        </div>
+
+        <!-- description -->
+        <div class="col-md-2 order-detail-key">
+            <label class="lbl">@Html.DisplayNameFor(x => x.LangType)</label>
+        </div>
+        <div class="col-md-2 order-detail-value border-left">
+            <label class="val desc">@Model.LangType.GetLocalizeDescription()</label>
+        </div>
+
+
+        <div class="col-md-2 order-detail-key">
+            <label class="lbl">@Html.DisplayNameFor(x => x.OrderStatus)</label>
+        </div>
+        <div class="ccol-md-2 order-detail-value border-left">
+            <label class="val">@Model.OrderStatus.GetDescription()</label>
+        </div>
+
+    </div>
+
+    <div class="warning-box">
+        <ul>
+            <li class="warning-title"><i class="zmdi zmdi-alert-triangle"></i>تذکرات مهم</li>
+            <li>@{Html.RenderAction(MVC.Setting.ActionNames.GetNotification, MVC.Setting.Name);}</li>
+            @foreach (var item in Model.OrderItems.Where(x => !string.IsNullOrWhiteSpace(x.Description)))
+            {
+                <li>@string.Format("{0}: {1}", item.Name, item.Description)</li>
+            }
+        </ul>
+    </div>
+    @*<div class="table-title">
+            لیست مدارک ثبت شده برای ترجمه به شرح زیر می باشد
+        </div>*@
+    <div class="total-table ">
+        @{
+            ViewBag.LangType = Model.LangType;
+            ViewBag.ExcludeOfficialRecord = true;
+            Html.RenderPartial(MVC.OrderItem.Views.Partials._List, Model.OrderItems);
+         }
+    </div>
+</div>
+
+

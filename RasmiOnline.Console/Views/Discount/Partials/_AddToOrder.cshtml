@@ -1,0 +1,20 @@
+﻿@model Order
+<form class="discount-wrapper col-md-7" action="@Url.Action(MVC.Discount.ActionNames.Check,MVC.Discount.Name)">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.OrderId)
+    @Html.HiddenFor(x=>x.LangType)
+    <label class="lbl"><i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>&nbsp;&nbsp;@LocalMessage.SendDiscountText</label>
+    <input name="code" type="text" class="discount-input" placeholder="@LocalMessage.DiscountCode" />
+    @*<button type="button" class="btn-discount">
+            اعمال کد
+        </button>*@
+    <button class="btn-action ltr float-right waves-effect btn-discount m-r-10" type="button">
+        <div class="text">
+            اعمال کد
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-money-off"></i>
+        </div>
+    </button>
+    <div class="discount-message"></div>
+</form>

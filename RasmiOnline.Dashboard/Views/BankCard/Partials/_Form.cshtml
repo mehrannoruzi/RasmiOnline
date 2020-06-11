@@ -1,0 +1,87 @@
+﻿@model BankCard
+
+@{
+    <div class="row">
+        @if (Model.IsNotNull())
+        {
+            <form id="bankcard-form" action="@Url.Action(MVC.BankCard.ActionNames.FormSubmited, MVC.BankCard.Name)" class="col-12">
+                @if (Model.BankCardId > 0)
+                {
+                    @Html.HiddenFor(x => x.BankCardId)
+                }
+                <div class="row">
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.BankName)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.BankName, (List<SelectListItem>)ViewBag.BankNames, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.BankName) </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.Title)
+                            <div class="input-group">
+                                @Html.TextBoxFor(x => x.Title, null, new { @class = "form-control type-fa" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Title) </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.AccountNumber)
+                            <div class="input-group">
+                                @Html.TextBoxFor(x => x.AccountNumber, null, new { @class = "form-control ltr-dir text-center", @data_mask = "00000000000000000000", @placeholder = "################" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.AccountNumber) </small>
+                    </div>
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.CardNumber)
+                            @Html.TextBoxFor(x => x.CardNumber, null, new { @class = "form-control ltr-dir text-center", @data_mask = "0000-0000-0000-0000", @placeholder = "####-####-####-####" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.CardNumber) </small>
+                    </div>
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.IsEnable)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.IsEnable, (List<SelectListItem>)ViewBag.ActivateStatus, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger">@Html.ValidationMessageFor(x => x.IsEnable) </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 m-t-30">
+                    <button class="btn-action rtl waves-effect" type="button">
+                        <div class="text">
+                            @if (Model.BankCardId == 0)
+                {
+                                @LocalMessage.Add
+                            }
+                            else
+                            {
+                                @LocalMessage.Edit
+                            }
+                        </div>
+                        <div class="icon">
+                            <i class="zmdi zmdi-plus"></i>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="text-center text-danger">@LocalMessage.BadRequest</div>
+        }
+    </div>
+}

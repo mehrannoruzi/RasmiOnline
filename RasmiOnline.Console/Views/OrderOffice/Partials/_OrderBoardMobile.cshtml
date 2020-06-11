@@ -1,0 +1,58 @@
+﻿@model IActionResponse<List<ItemTextValueModel<OrderStatus, int>>>
+
+@{
+    Layout = null;
+
+    var result = EnumConvertor.GetEnumElements<OrderStatus>().ToList();
+
+    var colors = new string[]
+    {
+
+        "#ffc109",
+        "#2295f3",
+        "#5844ff",
+        "#60488a",
+        "#fe6765",
+        "#32c786",
+        "#00cae3",
+        "#6d8896",
+        "#f09629",
+        "#51c0b9",
+        "#00cae3",
+        "#6d8896",
+        "#f09629",
+        "#51c0b9"
+    };
+
+    int counter = 0;
+}
+
+
+<div class="orang-vertical-scroll" style="height:210px">
+    @{
+        var menuItem = EnumConvertor.GetEnumElements<OrderStatus>().ToList();
+        foreach (var item in menuItem)
+        {
+            var orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), item.Name);
+
+            <div class="menu-item-select" data-desc="@item.Description" data-url="@Url.Action(MVC.OrderOffice.ActionNames.GetOrderListMobile,MVC.OrderOffice.Name)" data-type="@item.Name" style="padding:10px 15px;margin-bottom:5px; border-right:3px solid @(colors[counter]);">
+                <span>
+                    @item.Description
+                </span>
+                <small style="float:left;">
+                    @if (Model.IsSuccessful)
+                    {
+                        var orderState = Model.Result.FirstOrDefault(x => x.Key == orderStatus) ?? new ItemTextValueModel<OrderStatus, int> { Key = orderStatus, Value = 0 };
+                        <span>@($"{orderState.Value} {LocalMessage.Order}")</span>
+                    }
+                    else
+                    {
+                        <span>@($"0 {LocalMessage.Order}")</span>
+                    }
+                </small>
+            </div>
+
+            counter++;
+        }
+    }
+</div>

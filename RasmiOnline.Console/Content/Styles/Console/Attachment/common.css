@@ -1,0 +1,100 @@
+﻿/*----------------------------------------
+                    list
+------------------------------------------*/
+.attachments {
+    width: 100%;
+    margin: 0;
+}
+
+    .attachments .file-title {
+        text-align: left;
+        margin: 0;
+        padding: 5px;
+    }
+
+
+
+.attch-item {
+    padding: 7px;
+    margin-bottom: 15px;
+}
+
+    .attch-item > div {
+        position: relative;
+        border: solid 1px #d0d0d0;
+        height: 145px;
+        width: 100%;
+        padding: 3px;
+        border-radius: 2px;
+        text-align: center;
+        box-shadow: 3px 3px 12px #eee;
+    }
+
+        .attch-item > div.Identity {
+            border-color: #47947c;
+        }
+
+        .attch-item > div.Translation {
+            border-color: #ffd800;
+        }
+
+        .attch-item > div.OrderFiles {
+            border-color: #4f5b97;
+        }
+
+    .attch-item img {
+        height: 100%;
+        max-width: 100%;
+    }
+
+    .attch-item .hover {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        background-color: rgba(0,0,0,0.5);
+        transition: visibility,opacity 0.3s ease-in;
+        -webkit-transition: all 0.3s ease-in;
+    }
+
+        .attch-item .hover a {
+            text-decoration: none;
+        }
+
+        .attch-item .hover i {
+            color: #fff;
+            opacity: 0.9;
+            font-size: 30px;
+            cursor: pointer;
+            margin-top: 45px;
+        }
+
+    .attch-item:hover .hover {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .attch-item .remove {
+        display: none;
+    }
+
+    .attch-item:hover .remove {
+        display: block;
+        position: absolute;
+        top: 6px;
+        left: 6px;
+    }
+
+    .attch-item .remove > i {
+        color: #fff;
+        background-color: red;
+        border-radius: 50%;
+        width: 21px;
+        height: 21px;
+        padding: 5px;
+        cursor: pointer;
+    }

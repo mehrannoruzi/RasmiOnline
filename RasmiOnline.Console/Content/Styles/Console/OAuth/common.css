@@ -1,0 +1,54 @@
+﻿.tab-panel{
+    display:none;
+    margin-top:30px;
+}
+.tab-panel.active{
+    display:block;
+}
+.chk-input {
+    /*float: right;*/
+    display: inline-block;
+    width: 13px;
+}
+body > main{
+    min-height:450px;
+}
+#confirm-form .btn-group{
+    display:block;
+    height:50px;
+    margin-bottom:10px;
+}
+/*--- alert ---*/
+.alert {
+    visibility: hidden;
+}
+.alert-danger small:before{
+    content:'*';
+    margin-left:5px;
+}
+.alert-success small:before {
+    content: '-';
+    margin-left: 5px;
+}
+main > .contents
+{
+    min-height:720px;
+}
+.resend{
+    display:none;
+}
+@media(min-width:577px) and (max-width:1200px) {
+    .card {
+        top: 10%;
+        right: 20%;
+        left: 20%;
+    }
+}
+
+@media(max-width:576px) {
+    .card {
+        top: 10%;
+        right: 5%;
+        left: 5%;
+    }
+}

@@ -1,0 +1,213 @@
+﻿
+
+.EnZebra_DatePicker *,
+.EnZebra_DatePicker *:after,
+.EnZebra_DatePicker *:before {
+    -moz-box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
+
+.dp_hidden {
+    display: none;
+}
+
+.EnZebra_DatePicker {
+    position: absolute;
+    background: #666;
+    border: 3px solid #666;
+    font-size: 13px;
+    z-index: 99999999;
+}
+
+.EnZebra_DatePicker_Icon_Wrapper {
+    width: 100% !important;
+}
+
+.EnZebra_DatePicker * {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    background: transparent;
+    border: none;
+}
+
+.EnZebra_DatePicker table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 14px;
+    width:100%;
+}
+
+.EnZebra_DatePicker td,
+.EnZebra_DatePicker th {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.EnZebra_DatePicker td {
+    cursor: pointer;
+}
+
+.EnZebra_DatePicker .dp_daypicker,
+.EnZebra_DatePicker .dp_monthpicker,
+.EnZebra_DatePicker .dp_yearpicker {
+    margin-top: 3px;
+    width:100%;
+}
+
+    .EnZebra_DatePicker .dp_daypicker td,
+    .EnZebra_DatePicker .dp_daypicker th,
+    .EnZebra_DatePicker .dp_monthpicker td,
+    .EnZebra_DatePicker .dp_yearpicker td {
+        background: #E8E8E8;
+        width: 30px;
+        border: 1px solid #7BACD2;
+    }
+
+.EnZebra_DatePicker,
+.EnZebra_DatePicker .dp_header .dp_hover,
+.EnZebra_DatePicker .dp_footer .dp_hover {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+    /* = HEADER
+----------------------------------------------------------------------------------------------------------------------*/
+    .EnZebra_DatePicker .dp_header td {
+        color: #FFF;
+    }
+
+    .EnZebra_DatePicker .dp_header .dp_previous,
+    .EnZebra_DatePicker .dp_header .dp_next {
+        width: 30px;
+    }
+
+
+    .EnZebra_DatePicker .dp_header .dp_hover {
+        background: #222;
+        color: #FFF;
+    }
+
+    .EnZebra_DatePicker .dp_header .dp_blocked {
+        color: #888;
+        cursor: default;
+    }
+
+    /* = DATEPICKER
+----------------------------------------------------------------------------------------------------------------------*/
+    .EnZebra_DatePicker .dp_daypicker th {
+        background: #FFCC33;
+    }
+
+    .EnZebra_DatePicker td.dp_not_in_month {
+        background: #F3F3F3;
+        color: #CDCDCD;
+        cursor: default;
+    }
+
+    .EnZebra_DatePicker td.dp_not_in_month_selectable {
+        background: #F3F3F3;
+        color: #CDCDCD;
+        cursor: pointer;
+    }
+
+    .EnZebra_DatePicker td.dp_weekend {
+        background: #D8D8D8;
+    }
+
+    .EnZebra_DatePicker td.dp_weekend_disabled {
+        color: #CCC;
+        cursor: default;
+    }
+
+    .EnZebra_DatePicker td.dp_selected {
+        background: #5A4B4B;
+        color: #FFF !important;
+    }
+
+    .EnZebra_DatePicker td.dp_week_number {
+        background: #FFCC33;
+        color: #555;
+        cursor: text;
+        font-style: italic;
+    }
+
+    /* = MONTHPICKER
+----------------------------------------------------------------------------------------------------------------------*/
+    .EnZebra_DatePicker .dp_monthpicker td {
+        width: 33%;
+    }
+
+    /* = YEARPICKER
+----------------------------------------------------------------------------------------------------------------------*/
+    .EnZebra_DatePicker .dp_yearpicker td {
+        width: 33%;
+    }
+
+    /* = FOOTER
+----------------------------------------------------------------------------------------------------------------------*/
+    .EnZebra_DatePicker .dp_footer {
+        margin-top: 3px;
+    }
+
+        .EnZebra_DatePicker .dp_footer td {
+            color: #FFF;
+            padding: 2px;
+        }
+
+        .EnZebra_DatePicker .dp_footer .dp_hover {
+            background: #222;
+            color: #FFF;
+        }
+
+    /* = SOME MORE GLOBALS (MUST BE LAST IN ORDER TO OVERWRITE PREVIOUS PROPERTIES)
+----------------------------------------------------------------------------------------------------------------------*/
+    .EnZebra_DatePicker td.dp_current {
+        color: #C40000;
+    }
+
+    .EnZebra_DatePicker td.dp_disabled_current {
+        color: #E38585;
+    }
+
+    .EnZebra_DatePicker td.dp_disabled {
+        background: #F3F3F3;
+        color: #CDCDCD;
+        cursor: default;
+    }
+
+    .EnZebra_DatePicker td.dp_hover {
+        background: #482424;
+        color: #FFF;
+    }
+
+/* = ICON
+----------------------------------------------------------------------------------------------------------------------*/
+button.EnZebra_DatePicker_Icon {
+    display: inline-block !important;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHxJREFUeNpi/F/AoMXAwNAPxJYMEHAcSsP4DDjEQfxCRqABO7EoJhYcZ4Fr7v/PC6YLGT+j8GEAXRzCt2RioBCwYIig20xAnMoumOFOnK6MnXhcAJKEKcDFpp0X0L2Bi43XBUPOCyy4oodYQHFmAoVBIVJWJUkzSC9AgAEACMkxEomMXr8AAAAASUVORK5CYII=') /*/Content/Image/Zebra/calendar.png*/ no-repeat left top;
+    *background: url('/Content/Image/Zebra/calendar.png') no-repeat left top; /* For IE 6 and 7 */
+    text-indent: -9000px;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 0;
+    vertical-align: top;
+    zoom: 1;
+    *display: inline;
+    left: 10px;
+    margin-top: 10px !important;
+    z-index: 99;
+    top: 23px;
+}
+
+button.EnZebra_DatePicker_Icon_Disabled {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg0RjdCQzNCQjg3MjExRTFBNzBFRkQ3RTc0MTYzNERFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg0RjdCQzNDQjg3MjExRTFBNzBFRkQ3RTc0MTYzNERFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODRGN0JDMzlCODcyMTFFMUE3MEVGRDdFNzQxNjM0REUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6ODRGN0JDM0FCODcyMTFFMUE3MEVGRDdFNzQxNjM0REUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7wk15RAAAAh0lEQVR42mKsqanRYmBg6AdiSwYIOA6lYXwGHOIgfiELmmZsGnGJg/j9LDCJ5uZmXhBdW1v7GZkPA+jiUL4lEwOFgAVdAN1mQuLUdcHChQuJ0hQfH4/bBSBJmAJcbNp5Ad0buNh4XTD0vMCCK3pIcQEoV1nC0jqJ4DgoDAqRsipJmkF6AQIMAESMOtpILFFsAAAAAElFTkSuQmCC') /*/Content/Image/Zebra/calendar-disabled.png*/;
+    *background-image: url('/Content/Image/Zebra/calendar-disabled.png'); /* For IE 6 and 7 */
+}

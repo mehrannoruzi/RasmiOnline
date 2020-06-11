@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RasmiOnline.Domain.Entity.ActivityLog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABAAAAACAAAAAAAAAAAAgBAAAAAAAAAQAAAAAAIIA=</HashCode>
+      <FileName>Entity\ActivityLog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.ActivityLogArchive" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAAAAAACAAAAAAAAAAAAgBAAAAAAAAAQAAAAAAIIA=</HashCode>
+      <FileName>Entity\ActivityLogArchive.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.Address">
+    <Position X="15.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABCAAAAAAAAYAAAAIAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entity\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.Attachment" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIFAAAIAAAAAAAFAAAAAAAAAAAAEQAAAAAAAAQBAAIA=</HashCode>
+      <FileName>Entity\Attachment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.Message" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAgAAAAQAAAAAAAAAAAAEAAAgIQAABAgAAIA=</HashCode>
+      <FileName>Entity\Message.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.Order">
+    <Position X="13" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>UAABAAZAAAEiAAAAAgAAAAgAAQAARAAAARAAAAAAAAA=</HashCode>
+      <FileName>Entity\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.OrderItems">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEIAAAAAQAgAAAAAAgAAAQAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entity\OrderItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.PaymentGateway">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAAAAAAAAAAAAAAEQAAAAYAAAAAAAACABAAAAAAAIA=</HashCode>
+      <FileName>Entity\PaymentGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.PricingItems">
+    <Position X="6.75" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAIAAAAERIgAgAAAAAAAAAgACAAAAACAAAAQAAAAAA=</HashCode>
+      <FileName>Entity\PricingItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.Setting">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAACAAACA=</HashCode>
+      <FileName>Entity\Setting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.Transaction" BaseTypeListCollapsed="true">
+    <Position X="11" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EIABBAAEAQggAAAAACAAgAoAABAAAAEAAAAAAAAAAIA=</HashCode>
+      <FileName>Entity\Transaction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RasmiOnline.Domain.Entity.User">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAGEAAAAAAAIAIEQAAJAgAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Entity\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

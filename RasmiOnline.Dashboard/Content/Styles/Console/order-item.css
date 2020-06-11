@@ -1,0 +1,99 @@
+﻿/*----------------------------------------
+                   Editable-list
+------------------------------------------*/
+.plus-wrapper .plus-ico {
+    text-align: center !important;
+}
+
+    .plus-wrapper .plus-ico i {
+        font-size: 24px;
+        color: green;
+        vertical-align: middle;
+    }
+
+.add-wrapper {
+    position: relative;
+}
+
+    .add-wrapper input {
+        font-size: 12px;
+        border-radius: 3px;
+        border: 1px solid #bbb;
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+    }
+
+        .add-wrapper input:focus {
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+            border: 1px solid #6f9dc0;
+        }
+
+    .add-wrapper ul {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border: solid 1px #ccc;
+        box-shadow: 3px 3px 10px rgba(0,0,0,.2);
+        z-index: 99;
+        list-style: none;
+        right: 8px;
+        top: 50px;
+        padding-right: 0px;
+        width: 98%;
+        min-height: 50px;
+        max-height: 250px;
+        overflow-y: scroll;
+    }
+
+        .add-wrapper ul > li {
+            padding: 5px 10px 5px 5px;
+            text-align: right;
+            cursor: pointer;
+        }
+
+            .add-wrapper ul > li > div {
+                overflow: hidden;
+            }
+
+            .add-wrapper ul > li.active {
+                background-color: #dddcdc;
+            }
+
+            .add-wrapper ul > li:hover {
+                background-color: #eee;
+            }
+
+            .add-wrapper ul > li span {
+                float: left;
+                padding-left: 10px;
+            }
+
+.order-items .remove {
+    text-align: center;
+}
+
+    .order-items .remove i {
+        color: red;
+        font-size: 23px;
+        vertical-align: middle;
+        cursor:pointer;
+    }
+
+.order-items .doc-count, .order-items .copy-count {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40px;
+    height: 30px;
+}
+
+.remove .crisp-h5bnuo {
+    background-color: #000;
+}
+
+.p-20 {
+    padding: 20px !important;
+}

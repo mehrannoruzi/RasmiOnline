@@ -1,0 +1,97 @@
+﻿.main-content {
+    min-height: 10px;
+}
+
+body {
+    background: #ffffff;
+}
+
+.header {
+    border-bottom: 1px solid #424242;
+    color: #424242;
+}
+
+.summary-success {
+    margin-top: 15px;
+    height: 70px;
+}
+
+.order-row {
+    margin: -15px;
+}
+
+.values .wrapper {
+    background-color: #d4edda;
+    margin-bottom: 1px;
+    height: 35px;
+}
+
+@media (max-width: 576px) {
+    .mobile-item {
+        height: 175px;
+        width: 100% !important;
+    }
+}
+
+.f-s-20 {
+    font-size: 20px;
+}
+
+.order-items, .final-items {
+    padding: 0 0px 5px 0px;
+}
+
+.order-id {
+    font-size: 14px;
+}
+
+.nav-actions {
+    margin-top: 5px;
+}
+
+
+.sec-header {
+    font-weight: normal !important;
+}
+
+.f-w-normal {
+    font-weight: normal !important;
+}
+
+.btn-action {
+    width: 100%;
+    border-radius: 0 !important;
+    height: 40px;
+}
+
+.values .wrapper .lbl {
+    display: inline-block;
+    background-color: #18a689;
+    color: #fff;
+    min-width: 50%;
+    padding: 10px;
+    font-size: 11px;
+}
+
+.values .wrapper .val {
+    padding: 8px 20px;
+    text-align: center;
+    direction: ltr;
+    float: left;
+    font-size: 13px;
+    color: black;
+}
+
+.gateways > .form-group {
+    margin-top: 0;
+}
+
+.gateways .pre-factor {
+    margin-bottom: 0;
+}
+
+.gateways .payment-select {
+    padding: 0px;
+    height: auto;
+    margin-bottom: 0px;
+}

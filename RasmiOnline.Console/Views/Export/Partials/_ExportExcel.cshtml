@@ -1,0 +1,62 @@
+﻿@model ExportDataTableModel
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@LocalMessage.ExportAndDownloadExcelFile</h3>
+                <small class="card-subtitle">@LocalMessage.ExportAndDownloadExcelFileDescription</small>
+            </div>
+            <form id="ExportToExcelFile" action="@(Url.Action(MVC.Export.ActionNames.ToExcel, MVC.Export.Name))" method="POST">
+                <div class="card-block">
+                    <div class="col-12" method="post">
+                        <div class="row">
+
+                            <div class="col-sm-4 m-b-20">
+                                <div class="form-group" dir="rtl">
+                                    @Html.Label("entityName", LocalMessage.Tabel)
+                                    <div class="select">
+                                        @Html.DropDownList("entityName", (List<SelectListItem>)ViewBag.TabelsName, new { @class = "form-control" })
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DateTimeFrom, LocalMessage.DateFrom)
+                                    @Html.TextBox(nameof(Model.DateTimeFrom), PersianDateTime.Now.AddDays(-10).ToString(PersianDateTimeFormat.Date), new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.DateTimeFrom) </small>
+                            </div>
+
+                            <div class="col-sm-4 m-b-20" dir="ltr">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DateTimeTo, LocalMessage.DateTo)
+                                    @Html.TextBox(nameof(Model.DateTimeTo), PersianDateTime.Now.ToString(PersianDateTimeFormat.Date), new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.DateTimeTo) </small>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-left m-b-20">
+                        <button id="btnSubmitChange" class="btn-action rtl waves-effect m-r-10" type="submit">
+                            <div class="text">
+                                @LocalMessage.Download
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-download"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

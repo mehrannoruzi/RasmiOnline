@@ -1,0 +1,98 @@
+﻿@model IActionResponse<List<ItemTextValueModel<OrderStatus, int>>>
+
+@{
+    ViewBag.Title = LocalMessage.OrderManagment;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.OrderManagmentDescription;
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderAdmin.manage_css)" rel="stylesheet" />
+}
+
+<div class="card toolbar-head">
+    <div class="col-md-12 toolbar-head">
+        <div class="tab-container toolbar p-0 border-0">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0 active" data-toggle="tab" href="#Order" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-receipt icon-profile d-sm-none d-md-block"></i>
+                        مدیریت سفارشات
+                    </a>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#OrderToday" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                        سفارشات موعد امروز
+
+                        <div class="count-circle animated @(ViewBag.TodayOrderCount!='0' ? "shake" : "")">@ViewBag.TodayOrderCount</div>
+                    </a>
+                </li>
+
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#OrderOlder" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                        سفارشات تاریخ تحویل گذشته
+
+                        <div class="count-circle animated @(ViewBag.OlderOrderCount!='0' ? "shake" : "")">@ViewBag.OlderOrderCount</div>
+                    </a>
+                </li>
+
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#Transaction" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-money icon-profile d-sm-none d-md-block"></i>
+                        پرداخت های انجام شده
+
+                        <div id="transaction-count" class="count-circle animated @(ViewBag.AllUnReadPayment!='0' ? "shake" : "")">@ViewBag.AllUnReadPayment</div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="tab-content">
+    <div class="tab-pane fade active show" id="Order" role="tabpanel" aria-expanded="true">
+        @{
+            Html.RenderPartial(MVC.OrderAdmin.Views.Partials._OrderBoard, Model);
+        }
+    </div>
+
+    <div class="tab-pane fade show" id="OrderToday" role="tabpanel" aria-expanded="true">
+        @{
+            Html.RenderAction(MVC.OrderAdmin.ActionNames.GetAllTodayOrderList, MVC.OrderAdmin.Name);
+        }
+    </div>
+
+    <div class="tab-pane fade show" id="OrderOlder" role="tabpanel" aria-expanded="true">
+        @{
+            Html.RenderAction(MVC.OrderAdmin.ActionNames.GetAllOlderOrderList, MVC.OrderAdmin.Name);
+        }
+    </div>
+
+    <div class="tab-pane fade show" id="Transaction" role="tabpanel" aria-expanded="true">
+            @{
+                Html.RenderAction(MVC.Transaction.ActionNames.GetAllUnReadPayment, MVC.Transaction.Name);
+            }
+    </div>
+</div>
+
+<div class="toolbar order-board-mobile hidden-md-up" style="z-index: 9999999;" data-collapse-state="close">
+    <div class="toolbar__label label-accordion">
+        <span class="order-accordion-title">@LocalMessage.Orders</span>
+        <span id="ShowOrderBoardList">
+            <i class="zmdi zmdi-chevron-down"></i>
+        </span>
+    </div>
+    <div class="menu-item">
+        @{ Html.RenderAction(MVC.OrderAdmin.ActionNames.GetMobileOrderType, MVC.OrderAdmin.Name);}
+    </div>
+</div>
+
+<div id="itemsList_Mobile">
+
+</div>
+
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.OrderAdmin.manage_js)"></script>
+}

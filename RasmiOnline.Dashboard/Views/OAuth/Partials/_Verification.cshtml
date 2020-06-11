@@ -1,0 +1,54 @@
+﻿@model ConfirmVerificationCode
+@{
+    Layout = null;
+}
+<div class="form-block confirm-form" id="confirm-form">
+    <form class="oauth-form " action="@Url.Action(MVC.OAuth.ActionNames.ConfirmMobileNumber,MVC.OAuth.Name)">
+        <input type="hidden" name="UserId" id="UserId" value="" />
+        <div class="group alert w-full" dir="rtl">
+            <small></small>
+        </div>
+        <div class="w-full m-b-26" dir="rtl">
+            <h6>پیامکی حاوی کد تایید به شماره شما ارسال شد، لطفا آن را وارد نمایید.</h6>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Username is required">
+            @Html.TextBoxFor(x => x.Code, new { @class = "input100 ltr-elm p-h-r", @placeholder = Html.DisplayNameFor(x => x.Code), @data_trigger_click = "#btn-confirm-code" })
+        </div>
+        <div class="m-b-10 w-full">
+            <small>@Html.ValidationMessageFor(x => x.Code)</small>
+        </div>
+        <div class="container-login100-form-btn">
+            <button class="btn-action rtl waves-effect btn-confirm-code" type="button" id="btn-confirm-code">
+                <div class="text">
+                    @LocalMessage.Confirm
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-check"></i>
+                </div>
+            </button>
+            <div class="sms-try" data-url="@Url.Action(MVC.OAuth.ActionNames.SendSms,MVC.OAuth.Name)">
+                <p class="counter">
+                    زمان باقیمانده:
+                    <span class="val">60</span>
+                </p>
+               
+                <a class="resend dark btn-action ltr waves-effect">
+                    <div class="text">
+                        ارسال مجدد
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-repeat"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <div class="footer">
+        قبلا در رسمی آنلاین ثبت‌نام کرده‌اید؟
+
+        <a href="#signin-form" class="inner-nav goto-sign-in">وارد شوید</a>
+
+    </div>
+
+</div>

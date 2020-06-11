@@ -1,0 +1,32 @@
+﻿@model CustomModalModel
+
+<div class="modal fade show animated zoomIn" id="modal-default" data-modal-name="@($"{Model.EntityName}_Modal")"   tabindex="-1" style="display: none; padding-left: 20px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">عنوان مودال</h5>
+                <a class="float-left m-l-15" data-dismiss="modal">
+                    <i class="zmdi zmdi-close-circle" style="font-size:23px"></i>
+                </a>
+            </div>
+            <div class="modal-show-message" data-msg-error-title="@LocalMessage.Error" data-msg-warning-title="@LocalMessage.Warning" data-msg-success-title="@LocalMessage.Success" style="display:none">
+            </div>
+            <div class="modal-body">
+
+            </div>
+            @if (!Model.IsDisableSaveButton)
+            {
+                <div class="modal-footer">
+                    <button class="btn-action rtl waves-effect m-r-10" type="button" data-element-name="SubmitModalForm" data-entity-name="@(Model.EntityName)">
+                        <div class="text">
+                            @LocalMessage.Save
+                        </div>
+                        <div class="icon">
+                            <i class="zmdi zmdi-floppy"></i>
+                        </div>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

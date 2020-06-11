@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BankCard>
+
+@{ Layout = null; }
+
+<div class="row m-t-30">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-6 col-sm-12">
+                <div class="card-demo">
+                    <div class="card">
+                        <div class="card-header @(item.IsEnable ? "Accepted" : "Failed") walletHeader">
+                            <img src="~/Content/Images/BankName/@(item.BankName).png" class="walletImage">
+                            <h3 class="card-title" style="padding-right: 45px;padding-top:8px;">
+                                @(item.Title)
+                            </h3>
+                            <div class="actions">
+                                <i class="zmdi zmdi-time f-s-14 p-5px"></i>
+                                <span class="m-t-5">@item.InsertDateSh</span>
+                            </div>
+                        </div>
+                        <div class="card-block p-b-5">
+                            <div class="standard-item cardNumber">
+                                @item.CardNumber
+                            </div>
+                        </div>
+                        <div class="card-block p-t-0">
+                            <div class="standard-item f-s-12 col-12">
+                                شماره حساب :  @item.AccountNumber
+                            </div>
+                        </div>
+                        @*<div class="card-block text-center p-0" style="background-color: #f9f9f9;">
+                            <a href="" style="padding:15px;color:#808080" edit-item-modal="bankcard-form" class="col-6 float-right waves-effect">
+                                <i class="zmdi zmdi-edit f-s-20"></i>
+                                @LocalMessage.Edit
+                            </a>
+                            <a href="" class="col-6 float-left waves-effect" style="padding:15px;border-right:3px solid #fff">
+
+                                @if (item.IsEnable)
+                                {
+                                    <i class="zmdi zmdi-close deactive-color f-s-20"></i>
+                                    <span class="deactive-color">غیر فعال سازی</span>
+                                }
+                                else
+                                {
+                                    <i class="zmdi zmdi-check active-color f-s-20"></i>
+                                    <span class="active-color">فعال سازی</span>
+                                }
+                            </a>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

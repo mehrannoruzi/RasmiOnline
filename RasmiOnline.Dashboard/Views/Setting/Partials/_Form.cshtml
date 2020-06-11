@@ -1,0 +1,77 @@
+﻿@model Setting
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@LocalMessage.SystemSetting</h3>
+                <small class="card-subtitle">@LocalMessage.SettingDescription</small>
+            </div>
+            <div class="card-block">
+                <form id=@($"{nameof(Setting)}_FormControls") action="@Url.Action(MVC.Setting.ActionNames.SubmitChange, MVC.Setting.Name)" class="col-12">
+
+                    <label for="SettingCosts" class="sec-header">
+                        <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+                        @LocalMessage.Costs
+                    </label>
+                    <div class="row m-t-30" id="SettingCosts">
+
+                        <div class="col-sm-6 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.DayToDelivery)
+                                @Html.TextBoxFor(x => x.DayToDelivery, null, new { @class = "form-control ltr-dir only-digit" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.DayToDelivery) </small>
+                        </div>
+                        <div class="col-sm-6 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.LimitOrderOpenDay)
+                                @Html.TextBoxFor(x => x.LimitOrderOpenDay, null, new { @class = "form-control ltr-dir only-digit" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.LimitOrderOpenDay) </small>
+                        </div>
+
+                        <div class="col-sm-6 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.OfficialRecordPrice)
+                                @Html.TextBoxFor(x => x.OfficialRecordPrice, null, new { @class = "form-control ltr-dir only-digit" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.OfficialRecordPrice) </small>
+                        </div>
+                        <div class="col-sm-6 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Tel)
+                                @Html.TextBoxFor(x => x.Tel, null, new { @class = "form-control ltr-dir only-digit" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Tel) </small>
+                        </div>
+                        <div class="col-sm-12 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.ImportantNotice)
+                                @Html.TextAreaFor(x => x.ImportantNotice, 4, 10, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ImportantNotice) </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-left p-0">
+                        <button class="btn-action rtl waves-effect next-panel" type="button" id="btnSubmitChange">
+                            <div class="text">
+                                @LocalMessage.Save
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-floppy"></i>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@model Order
+@{
+    ViewBag.Title = "پرداخت سفارشات";
+    Layout = "~/Views/Order/_Layout.cshtml";
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.pay_mobile_css)" rel="stylesheet" />
+}
+@Html.HiddenFor(X => X.OrderId)
+<div class="main-content">
+    <label for="PaymentDescription" class="sec-header f-w-normal col-sm-2">
+        <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+        اقلام سفارش
+    </label>
+    <div class="order-items">
+        @{Html.RenderPartial(MVC.OrderItem.Views.Partials._List_Mobile, Model.OrderItems);}
+    </div>
+    <div class="row values">
+        <div class="col-12 col-sm-6">
+            <div class="wrapper">
+                <span class="lbl">جمع کل:</span>
+                <span class="val">@Model.TotalPrice().ToString("N0") تومان</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="wrapper">
+                <span class="lbl">مبلغ پرداخت شده</span>
+                <span class="val">@Model.PayedValue.ToString("N0") تومان</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="wrapper">
+                <span class="lbl">مبلغ قابل پرداخت</span>
+                <span class="val">@((Model.TotalPrice() - Model.PayedValue).ToString("N0")) تومان</span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <label for="PaymentDescription" class="sec-header col-sm-2">
+        <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+        @LocalMessage.PaymentGateways (@LocalMessage.SelectGateway)
+    </label>
+    <div class="gateways">
+        @{Html.RenderPartial(MVC.PaymentGateway.Views.Partial._ListOfGateway, (IEnumerable<PaymentGateway>)ViewBag.PaymentGatewaies);}
+    </div>
+    <div class="nav-actions w-100">
+
+        <button class="btn-action rtl waves-effect next-panel btn-pay float-left" type="button" data-url="@Url.Action(MVC.Order.ActionNames.Pay,MVC.Order.Name)">
+
+            <div class="text">
+                @LocalMessage.Payment
+            </div>
+            <div class="icon">
+                <i class="zmdi zmdi zmdi-card"></i>
+            </div>
+        </button>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        window.CRISP_READY_TRIGGER = () => {
+            $crisp.push(["do", "chat:hide"]);
+        };
+    </script>
+    <script src="@Url.Content(Links.Scripts.Plugins.SweetAlert.sweetalert_min_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.pay_mobile_js)"></script>
+}

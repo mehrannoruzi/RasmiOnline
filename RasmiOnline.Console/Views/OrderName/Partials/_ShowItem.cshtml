@@ -1,0 +1,42 @@
+﻿@model OrderName
+@{
+    Layout = null;
+    var editable = (bool?)ViewBag.Editable ?? false;
+}
+
+@if (Model != null)
+{
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-4 order-name-item @(editable?"":"without-insert")">
+        <div class="wrapper">
+            <h6 class="header m-b-30">
+                <i class="zmdi zmdi-account"></i>
+                <span>@Model.FullName</span>
+
+                @if (editable)
+                {
+                    <span class="remove float-left" data-url="@Url.Action(MVC.OrderName.ActionNames.Delete, MVC.OrderName.Name, new { id = Model.OrderNameId })">
+                        <i class="zmdi zmdi-close"></i>
+                    </span>
+                }
+            </h6>
+            <div class="lbl-group">
+                <label class="lbl">@Html.DisplayNameFor(x => x.FullNameEN):</label>
+                <label class="val">@Model.FullNameEN</label>
+            </div>
+            <div class="lbl-group">
+                <label class="lbl">@Html.DisplayNameFor(x => x.FatherName):</label>
+                <label class="val">@Model.FatherName</label>
+            </div>
+
+            <div class="lbl-group">
+                <label class="lbl">@Html.DisplayNameFor(x => x.FatherNameEn):</label>
+                <label class="val">@Model.FatherNameEn</label>
+            </div>
+            <div class="lbl-group">
+                <label class="lbl">@Html.DisplayNameFor(x => x.BirthDateMi):</label>
+                <label class="val">@Model.BirthDateMi</label>
+            </div>
+        </div>
+    </div>
+}
+

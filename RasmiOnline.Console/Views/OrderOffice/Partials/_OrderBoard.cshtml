@@ -1,0 +1,82 @@
+﻿@model IActionResponse<List<ItemTextValueModel<OrderStatus, int>>>
+
+@{
+    Layout = null;
+    var result = EnumConvertor.GetEnumElements<OrderStatus>().ToList();
+    var colors = new string[]
+    {
+        "#ffc109",
+        "#2295f3",
+        "#5844ff",
+        "#60488a",
+        "#fe6765",
+        "#32c786",
+        "#00cae3",
+        "#6d8896",
+        "#f09629",
+        "#51c0b9",
+        "#00cae3",
+        "#6d8896",
+        "#f09629",
+        "#51c0b9"
+    };
+    int counter = 0;
+}
+
+<div class="row m-l-0 hidden-sm-down">
+    @foreach (var item in result)
+    {
+        var orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), item.Name);
+        var orderState = Model.Result.FirstOrDefault(x => x.Key == orderStatus) ?? new ItemTextValueModel<OrderStatus, int> { Key = orderStatus, Value = 0 };
+
+        <div class="item-box col-lg-12 col-md-12 @(orderState.Value==0 ? "hide" :string.Empty)">
+            <ul>
+                <li class="item">
+                    <input type="checkbox" checked="" class="chbx_according" data-url="@Url.Action(MVC.OrderOffice.ActionNames.GetOrderList,MVC.OrderOffice.Name)" data-type="@item.Name" data-desc="@item.Description">
+                    <i></i>
+                    <div style="display:inline;">
+                        <span>
+                            <span class="circle" style="background-color:@(colors[counter]);"></span>
+                            <span class="m-r-20 p-abs-top">
+                                @(orderStatus.GetLocalizeDescription())
+                            </span>
+                        </span>
+                        <span class="m-r-10">
+                            (
+                            @if (Model.IsSuccessful)
+                            {
+                                @($"{orderState.Value} {LocalMessage.Order}")
+                            }
+                            else
+                            {
+                                @($"0 {LocalMessage.Order}")
+                            }
+                            )
+                        </span>
+
+                    </div>
+                    @if (orderStatus == OrderStatus.WaitForPricing)
+                    {
+                        <div id="@(item.Name)_loadingOver grid" >
+                            <div id="@(item.Name)_ItemsList">
+                                @if (Model.IsNotNull())
+                                {
+                                    Html.RenderAction(MVC.OrderOffice.ActionNames.GetOrderList, new { orderStatus = OrderStatus.WaitForPricing });
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="loadingOver grid">
+                            <div id="@(item.Name)_ItemsList">
+                            </div>
+                        </div>
+                    }
+
+                </li>
+            </ul>
+        </div>
+        counter++;
+    }
+</div>

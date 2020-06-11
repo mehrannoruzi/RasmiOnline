@@ -1,0 +1,517 @@
+h1, h2, h3, h4, h5, h6 {
+    color: #3D4351;
+    margin-top: 0;
+}
+
+a {
+    color: #6f1f1f;
+}
+
+    a:hover {
+        color: #ff9a9a;
+        text-decoration: none;
+    }
+
+.p-5px {
+    padding: 5px;
+}
+
+.subtitle {
+    color: #a0a0a0;
+    font-size: 11px;
+}
+
+.card-block {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+@media (max-width:768px) {
+    .timeline-item {
+        padding-right: 25px !important;
+    }
+}
+
+.process .timeline-title {
+    color: #4250b5 !important;
+}
+
+.example-header {
+    background: #3D4351;
+    color: #FFF;
+    padding: 3em 1em;
+    text-align: center;
+}
+
+    .example-header h1 {
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+
+    .example-header p {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+.container-fluid .row {
+    padding: 0 0 4em 0;
+}
+
+    .container-fluid .row:nth-child(even) {
+        background: #F1F4F5;
+    }
+
+.example-title {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 3em 0;
+    border-bottom: 1px solid #E4EAEC;
+}
+
+    .example-title p {
+        margin: 0 auto;
+        font-size: 16px;
+        max-width: 400px;
+    }
+
+/*==================================
+    TIMELINE
+==================================*/
+/*-- GENERAL STYLES
+------------------------------*/
+.timeline {
+    line-height: 1.4em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+    .timeline h1, .timeline h2, .timeline h3, .timeline h4, .timeline h5, .timeline h6 {
+        line-height: inherit;
+        font-weight: 400;
+    }
+
+/*----- TIMELINE ITEM -----*/
+.timeline-item {
+    padding-right: 40px;
+    position: relative;
+}
+
+    .timeline-item:last-child {
+        padding-bottom: 0;
+    }
+
+/*----- TIMELINE INFO -----*/
+.timeline-info {
+    font-size: 11px;
+    margin: 0 0 .5em 0;
+    padding-top: 5px;
+}
+
+/*----- TIMELINE MARKER -----*/
+.timeline-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+}
+
+    .timeline-marker:before {
+        background: #bbb;
+        border: 3px solid transparent;
+        border-radius: 100%;
+        content: "";
+        display: block;
+        height: 15px;
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 15px;
+        transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+    }
+
+    .timeline-marker:after {
+        content: "";
+        width: 3px;
+        background: #CCD5DB;
+        display: block;
+        position: absolute;
+        top: 24px;
+        bottom: 0;
+        left: 6px;
+    }
+
+.timeline-item:last-child .timeline-marker:after {
+    content: none;
+}
+
+.done .timeline-marker:before {
+    color: #20b741;
+    font-size: 20px;
+    background: transparent;
+    left: 3px;
+    top: 1px;
+    content: '\f110';
+    font-family: 'Material-Design-Iconic-Font';
+}
+
+.done .timeline-info i {
+    display: inline !important;
+}
+/*----- TIMELINE CONTENT -----*/
+.timeline-content {
+    padding-bottom: 40px;
+    padding-top: 10px;
+}
+
+    .timeline-content p:last-child {
+        margin-bottom: 0;
+    }
+
+/*----- TIMELINE PERIOD -----*/
+.period {
+    padding: 0;
+}
+
+    .period .timeline-info {
+        display: none;
+    }
+
+    .period .timeline-marker:before {
+        background: transparent;
+        content: "";
+        width: 15px;
+        height: auto;
+        border: none;
+        border-radius: 0;
+        top: 0;
+        bottom: 30px;
+        position: absolute;
+        border-top: 3px solid #CCD5DB;
+        border-bottom: 3px solid #CCD5DB;
+    }
+
+    .period .timeline-marker:after {
+        content: "";
+        height: 32px;
+        top: auto;
+    }
+
+    .period .timeline-content {
+        padding: 25px 0 30px;
+        line-height: 22px;
+    }
+
+    .period .timeline-title {
+        margin: 0;
+        padding-right: 40px;
+    }
+
+.seperator {
+    height: 60px;
+    text-align: center;
+    padding: 10px;
+}
+
+    .seperator i {
+        transform: rotate(-90deg);
+        opacity: 0.8;
+    }
+
+.you-are-here {
+    display: inline-block;
+    height: 24px;
+    background: #ff5252;
+    vertical-align: 0;
+    color: #fff;
+    text-align: center;
+    padding: 0px 20px;
+    float: left;
+    line-height: 20px;
+}
+
+
+
+    .you-are-here:after {
+        content: "";
+        position: absolute;
+        left: 193px;
+        border-left: 10px solid #ff5252;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        float: right;
+    }
+
+
+.done-ribbon {
+    float: left;
+    margin-left: -35px;
+    margin-top: -27px;
+    width: 0;
+    height: 0;
+    border-top: 80px solid #4CAF50;
+    border-right: 80px solid transparent;
+    opacity: 0.9;
+}
+
+    .done-ribbon i {
+        margin-left: 14px;
+        margin-top: -65px;
+        float: left;
+        font-size: 25px;
+        color: white;
+    }
+
+.overlay {
+    position: absolute;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+}
+
+.ribbon-active {
+    float: left;
+    margin-left: -35px;
+    margin-top: -27px;
+    width: 0;
+    height: 0;
+    border-top: 80px solid #F9A825;
+    border-right: 80px solid transparent;
+    opacity: 0.9;
+}
+
+    .ribbon-active i {
+        margin-left: 14px;
+        margin-top: -65px;
+        float: left;
+        font-size: 21px;
+        color: white;
+    }
+
+.done-level {
+    float: left;
+    margin-left: -35px;
+    margin-top: -27px;
+    width: 0;
+    height: 0;
+    border-top: 80px solid #3F51B5;
+    border-right: 80px solid transparent;
+    opacity: 0.9;
+}
+
+    .done-level i {
+        margin-left: 14px;
+        margin-top: -65px;
+        float: left;
+        font-size: 25px;
+        color: white;
+    }
+
+done-level
+/*----------------------------------------------
+    MOD: TIMELINE SPLIT
+----------------------------------------------*/
+@media (min-width: 768px) {
+    .timeline-split .timeline, .timeline-centered .timeline;
+
+{
+    display: table;
+}
+
+.timeline-split .timeline-item, .timeline-centered .timeline-item {
+    display: table-row;
+    padding: 0;
+}
+
+.timeline-split .timeline-info, .timeline-centered .timeline-info,
+.timeline-split .timeline-marker,
+.timeline-centered .timeline-marker,
+.timeline-split .timeline-content,
+.timeline-centered .timeline-content,
+.timeline-split .period .timeline-info,
+.timeline-centered .period .timeline-info {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.timeline-split .timeline-marker, .timeline-centered .timeline-marker {
+    position: relative;
+}
+
+.timeline-split .timeline-content, .timeline-centered .timeline-content {
+    padding-left: 30px;
+}
+
+.timeline-split .timeline-info, .timeline-centered .timeline-info {
+    padding-right: 30px;
+}
+
+.timeline-split .period .timeline-title, .timeline-centered .period .timeline-title {
+    position: relative;
+    left: -45px;
+}
+
+}
+
+.card-header {
+    background-color: rgba(70, 68, 68, 0.7294117647058823);
+    padding: 15px;
+    padding-right: 45px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 14px;
+}
+/*----------------------------------------------
+    MOD: TIMELINE CENTERED
+----------------------------------------------*/
+@media (min-width: 992px) {
+    .timeline-centered,
+    .timeline-centered .timeline-item,
+    .timeline-centered .timeline-info,
+    .timeline-centered .timeline-marker,
+    .timeline-centered .timeline-content {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+        .timeline-centered .timeline-item {
+            padding-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .timeline-centered .timeline-marker {
+            position: absolute;
+            left: 50%;
+            margin-left: -7.5px;
+        }
+
+        .timeline-centered .timeline-info,
+        .timeline-centered .timeline-content {
+            width: 50%;
+        }
+
+        .timeline-centered > .timeline-item:nth-child(odd) .timeline-info {
+            float: left;
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        .timeline-centered > .timeline-item:nth-child(odd) .timeline-content {
+            float: right;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .timeline-centered > .timeline-item:nth-child(even) .timeline-info {
+            float: right;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .timeline-centered > .timeline-item:nth-child(even) .timeline-content {
+            float: left;
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        .timeline-centered > .timeline-item.period .timeline-content {
+            float: none;
+            padding: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .timeline-centered .timeline-item.period {
+            padding: 50px 0 90px;
+        }
+
+        .timeline-centered .period .timeline-marker:after {
+            height: 30px;
+            bottom: 0;
+            top: auto;
+        }
+
+        .timeline-centered .period .timeline-title {
+            left: auto;
+        }
+}
+
+.done .timeline-title {
+}
+
+.f-s-25 {
+    font-size: 25px;
+}
+
+@media(max-width:768px) {
+    .period .timeline-title {
+        padding-right: 10px !important;
+    }
+}
+
+.end:before {
+    border-bottom: none !important;
+}
+
+h3.timeline-title {
+    font-size: 13px;
+    color: #000;
+}
+/*----------------------------------------------
+    MOD: MARKER OUTLINE
+----------------------------------------------*/
+.marker-outline .timeline-marker:before {
+    background: transparent;
+    border-color: #FF6B6B;
+}
+
+.marker-outline .timeline-item:hover .timeline-marker:before {
+    background: #FF6B6B;
+}
+/*-----------------------------------
+              time line
+------------------------------------*/
+h3.timeline-title {
+    font-size: 12px;
+    color: #434242;
+}
+
+.order-time-line {
+    height: 100%;
+    overflow: hidden;
+    z-index: 7;
+    /*background-color: #ffffff;*/
+    padding: 15px 0 50px 0;
+    color: black;
+}
+
+.time-line-content {
+    /*overflow: hidden;*/
+    z-index: 9;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-right: dashed 5px #b7b7b7;
+}
+
+    .time-line-content .card {
+        box-shadow: none;
+    }
+
+.border-top-befor-0:before {
+    border-top: 0 !important;
+}
+
+.current:before {
+    background: #ffd800;
+    animation: pulse 2s infinite;
+}

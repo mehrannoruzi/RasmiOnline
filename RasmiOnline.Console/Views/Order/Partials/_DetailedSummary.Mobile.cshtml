@@ -1,0 +1,47 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+<div class="wrapper row">
+    <div class="props order-props">
+        <div class="prop-group w-half">
+            <span class="lbl">عنوان سفارش:</span>
+            <span class="val">@Model.OrderTitle</span>
+        </div>
+        <div class="prop-group w-half">
+            <span class="lbl">شماره سفارش:</span>
+            <span class="val">@Model.OrderId</span>
+        </div>
+        <div class="prop-group w-half">
+            <span class="lbl">زبان:</span>
+            <span class="val lang">@Model.LangType.GetDescription()</span>
+        </div>
+        <div class="prop-group w-half">
+            <span class="lbl">وضعیت:</span>
+            <span class="val lang">@Model.OrderStatus.GetDescription()</span>
+        </div>
+    </div>
+    <div class="warning-box">
+        <ul>
+            <li class="warning-title"><i class="zmdi zmdi-alert-triangle"></i>تذکرات مهم</li>
+            <li>@{Html.RenderAction(MVC.Setting.ActionNames.GetNotification, MVC.Setting.Name);}</li>
+            @foreach (var item in Model.OrderItems.Where(x => !string.IsNullOrWhiteSpace(x.Description)))
+            {
+                <li>@string.Format("{0}: {1}", item.Name, item.Description)</li>
+            }
+        </ul>
+    </div>
+    <div class="final-items m-b-20">
+        @{
+            ViewBag.LangType = Model.LangType;
+            Html.RenderPartial(MVC.OrderItem.Views.Partials._List_Mobile,Model.OrderItems);
+         }
+    </div>
+
+    <div class="sum props">
+        <div class="prop-group w-full">
+            <span class="lbl">جمع کل:</span>
+            <span>@Model.OrderItems.Sum(x => x.CalculateTotalPrice(Model.LangType)).ToString("N0")</span>
+        </div>
+    </div>
+</div>

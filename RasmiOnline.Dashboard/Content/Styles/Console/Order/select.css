@@ -1,0 +1,113 @@
+﻿.price-table {
+    text-align: center;
+}
+
+.price-table:not(.price-table--highlight) {
+    margin: 0 -10px;
+}
+
+.price-table:not(.price-table--highlight) > [class*=col-] {
+    padding: 0 10px;
+    text-align: center;
+}
+
+.price-table--highlight {
+    margin: 0;
+}
+
+    .price-table--highlight > [class*=col-] {
+        padding: 0;
+    }
+
+.price-table__item {
+    margin-bottom: 20px;
+    background-color: #FFF;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    overflow:hidden;
+}
+
+@media (max-width:767px) {
+    .price-table__item {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width:768px) {
+    .price-table__item--popular {
+        padding-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+        margin: -1rem -.1rem 0;
+        box-shadow: 0 0 20px rgba(0,0,0,.14);
+    }
+
+    .price-table__item--popular .price-table__header {
+        padding: 2.5rem 2rem;
+    }
+}
+
+.price-table__header {
+    color: #FFF;
+    border-radius: 2px 2px 0 0;
+    padding: 2rem;
+    margin-bottom: 5px;
+}
+
+.price-table__title {
+    font-size: 14px;
+    background-color: #32c787;
+    color: white;
+    padding: 13px;
+}
+
+.price-table__desc {
+    color: rgba(255,255,255,.75);
+    color: rgba(255,255,255,.75);
+    margin: 10px 0;
+    line-height: 30px;
+}
+
+.price-table__price {
+    font-size: 1.8rem;
+}
+
+.price-table__price > small {
+    font-size: 1rem;
+    position: relative;
+    top: -.4rem;
+}
+
+.price-table__info {
+    padding: 1rem 0;
+}
+
+    .price-table__info > li {
+        padding: 1rem 1.5rem;
+        text-align: right;
+        padding-right: 50px;
+    }
+
+
+
+.price-table__action {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    padding: .8rem 1.2rem;
+    border-radius: 2px;
+    color: #FFF;
+    font-weight: 500;
+    box-shadow: 0 3px 5px rgba(0,0,0,.12);
+    transition: opacity .3s;
+}
+.btn-action{
+    float:none!important;
+    display:inline-block;
+    min-width:248px!important;
+}
+.btn-action > .text{
+    float: none!important;
+    padding-top: 7px;
+}

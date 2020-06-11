@@ -1,0 +1,144 @@
+﻿@model AddDiscountModel
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@LocalMessage.AddDiscount</h3>
+                <small class="card-subtitle">@LocalMessage.AddDiscountDescription</small>
+            </div>
+            <div class="card-block">
+                <form id=@($"{nameof(Discount)}_FormControls") action="@Url.Action(MVC.Discount.ActionNames.SubmitChange, MVC.Discount.Name)" class="col-12">
+                    <div class="row">
+
+                        <div class="col-sm-4 m-b-20">
+                            <div class="form-group" dir="rtl">
+                                @Html.LabelFor(x => x.UseForOnce)
+                                <div class="select">
+                                    @Html.DropDownListFor(x => x.UseForOnce, (List<SelectListItem>)ViewBag.UsingType, new { @class = "form-control" })
+                                    <i class="form-group__bar"></i>
+                                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.UseForOnce) </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 m-b-20">
+                            <div class="form-group" dir="rtl">
+                                @Html.LabelFor(x => x.ForFirstUser)
+                                <div class="select">
+                                    @Html.DropDownListFor(x => x.ForFirstUser, (List<SelectListItem>)ViewBag.AccessType, new { @class = "form-control" })
+                                    <i class="form-group__bar"></i>
+                                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.ForFirstUser) </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Code)
+                                @Html.TextBoxFor(x => x.Code, null, new { @class = "form-control ltr-dir" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Code) </small>
+                        </div>
+
+                        @*<div class="col-sm-4 m-b-20">
+                                <div class="form-group" dir="rtl">
+                                    @Html.LabelFor(x => x.CodeType)
+                                    <div class="select">
+                                        @Html.DropDownListFor(x => x.CodeType, (List<SelectListItem>)ViewBag.CodeTypes, new { @class = "form-control" })
+                                        <i class="form-group__bar"></i>
+                                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.CodeType) </small>
+                                    </div>
+                                </div>
+                            </div>*@
+                        @Html.HiddenFor(x => x.CodeType)
+
+
+                        @*<div class="col-sm-4 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.CodeLength)
+                                    @Html.TextBoxFor(x => x.CodeLength, null, new { @class = "form-control ltr-dir only-digit" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.CodeLength) </small>
+                            </div>*@
+                        @Html.HiddenFor(x => x.CodeLength)
+
+                        <div class="col-sm-4 m-b-20">
+                            <div class="form-group" dir="rtl">
+                                @Html.LabelFor(x => x.DiscountType)
+                                <div class="select">
+                                    @Html.DropDownListFor(x => x.DiscountType, (List<SelectListItem>)ViewBag.DiscountTypes, new { @class = "form-control" })
+                                    <i class="form-group__bar"></i>
+                                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.DiscountType) </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.Label(LocalMessage.ValuePercent)
+                                @Html.TextBoxFor(x => x.Value, null, new { @class = "form-control ltr-dir only-digit" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Value) </small>
+                        </div>
+
+                        <div class="col-sm-4 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Ceiling)
+                                @Html.TextBoxFor(x => x.Ceiling, null, new { @class = "form-control ltr-dir only-digit", @disabled = "disabled" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Ceiling) </small>
+                        </div>
+
+                        @*<div class="col-sm-4 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Count)
+                                    @Html.TextBoxFor(x => x.Count, null, new { @class = "form-control ltr-dir only-digit" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Count) </small>
+                            </div>*@
+                        @Html.HiddenFor(x => x.Count)
+
+                        <div class="col-sm-4 m-b-20" dir="rtl">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.ValidFromDateSh)
+                                @Html.TextBoxFor(x => x.ValidFromDateSh, null, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ValidFromDateSh) </small>
+                        </div>
+
+                        <div class="col-sm-4 m-b-20" dir="ltr">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.ValidToDateSh)
+                                @Html.TextBoxFor(x => x.ValidToDateSh, null, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+                                <i class="form-group__bar"></i>
+                            </div>
+                            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ValidToDateSh) </small>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12 text-left p-0">
+                        <button class="btn-action rtl waves-effect next-panel" type="button" id="btnSubmitChange">
+                            <div class="text">
+                                @LocalMessage.Save
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-floppy"></i>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        @{Html.RenderAction(MVC.Discount.ActionNames.GetList);}
+    </div>
+</div>

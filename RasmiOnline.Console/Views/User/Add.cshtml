@@ -1,0 +1,22 @@
+﻿@model IActionResponse<AddUserModel>
+
+@{
+    ViewBag.Title = LocalMessage.AddUser;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.AddUser;
+}
+
+@{
+    if (Model.IsNotNull().And(Model.IsSuccessful))
+    {
+        Html.RenderPartial(MVC.User.Views.Partials._Form, Model);
+    }
+    else
+    {
+        <div class="text-center text-danger">@LocalMessage.RecordsNotFound</div>
+    }
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Own.AddUserController_js" type="text/javascript"></script>
+}

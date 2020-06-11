@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Channel>
+@{
+    Layout = null;
+}
+
+<div class="">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card m-b-0" style="background-color: #eae8e8;">
+                <div class="col-md-12" style="padding: 8px !important;margin: 0;background-color: #00947c;color: white;">
+                    کد دعوت :
+                    <span class="_2nd tel p-r-5">@item.ReferralCode</span>
+                </div>
+                <div class="p-5px">
+                    <div class="address_item__detail row m-0">
+
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi zmdi-money f-s-20 v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@item.Percent درصد</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi zmdi-mouse f-s-20 v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@item.UniqueClick کلیک</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi f-s-20 zmdi-globe-alt v-a-m"></i></span>
+                            <a class="_2nd tel p-r-5 " href="Http://RasmiOnline.com?ref=@item.ReferralCode" target="_blank" style="color:green">
+                                Http://RasmiOnline.com?ref=@item.ReferralCode
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

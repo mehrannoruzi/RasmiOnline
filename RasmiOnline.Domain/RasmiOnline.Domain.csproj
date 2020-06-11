@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB6CCBF6-0CCB-4A8F-BFEF-44A6D480C653}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rasmi724.Domain</RootNamespace>
+    <AssemblyName>Rasmi724.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Gnu.Framework.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.Core.2.4.1\lib\Gnu.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gnu.Framework.EntityFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gnu.Framework.EntityFramework.2.2.1\lib\Gnu.Framework.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dto\AddButtonModel.cs" />
+    <Compile Include="Dto\AddDiscountModel.cs" />
+    <Compile Include="Dto\AddTransactionModel.cs" />
+    <Compile Include="Dto\CustomUserAction.cs" />
+    <Compile Include="Dto\DiscountCheckModel.cs" />
+    <Compile Include="Dto\GetTransactionModel.cs" />
+    <Compile Include="Dto\AddUserInRoleModel.cs" />
+    <Compile Include="Dto\AddUserModel.cs" />
+    <Compile Include="Dto\ChangePassword.cs" />
+    <Compile Include="Dto\CompleteOrderModel.cs" />
+    <Compile Include="Dto\CustomModalModel.cs" />
+    <Compile Include="Dto\ExportDataTableModel.cs" />
+    <Compile Include="Dto\ExportOrderToExcelModel.cs" />
+    <Compile Include="Dto\ExportUserToExcelModel.cs" />
+    <Compile Include="Dto\FileExportResultModel.cs" />
+    <Compile Include="Dto\FilterPricingItemModel.cs" />
+    <Compile Include="Dto\FilterRoleModel.cs" />
+    <Compile Include="Dto\FilterViewModel.cs" />
+    <Compile Include="Dto\PersonalInfo.cs" />
+    <Compile Include="Dto\FilterBaseModel.cs" />
+    <Compile Include="Dto\FilterOrderModel.cs" />
+    <Compile Include="Dto\FilterUserModel.cs" />
+    <Compile Include="Dto\GatewayPayResponseModel.cs" />
+    <Compile Include="Dto\ItemTextValueModel.cs" />
+    <Compile Include="Dto\MenuModel.cs" />
+    <Compile Include="Dto\MenuSPModel.cs" />
+    <Compile Include="Dto\ObserverMessage.cs" />
+    <Compile Include="Dto\OrderDetailsModel.cs" />
+    <Compile Include="Dto\ReferralModel.cs" />
+    <Compile Include="Dto\SearchPartialModel.cs" />
+    <Compile Include="Dto\SendMessageModel.cs" />
+    <Compile Include="Dto\TransactionModel.cs" />
+    <Compile Include="Dto\UserDetailsModel.cs" />
+    <Compile Include="Dto\ViewsFullPathModel.cs" />
+    <Compile Include="Entity\Base\BankCard.cs" />
+    <Compile Include="Entity\Base\Channel.cs" />
+    <Compile Include="Entity\Base\DiscountOrder.cs" />
+    <Compile Include="Entity\Base\OfficeAddress.cs" />
+    <Compile Include="Entity\Base\PricingItemTemplate.cs" />
+    <Compile Include="Entity\Order\OrderComment.cs" />
+    <Compile Include="Entity\Order\OrderDetail.cs" />
+    <Compile Include="Entity\Order\ShortLink.cs" />
+    <Compile Include="Enum\DeliveryType.cs" />
+    <Compile Include="Enum\PaymentGatewayType.cs" />
+    <Compile Include="Enum\PaymentType.cs" />
+    <Compile Include="Enum\PricingItemCategory.cs" />
+    <Compile Include="Entity\Base\VerificationCode.cs" />
+    <Compile Include="Entity\Log\ActivityLog.cs" />
+    <Compile Include="Entity\Order\Attachment.cs" />
+    <Compile Include="Entity\Base\Discount.cs" />
+    <Compile Include="Entity\Order\OrderNames.cs" />
+    <Compile Include="Entity\Base\PricingItem.cs" />
+    <Compile Include="Entity\Order\Transaction.cs" />
+    <Compile Include="Enum\ActivityLogType.cs" />
+    <Compile Include="Enum\AttachmentType.cs" />
+    <Compile Include="Enum\CodeType.cs" />
+    <Compile Include="Enum\ConcreteKey.cs" />
+    <Compile Include="Enum\BankNames.cs" />
+    <Compile Include="Enum\DiscountType.cs" />
+    <Compile Include="Enum\EntityName.cs" />
+    <Compile Include="Enum\MessageType.cs" />
+    <Compile Include="Enum\OrderItemType.cs" />
+    <Compile Include="Enum\OrderStatus.cs" />
+    <Compile Include="Enum\LangType.cs" />
+    <Compile Include="Enum\CalculatorTemplate.cs" />
+    <Compile Include="Enum\PricingItemUnit.cs" />
+    <Compile Include="Enum\StateType.cs" />
+    <Compile Include="VisibleAttribute.cs" />
+    <Compile Include="Properties\DisplayName.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayName.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\ErrorMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Acl\Role.cs" />
+    <Compile Include="Entity\Acl\UserInRole.cs" />
+    <Compile Include="Entity\Acl\View.cs" />
+    <Compile Include="Entity\Acl\ViewInRole.cs" />
+    <Compile Include="Entity\Base\Address.cs" />
+    <Compile Include="Entity\Base\Message.cs" />
+    <Compile Include="Entity\Order\Order.cs" />
+    <Compile Include="Entity\Order\OrderItem.cs" />
+    <Compile Include="Entity\Base\PaymentGateway.cs" />
+    <Compile Include="Entity\Base\Setting.cs" />
+    <Compile Include="Entity\Base\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\DisplayName.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisplayName.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\ErrorMessage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

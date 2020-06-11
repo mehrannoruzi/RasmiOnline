@@ -1,0 +1,70 @@
+﻿@model PersonalInfo
+
+<form action="@Url.Action(MVC.User.ActionNames.UpdateInfo, MVC.User.Name)" id="SendPersonalInfo" method="post">
+    @Html.HiddenFor(x => x.UserId)
+    <div class="row p-t-50 p-r-50 p-l-50">
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.FirstName)
+                @Html.TextBoxFor(x => x.FirstName, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.FirstName) </small>
+        </div>
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.LastName)
+                @Html.TextBoxFor(x => x.LastName, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.LastName) </small>
+        </div>
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.NationalCode)
+                @Html.TextBoxFor(x => x.NationalCode, null, new { @class = "nationalCode form-control ltr-dir only-digit", @data_mask = "0000000000", @placeholder = "##########" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.NationalCode) </small>
+        </div>
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.MobileNumber)
+                @Html.TextBoxFor(x => x.MobileNumber, null, new { @class = "form-control ltr-dir only-digit" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.MobileNumber) </small>
+        </div>
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, null, new { @class = "form-control ltr-dir" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Email) </small>
+        </div>
+
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group">
+                @Html.LabelFor(x => x.IsActive)
+                <div class="select">
+                    @Html.DropDownListFor(x => x.IsActive, (List<SelectListItem>)ViewBag.ActiveStatus, new { @class = "form-control" })
+                    <i class="form-group__bar"></i>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.IsActive) </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row p-r-50 p-l-50">
+        <div class="col-md-12 text-left m-b-20">
+            <button class="btn-action rtl waves-effect" type="button" data-dismiss="modal" id="btn-update-profile">
+                <div class="text">
+                    @LocalMessage.Submit
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-check"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+</form>

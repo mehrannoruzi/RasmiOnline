@@ -1,0 +1,36 @@
+﻿@model FilterPricingItemModel
+
+@{
+<div class="row">
+    <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.Lable)
+            @Html.TextBoxFor(x => x.Lable, null, new { @class = "form-control type-fa" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Lable) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20">
+        <div class="form-group">
+            @Html.LabelFor(x => x.CategoryId)
+            <div class="select">
+                @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.PricingItemCategories, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+                <small class="text-danger"> @Html.ValidationMessageFor(x => x.CategoryId) </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20">
+        <div class="form-group">
+            @Html.LabelFor(x => x.PricingItemUnit)
+            <div class="select">
+                @Html.DropDownListFor(x => x.PricingItemUnit, (List<SelectListItem>)ViewBag.PricingItemUnits, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+                <small class="text-danger"> @Html.ValidationMessageFor(x => x.PricingItemUnit) </small>
+            </div>
+        </div>
+    </div>
+</div>
+}

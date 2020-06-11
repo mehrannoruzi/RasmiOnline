@@ -1,0 +1,80 @@
+﻿@model IActionResponse<IEnumerable<Order>>
+
+<div class="d-none d-md-block d-lg-block">
+    <div class="card-block ">
+        <div class="table-responsive">
+            <table class="table-striped table">
+                <thead class="thead-default">
+                    <tr role="row">
+                        <th tabindex="0" rowspan="1" colspan="1">#</th>
+                        <th tabindex="0" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderTitle)</th>
+                        <th tabindex="0" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderId)</th>
+                        <th tabindex="0" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderStatus)</th>
+                        <th tabindex="0" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().InsertDateMi)</th>
+                        <th tabindex="0" rowspan="1" colspan="1">@LocalMessage.Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.IsSuccessful)
+                    {
+                        int count = 1;
+                        foreach (var item in Model.Result)
+                        {
+                            <tr>
+                                <td class="sorting_1">@count</td>
+                                <td title="@item.OrderTitle">@((item.OrderTitle ?? "---").CustomSubstring(30))</td>
+                                <td>@item.OrderId</td>
+                                <td>@(item.OrderStatus.GetLocalizeDescription() ?? "---")</td>
+                                <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateTime)}")</td>
+                                <td>
+                                    <a class="btn-action detail ltr waves-effect" href="@Url.Action(MVC.OrderAdmin.ActionNames.Edit,MVC.OrderAdmin.Name, new { orderId = item.OrderId })">
+                                        <div class="text">
+                                            @LocalMessage.OrderDetail
+                                        </div>
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-apps"></i>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-none d-768px">
+    @if (Model != null && Model.IsSuccessful)
+    {
+        foreach (var item in Model.Result)
+        {
+        <div class="card card-margin-bottom-15">
+            <div class="card-header">
+                <h3 class="card-title under-border">@($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderTitle)} : {item.OrderTitle}")</h3>
+            </div>
+            <div class="card-block">
+                <div class="standard-item">
+                    <i class="zmdi zmdi-n-1-square f-s-20 m-l-5"></i>
+                    @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderId)} : {item.OrderId}")
+                </div>
+                <div class="standard-item">
+                    <i class="zmdi zmdi-spellcheck f-s-20 m-l-5"></i>
+                    @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderStatus)} : {item.OrderStatus.GetLocalizeDescription()}")
+                </div>
+                <div class="standard-item">
+                    <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                    @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().InsertDateMi)} : {PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateTime)}")
+                </div>
+            </div>
+            <a href="@Url.Action(MVC.Order.ActionNames.Detail, MVC.Order.Name, new { orderId = item.OrderId })" class="dropdown-item card-status card-status-gray text-center">
+                <i class="zmdi zmdi-apps"></i>
+                <span>
+                    @LocalMessage.OrderDetail
+                </span>
+            </a>
+        </div>
+        }
+    }
+</div>

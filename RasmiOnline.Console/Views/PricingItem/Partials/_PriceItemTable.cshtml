@@ -1,0 +1,76 @@
+﻿@model IActionResponse<IEnumerable<PricingItem>>
+
+
+@if (((CalculatorTemplate)ViewBag.CalculatorTemplate) == CalculatorTemplate.Graduate)
+{
+    <p class="text-center text-medium">در كدام مقطع قصد اخذ پذيرش را داريد؟</p>
+    <br />
+    <div class="cols box-cont">
+        <div class="col col-xs-6 col-md-6">
+            <div class="box-one box-tow classroom-select">
+                
+                <div class="classroom"></div>
+                <h3>دكتري</h3>
+            </div>
+            <div class="span-line"></div>
+        </div>
+        <div class="col col-xs-6 col-md-6">
+            <div class="box-one classroom-selec">
+                <div class="classroom"></div>
+                <h3>كارشناسي ارشد</h3>
+            </div>
+        </div>
+    </div>
+}
+@if (((CalculatorTemplate)ViewBag.CalculatorTemplate) == CalculatorTemplate.Migration)
+{
+    <p class="text-center text-medium">تعداد افراد خانواده جهت دریافت ویزا را انتخاب نمایید.</p>
+    <br />
+    <div class="cols box-cont box-users">
+        <div class="col col-xs-12 col-md-12">
+            <div class="box-one box-tow ">
+            </div>
+            <div class="box-user">
+                <div class="no-active user-4"></div>
+                <div class="no-active user-3"></div>
+                <div class="no-active user-2"></div>
+                <div class="no-active user-1"></div>
+            </div>
+            <div class="box-one">
+            </div>
+        </div>
+    </div>
+}
+<table class="table table-responsive text-center table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(item => item.Result.FirstOrDefault().DocumentType)</th>
+            <th>@Html.DisplayNameFor(item => item.Result.FirstOrDefault().AboveReference)</th>
+            <th>@Html.DisplayNameFor(item => item.Result.FirstOrDefault().PricingItemUnit)</th>
+            <th>@Html.DisplayNameFor(item => item.Result.FirstOrDefault().Price)</th>
+            <th>@Html.DisplayNameFor(item => item.Result.FirstOrDefault().CopyPrice)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.IsSuccessful)
+        {
+            int counter = 1;
+            foreach (var item in Model.Result)
+            {
+                <tr>
+                    <td>@counter</td>
+                    <td>@item.DocumentType</td>
+                    <td>@item.AboveReference</td>
+                    <td>@item.PricingItemUnit.GetLocalizeDescription()</td>
+                    <td>@item.Price.ToString("0,0")</td>
+                    <td>@item.CopyPrice.ToString("0,0")</td>
+                </tr>
+                counter++;
+            }
+        }
+    </tbody>
+</table>
+<div class="calculator-warning">
+    «برای مشاهده قیمت دقیق ترجمه رسمی می توانید به بخش ثبت سفارش مراجعه کنید.»
+</div>

@@ -1,0 +1,23 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+<div class="info">
+    <div class="col-xs-12 col-sm-12 order-title">
+        <div class="title">@Html.DisplayNameFor(x => x.OrderId) @Model.OrderId</div>@*سفارش شماره*@
+        <span class="dt float-left">@Html.DisplayNameFor(x => x.InsertDateSh) @Model.InsertDateSh @*تاریخ ثبت سفارش*@ </span>
+    </div>
+    @if (Model.OrderStatus != OrderStatus.PayAllFactor)
+    {
+        <div class="table-title" style="background-color:#fcf4b3">
+            تاریخ تحویل ترجمه: @(((Setting)ViewBag.Setting).DayToDelivery) روز کاری پس از پرداخت هزینه سفارش
+        </div>
+    }
+
+    <div class="table-title">
+        لیست مدارک ثبت شده برای ترجمه به شرح زیر می باشد
+    </div>
+    <div class="total-table ">
+        @{Html.RenderPartial(MVC.OrderItem.Views.Partials._List, Model.OrderItems); }
+    </div>
+</div>

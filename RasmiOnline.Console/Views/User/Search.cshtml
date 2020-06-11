@@ -1,0 +1,32 @@
+﻿@model ActionResponse<List<UserDetailsModel>>
+
+@{
+    ViewBag.Title = LocalMessage.UserSearch;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.UserSearch;
+}
+
+@{
+    Html.RenderPartial(MVC.Shared.Views._SharedSearch, new SearchPartialModel
+    {
+        ActionUrl = Url.Action(MVC.User.ActionNames.Search, MVC.User.Name),
+        EntityName = nameof(User),
+        Model = new FilterUserModel(),
+        PartialViewName = MVC.User.Views.Partials._SearchUser
+    });
+
+    <div id="loadingOver" style="position:relative;">
+        <div id="@(nameof(User))_SearchResultContainer">
+            @if (Model.IsNotNull())
+            {
+                Html.RenderPartial(MVC.User.Views.Partials._SearchList, Model.Result);
+            }
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+    <script src="@Links.Scripts.Plugins.jquery_custom_search_js" type="text/javascript"></script>
+    <script src="@Links.Scripts.Own.UserSearchController_js" type="text/javascript"></script>
+}

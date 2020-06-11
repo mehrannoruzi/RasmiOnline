@@ -1,0 +1,92 @@
+﻿@model Order
+@using RasmiOnline.Console.Enum
+@{
+    ViewBag.Title = LocalMessage.PaymentAllFactor;
+}
+
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.pay_all_factor_css)" rel="stylesheet" />
+
+}
+
+<div class="order-row">
+    @{
+        Html.RenderPartial(MVC.Order.Views.Partials._DetailedAddTimeLine, DetailedAddOrderTimeLine.PaymentAllFactor);
+    }
+    <div class="col-md-9 time-line-content panels">
+
+        <div class="panel summary discount active">
+            @Html.Partial(MVC.Order.Views.Partials._SummaryHeader, new SummaryHeader
+            {
+                Message = "سفارش شما آماده پرداخت نهایی می باشد . جهت تکمیل سفارش، لطفا مبلغ مورد نظر را را پرداخت نمایید",
+                BGColor = "#fff3b2",
+                Icon = "zmdi-info",
+                PaddingTop = "15px",
+                Color = "#4d4d4d",
+                IconColor = "#4d4d4d"
+            })
+            @{Html.RenderPartial(MVC.Order.Views.Partials._Summary, Model); }
+            <div class="row values">
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <span class="lbl">مبلغ پرداخت شده</span>
+                        <span class="val">@Model.PayedValue.ToString("N0") تومان</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <span class="lbl">مبلغ قابل پرداخت</span>
+                        <span class="val">@((Model.TotalPrice() - Model.PayedValue).ToString("N0")) تومان</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn-action rtl waves-effect float-left next-panel" type="button" data-strategy="f" data-url="@Url.Action(MVC.Order.ActionNames.PayAllFactor,MVC.Order.Name)">
+                        <div class="text">
+                            @LocalMessage.NextStep
+                        </div>
+                        <div class="icon">
+                            <i class="zmdi zmdi zmdi-arrow-left"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel gateway">
+            @{Html.RenderPartial(MVC.Order.Views.Partials._SelectPaymentType);}
+            <div class="nav-actions">
+                <button class="btn-action ltr dark waves-effect float-right prev-panel" type="button" data-strategy="b">
+                    <div class="text">
+                        @LocalMessage.PrevStep
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi zmdi-arrow-right"></i>
+                    </div>
+                </button>
+
+
+                <button class="btn-action rtl waves-effect go-to-gateway" type="button" data-url="@Url.Action(MVC.Order.ActionNames.SubmitPayAllFactor,MVC.Order.Name,new { OrderId = Model.OrderId })">
+
+                    <div class="text">
+                        @LocalMessage.Submit
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi zmdi-card"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.pay_all_factor_js)"></script>
+
+}
+

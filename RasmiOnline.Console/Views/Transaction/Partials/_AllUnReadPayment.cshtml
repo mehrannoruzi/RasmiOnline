@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Transaction>
+@{
+    Layout = null;
+}
+
+<div class="card card-fixed">
+
+    <div class="table-responsive hidden-sm-down">
+        <table class="table-striped table">
+            <thead class="thead-default">
+                <tr role="row">
+                    <th tabindex="0" rowspan="1" colspan="1">#</th>
+                    <th tabindex="0" rowspan="1" colspan="1">درگاه بانکی</th>
+                    <th tabindex="0" rowspan="1" colspan="1">شماره سفارش</th>
+                    <th tabindex="0" rowspan="1" colspan="1">مبلغ سفارش</th>
+                    <th tabindex="0" rowspan="1" colspan="1">کد رهگیری</th>
+                    <th tabindex="0" rowspan="1" colspan="1">وضعیت پرداخت</th>
+                   <th tabindex="0" rowspan="1" colspan="1">تاریخ پرداخت</th>
+                     @*<th tabindex="0" rowspan="1" colspan="1">دفتر ترجمه</th>*@
+                    <th tabindex="0" rowspan="1" colspan="1">عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+            {
+                int count = 1;
+                foreach (var item in Model)
+                {
+                        <tr class="transaction_@item.TransactionId">
+                            <td class="sorting_1">@count</td>
+                            <td>
+                                <img src="~/Content/Images/BankName/@(item.PaymentGatewayId).png" class="w-48-px" />
+
+                            </td>
+                            <td>
+                                @item.OrderId
+                            </td>
+                            <td>@(item.Price.ToString("0,0"))</td>
+                            <td>@(item.TrackingId)</td>
+                            <td><span class="@(item.IsSuccess ? "color-green" : "color-red")">@(item.IsSuccess ? LocalMessage.Success : LocalMessage.UnSuccess)</span></td>
+                            <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.FullDateFullTime)}")</td>
+
+                            <td>
+                                <a class="btn-action rtl info btnReadTransaction waves-effect float-left m-l-5" data-transactionId="@item.TransactionId" data-isOffice="@ViewBag.IsOffice">
+                                    <div class="text">
+                                        بررسی شد
+                                    </div>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-check"></i>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        count++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

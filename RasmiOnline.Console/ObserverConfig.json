@@ -1,0 +1,71 @@
+﻿[
+  {
+    "Key": "User_Register",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver"
+    ]
+  },
+    {
+    "Key": "Order_Moved_Office",
+    "Observers": [
+      "RasmiOnline.Business.Observers.SmsObserver"
+    ]
+  },
+  {
+    "Key": "Order_Add",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver",
+      "RasmiOnline.Business.Observers.SmsObserver",
+    ]
+  },
+  {
+    "Key": "Order_Add",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver",
+      "RasmiOnline.Business.Observers.SmsObserver",
+    ]
+  },
+  {
+    "Key": "Waiting_For_Payment",
+    "Observers": [
+      "RasmiOnline.Business.Observers.SmsObserver"
+    ]
+  },
+  {
+    "Key": "Transaction_Add",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver",
+      "RasmiOnline.Business.Observers.SmsObserver",
+    ]
+  },
+  {
+    "Key": "Pay_All_Factor",
+    "Observers": [
+      "RasmiOnline.Business.Observers.SmsObserver"
+    ]
+  },
+  {
+    "Key": "Offline_Transaction_Add",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver"
+    ]
+  },
+    {
+    "Key": "Change_OrderState",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver"
+    ]
+  },
+  {
+    "Key": "Cancel_Order",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver"
+    ]
+  },
+   {
+    "Key": "Attachment_Add",
+    "Observers": [
+      "RasmiOnline.Business.Observers.AdminRoboTeleObserver"
+    ]
+  }
+]

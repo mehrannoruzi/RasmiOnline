@@ -1,0 +1,145 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-4 map-wrapper p-r-0">
+        <div class="google-map" data-type="static" data-location="@ViewBag.Location" style="height:220px;border-radius:5px">
+        </div>
+    </div>
+    <div class="col-md-8 order-wrapper">
+        <div class="row p-0">
+            <div class="col-md-6">
+                <ul class="order">
+                  
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>@Html.DisplayNameFor(x => x.User.FullName) : <span>@Model.User.FullName</span></span>
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>@Html.DisplayNameFor(x => x.User.MobileNumber) : <span>@Model.User.MobileNumber</span></span>
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>آدرس : @(Model.AddressId == null ? "---" : Model.Address.FullAddress)</span>
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>@Html.DisplayNameFor(x => x.OrderId) : <span>@Model.OrderId</span></span>
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>@Html.DisplayNameFor(x => x.InsertDateSh) : @Model.InsertDateSh ساعت :: @Model.InsertDateMi.Hour:@Model.InsertDateMi.Minute</span>
+                    </li>
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>@Html.DisplayNameFor(x => x.DeliverFiles_DateSh) : @(Model.DeliverFiles_DateSh == null ? $"{Model.DayToDelivery} روز کاری" : Model.DeliverFiles_DateSh)</span>
+                    </li>
+
+                    <li>
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        <span>@Html.DisplayNameFor(x => x.OrderTitle) : @Model.OrderTitle</span>
+                    </li>
+                </ul>
+            </div>
+            
+                @{ Html.RenderAction(MVC.OrderAdmin.ActionNames.GetOrderPaymentInfo, MVC.OrderAdmin.Name, new { orderId = Model.OrderId });}
+           
+        </div>
+    </div>
+    <div class="col-md-12 p-0 form-group">
+        <form action="@Url.Action(MVC.OrderAdmin.ActionNames.Update,MVC.OrderAdmin.Name , new { orderId = Model.OrderId })" method="post">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.OrderId)
+            <div class="row">
+                <div class="col-md-4" style="margin-left:-12px">
+                    @Html.TextAreaFor(X => X.OrderDescription, 9, 5, new { @PlaceHolder = "توضیحات سفارش", @Class = "form-control border-control valid" })
+                </div>
+
+                <ul class="order col-md-8">
+                    <li class="order-status lang-type-wrapper">
+                        <div class="hint animated fadeIn">
+                            <i class="zmdi zmdi-alert-circle"></i>
+                            قیمتها تغییر کردند
+                        </div>
+                        <label class="lbl">@Html.DisplayNameFor(x => x.LangType) </label>
+                        <div class="select-value select">
+                            @Html.DropDownListFor(x => x.LangType, (IEnumerable<SelectListItem>)ViewBag.LangTypes, new { @class = "form-control" })
+                        </div>
+                    </li>
+                    <li class="order-status  order-status-top-border">
+                        <label class="lbl">@Html.DisplayNameFor(x => x.DayToDelivery)</label>
+                        <div class="select-value">
+                            @Html.TextBoxFor(X => X.DayToDelivery, new { @Class = "form-control border-none only-digit valid" })
+                        </div>
+                    </li>
+                    <li class="order-status  order-status-top-border">
+                        <label class="lbl">@Html.DisplayNameFor(x => x.DocsBeenRecieved)</label>
+                        <div class="select-value select">
+                            @Html.DropDownListFor(x => x.DocsBeenRecieved, new List<SelectListItem> {
+                                           new SelectListItem{ Text=LocalMessage.Yes,Value="true" },
+                                           new SelectListItem{ Text=LocalMessage.No,Value="false" }
+                                       }, new { @class = "form-control" })
+                        </div>
+                    </li>
+                    <li class="order-status  order-status-top-border">
+                        <label class="lbl">@Html.DisplayNameFor(x => x.DeliverFiles_DateSh)</label>
+                        <div class="select-value">
+                            @Html.TextBoxFor(X => X.DeliverFiles_DateSh, new { @Class = "form-control border-none valid pdate" })
+                        </div>
+                    </li>
+                    <li class="order-status order-status-top-border">
+                        <label class="lbl">@Html.DisplayNameFor(x => x.OfficeUserId) </label>
+                        <div class="select-value select">
+
+                            <select name="OfficeUserId" id="OfficeUserId" class="form-control">
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.OfficeUserId)
+                {
+                    <option @(item.Selected ? "selected" : string.Empty) value="@item.Value">@item.Text</option>
+}
+                            </select>
+                        </div>
+                    </li>
+
+                    <li class="order-status order-status-top-border">
+                        <label class="lbl">@Html.DisplayNameFor(x => x.OrderStatus) </label>
+                        <div class="select-value select">
+                            @Html.DropDownListFor(x => x.OrderStatus, (IEnumerable<SelectListItem>)ViewBag.OrderStatuses, new { @class = "form-control" })
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn-action rtl waves-effect btn-update-order  m-r-10" style="margin-left: 12px;" type="button">
+                <div class="text">
+                    @LocalMessage.Submit
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-check-all"></i>
+                </div>
+            </button>
+
+            <a class="btn-action ltr dark waves-effect float-left d-sm-none d-md-block" href="@Url.Action(MVC.OrderAdmin.ActionNames.Manage,MVC.OrderAdmin.Name)">
+                <div class="text">
+                    @LocalMessage.Return
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </div>
+            </a>
+
+            <a class="btn-action rtl info SignInPanel waves-effect float-right m-l-5" data-userId="@Model.UserId">
+                <div class="text">
+                    ورود به پنل کاربر
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-shield-security"></i>
+                </div>
+            </a>
+
+
+
+        </form>
+    </div>
+</div>

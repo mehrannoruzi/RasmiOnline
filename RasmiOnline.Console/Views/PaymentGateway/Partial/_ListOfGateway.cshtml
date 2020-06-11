@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PaymentGateway>
+@{
+    Layout = null;
+    var default_paymentgatewayId = 0;
+    if (Model.Count() >= 1)
+    {
+        default_paymentgatewayId = Model.FirstOrDefault().PaymentGatewayId;
+    }
+}
+
+<div class="form-group m-t-20 pre-factor w-100">
+    @*<div class="">
+        <label>
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            &nbsp;@LocalMessage.PaymentGateways (@LocalMessage.SelectGateway)
+        </label>
+    </div>*@
+
+    <div class="payment-select">
+        @Html.Hidden("PaymentGatewayId", (default_paymentgatewayId > 0 ? default_paymentgatewayId.ToString() : ""))
+        @foreach (var item in (IEnumerable<PaymentGateway>)ViewBag.PaymentGatewaies)
+        {
+            <a class="@(item.PaymentGatewayId == default_paymentgatewayId  ? "payment-select-a" : "")">
+                <i class="zmdi zmdi-check-circle color-green hide"></i>
+                <img src="~/Content/Images/BankName/@(item.BankName).png" data-paymentGatewayId="@item.PaymentGatewayId" class="@(item.PaymentGatewayId == default_paymentgatewayId  ? "select" : "")" />
+            </a>
+        }
+    </div>
+    <small class="text-danger"> @Html.ValidationMessage("PaymentGatewayId") </small>
+</div>
+
+@{
+    Html.AddJavaScript(@<text>
+        <script>
+            $().ready(function () {
+                $(".payment-select a img").click(function () {
+                    $(".payment-select a img").removeClass("select");
+                    $(this).addClass("select");
+                    $(".payment-select a").removeClass("payment-select-a");
+                    $(this).parent().addClass("payment-select-a");
+                    $("#PaymentGatewayId").val($(this).attr("data-paymentGatewayId"));
+                });
+            });
+        </script>
+    </text>);
+}

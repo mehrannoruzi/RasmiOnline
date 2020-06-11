@@ -1,0 +1,68 @@
+﻿@model IActionResponse<IEnumerable<OfficeAddress>>
+@{
+    Layout = null;
+    int count = 1;
+}
+
+<div class="text-left m-b-20 o-f-h">
+    <a class="btn-action rtl waves-effect add-office-address" data-modal-url="@Url.Action(MVC.OfficeAddress.ActionNames.Add,MVC.OfficeAddress.Name)" data-modal-title="@LocalMessage.AddNewOfficeAddress">
+        <div class="text">
+            @LocalMessage.AddNewOfficeAddress
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-plus"></i>
+        </div>
+    </a>
+</div>
+
+<div class="row">
+    @foreach (var item in Model.Result)
+    {
+        <div class="col-md-6">
+            <div class="card">
+                <div class="address_item__name clearfix">
+                    <div class="reciever">@item.DeliveryName</div>
+                    <a class="address-update-status" title="@($"{(item.IsActive ? "غیر" : "")}فعال کردن")" data-url="@Url.Action(MVC.OfficeAddress.ActionNames.EditStatus,MVC.OfficeAddress.Name,new {officeAddressId = item.OfficeAddressId})">
+                        <i class="zmdi zmdi-@($"{(item.IsActive ? "check color-green" : "close color-red")}") f-s-20"></i>
+                    </a>
+                    <a data-modal="#modal_@item.OfficeAddressId" class="address-edit" data-modal-title="ویرایش آدرس دفتر" data-modal-url="@Url.Action(MVC.OfficeAddress.ActionNames.Edit,MVC.OfficeAddress.Name,new {officeAddressId = item.OfficeAddressId })">
+                        <i class="zmdi zmdi-edit color-green f-s-20"></i>
+                    </a>
+                </div>
+                <div class="address_item__detail m-h-200 row m-0">
+                    <div class="map-wrapper clearfix col-md-4">
+                        <div id="map_@item.OfficeAddressId" class="google-map" data-type="static" data-location="@item.Location"></div>
+                    </div>
+                    <div class="row location col-md-8">
+                        <div class="col-md-12 p-r-5 m-t-5">
+                            <span class="_1st"><i class="zmdi zmdi-account-box-mail v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">
+                                زبان   @item.LangType.GetDescription()
+                            </span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-5">
+                            <span class="_1st"><i class="zmdi zmdi-phone v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@item.Tel</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-5">
+                            <span class="_1st"><i class="zmdi zmdi-smartphone v-a-m"></i></span>
+                            <span class="_2nd mobile p-r-5">@item.MobileNumber</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-5">
+                            <span class="_1st"><i class="zmdi zmdi-alarm-check v-a-m"></i></span>
+                            <span class="_2nd mobile p-r-5">@item.WorkHour</span>
+                        </div>
+                        <div class="address col-md-12 p-r-5 m-t-5">
+                            <div class="compelete">
+                                <span class="_1st"><i class="zmdi zmdi-pin v-a-m"></i></span>
+                                <span class="_2nd address p-r-5">@item.FullAddress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        count++;
+    }
+</div>

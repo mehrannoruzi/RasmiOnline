@@ -1,0 +1,101 @@
+﻿@model List<Role>
+
+@{
+    Layout = null;
+}
+
+<div class="card d-none d-md-block d-lg-block">
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                    <thead class="thead-default">
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().RoleNameFa)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().RoleNameEn)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().IsActive)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().IsDefault)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            int count = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td>@item.RoleNameFa</td>
+                                    <td>@item.RoleNameEn</td>
+                                    <td><i class="zmdi zmdi-@(item.IsActive ? "check active-color" : "close deactive-color") f-s-20"></i></td>
+                                    <td><i class="zmdi zmdi-@(item.IsDefault ? "check active-color" : "close deactive-color") f-s-20"></i></td>
+                                    <td>
+                                        <div class="actions">
+                                            <div class="dropdown actions__item">
+                                                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="" edit-item-modal="@($"{nameof(Role)}")" data-edit-url="@(Url.Action(MVC.Role.ActionNames.GetForm,MVC.Role.Name, new { id= item.RoleId}))" data-modal-title="@LocalMessage.EditRole" class="dropdown-item"><i class="zmdi zmdi-edit f-s-20"></i>&nbsp;@LocalMessage.Edit</a>
+                                                    <a href="" data-delete-url="@(Url.Action(MVC.Role.ActionNames.Delete, MVC.Role.Name, new { id= item.RoleId}))" data-modal-title="@LocalMessage.DeleteRole" class="dropdown-item"><i class="zmdi zmdi-delete f-s-20"></i>&nbsp;@LocalMessage.Delete</a>
+                                                    <a href="" add-user-in-role-modal="@($"{nameof(UserInRole)}")" data-add-user-in-role-url="@(Url.Action(MVC.Role.ActionNames.GetAddUserInRole,MVC.Role.Name, new { id= item.RoleId}))" data-role-id="@item.RoleId" data-modal-title="@LocalMessage.UserManagmentInRole" class="dropdown-item"><i class="zmdi zmdi-assignment-account f-s-20"></i>&nbsp;@LocalMessage.UserManagement</a>
+                                                    <a href="" add-view-in-role-modal="@($"{nameof(ViewInRole)}")" data-add-view-in-role-url="@(Url.Action(MVC.Role.ActionNames.GetAddViewInRole,MVC.Role.Name, new { id= item.RoleId}))" data-role-id="@item.RoleId" data-modal-title="@LocalMessage.ViewManagmentInRole" class="dropdown-item"><i class="zmdi zmdi-view-carousel f-s-20"></i>&nbsp;@LocalMessage.ViewManagement</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Any())
+{
+    <div class="d-none d-768px">
+        <div class="toolbar">
+            <div class="toolbar__label">
+                @LocalMessage.SearchResult
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@(item.RoleNameFa ?? "---")</h3>
+                    <small class="card-subtitle under-border">@(item.RoleNameEn ?? "---")</small>
+                    <div class="actions">
+                        <div class="dropdown actions__item">
+                            <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="" edit-item-modal="@($"{nameof(Role)}")" data-edit-url="@(Url.Action(MVC.Role.ActionNames.GetForm,MVC.Role.Name, new { id= item.RoleId}))" data-modal-title="@LocalMessage.EditRole" class="dropdown-item"><i class="zmdi zmdi-edit f-s-20"></i>&nbsp;@LocalMessage.Edit</a>
+                                <a href="" data-delete-url="@(Url.Action(MVC.Role.ActionNames.Delete,MVC.Role.Name, new { id= item.RoleId}))" data-modal-title="@LocalMessage.DeleteRole" class="dropdown-item"><i class="zmdi zmdi-delete f-s-20"></i>&nbsp;@LocalMessage.Delete</a>
+                                <a href="" add-user-in-role-modal="@($"{nameof(UserInRole)}")" data-add-user-in-role-url="@(Url.Action(MVC.Role.ActionNames.GetAddUserInRole,MVC.Role.Name, new { id= item.RoleId}))" data-role-id="@item.RoleId" data-modal-title="@LocalMessage.UserManagmentInRole" class="dropdown-item"><i class="zmdi zmdi-assignment-account f-s-20"></i>&nbsp;@LocalMessage.UserManagement</a>
+                                <a href="" add-view-in-role-modal="@($"{nameof(ViewInRole)}")" data-add-view-in-role-url="@(Url.Action(MVC.Role.ActionNames.GetAddViewInRole,MVC.Role.Name, new { id= item.RoleId}))" data-role-id="@item.RoleId" data-modal-title="@LocalMessage.ViewManagmentInRole" class="dropdown-item"><i class="zmdi zmdi-view-carousel f-s-20"></i>&nbsp;@LocalMessage.ViewManagement</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-texture f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().IsActive)}")
+                        <i class="zmdi zmdi-@(item.IsActive ? "check active-color" : "close deactive-color") f-s-20"></i>
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-texture f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().IsDefault)}")
+                        <i class="zmdi zmdi-@(item.IsDefault ? "check active-color" : "close deactive-color") f-s-20"></i>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

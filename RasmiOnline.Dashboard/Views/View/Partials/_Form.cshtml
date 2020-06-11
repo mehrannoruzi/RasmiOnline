@@ -1,0 +1,101 @@
+﻿@model ActionResponse<View>
+
+@{
+    <div class="row">
+        @if (Model.IsNotNull() && Model.IsSuccessful)
+        {
+            <form id=@($"{nameof(View)}_FormControls") data-submit-action="@Url.Action(MVC.View.ActionNames.FormSubmited, MVC.View.Name)" class="col-12">
+                <div class="row">
+
+                    @if (Model.Result.ViewId > 0)
+                    {
+                        @Html.HiddenFor(x => x.Result.ViewId)
+                    }
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.ParentId)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.Result.ParentId, (List<SelectListItem>)ViewBag.AllViews, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.ParentId) </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.ActionNameFa)
+                            @Html.TextBoxFor(x => x.Result.ActionNameFa, null, new { @class = "form-control type-fa" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.ActionNameFa) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.Controller)
+                            @Html.TextBoxFor(x => x.Result.Controller, null, new { @class = "form-control ltr-dir" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Controller) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.ActionName)
+                            @Html.TextBoxFor(x => x.Result.ActionName, null, new { @class = "form-control ltr-dir" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.ActionName) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.IsVisible)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.Result.IsVisible, (List<SelectListItem>)ViewBag.VisibleStatus, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.IsVisible) </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.OrderPriority)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.Result.OrderPriority, (List<SelectListItem>)ViewBag.OrderPriorities, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.OrderPriority) </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.ExpireDateSh)
+                            @Html.TextBoxFor(x => x.Result.ExpireDateSh, null, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.ExpireDateSh) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.Icon)
+                            @Html.TextBoxFor(x => x.Result.Icon, null, new { @class = "form-control ltr-dir" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Icon) </small>
+                    </div>
+
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="text-center text-danger">@LocalMessage.BadRequest</div>
+        }
+    </div>
+}

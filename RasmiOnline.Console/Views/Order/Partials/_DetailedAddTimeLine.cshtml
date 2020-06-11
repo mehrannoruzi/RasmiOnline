@@ -1,0 +1,54 @@
+﻿@model DetailedAddOrderTimeLine
+@using RasmiOnline.Console.Enum
+@{
+    Layout = null;
+}
+
+<aside class="col-md-3 order-time-line">
+    <div class="">
+        <div class="container-fluid">
+            <div class="example-basic">
+
+                <div class="col-12">
+                    <ul class="timeline">
+                        <li class="timeline-item period">
+                            <div class="timeline-info"></div>
+                            <div class="timeline-marker border-top-befor-0"></div>
+                            <div class="timeline-content">
+                            </div>
+                        </li>
+                        @{
+                            bool beenSet = false;
+                            foreach (var item in EnumConvertor.GetEnumElements<DetailedAddOrderTimeLine>().ToList())
+                            {
+                                if(item.Name == Model.ToString())
+                                {
+                                    beenSet = true;
+                                }
+                                <li class="timeline-item @(beenSet?"":"done")" data-name="@item.Name">
+                                    <div class="timeline-info">
+                                        <h3 class="timeline-title">@item.Description</h3>
+                                    </div>
+                                    <div class="timeline-marker @(item.Name == Model.ToString()?"current":"")"></div>
+                                    <div class="timeline-content">
+
+                                    </div>
+                                </li>
+                            }
+                        }
+
+                        <li class="timeline-item period">
+                            <div class="timeline-info"></div>
+                            <div class="timeline-marker"></div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</aside>
+

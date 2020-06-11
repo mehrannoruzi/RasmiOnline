@@ -1,0 +1,171 @@
+﻿
+@model IEnumerable<OrderItem>
+@{
+    Layout = null;
+    var langType = ((LangType?)ViewBag.LangType) ?? LangType.Fa_En;
+}
+<table class="order-items table table-border text-center table-hover tbl-order-items table-gray" data-remove-url="@Url.Action(MVC.OrderItem.ActionNames.Delete,MVC.OrderItem.Name)">
+    <tr>
+        <th width="50px"></th>
+        <th>@Html.DisplayNameFor(x => x.Name)</th>
+        <th width="90px">@Html.DisplayNameFor(x => x.PricingItemUnitText)</th>
+        <th width="100px">@Html.DisplayNameFor(x => x.Price) (تومان)</th>
+        <th width="70px">@Html.DisplayNameFor(x => x.Count)</th>
+        <th width="70px">@Html.DisplayNameFor(x => x.Copy)</th>
+        <th width="120px">@LocalMessage.TotalCopyPrice (تومان)</th>
+        <th width="80px">@Html.DisplayNameFor(x => x.TotalPrice) (تومان)</th>
+    </tr>
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model.Where(x => x.OrderItemType == OrderItemType.PricingItem))
+        {
+            <tr class="item pricing-item" data-IsPricingItem="@item.IsPricingItem" data-info="@(new {
+                                                                                              orderItemId = item.OrderItemId,
+                                                                                              pricingItemId = item.PricingItemId,
+                                                                                              price = item.Price,
+                                                                                              totalPrice = item.TotalPrice,
+                                                                                              priceInOtherLangs = item.Price_OthersLang,
+                                                                                              copyPrice = item.CopyPrice,
+                                                                                              copyPriceInOtherLangs = item.CopyPrice_OthersLang,
+                                                                                              serverSideRemove = ((bool?)ViewBag.RemoveFromServer??true).ToString().ToLower()
+
+                                                                                          }.SerializeToJson())" data-id="@item.PricingItemId" data-order-item-id="@item.OrderItemId" data-changed="true">
+
+                <td class="remove"><i class="zmdi zmdi-close-circle"></i></td>
+                <td class="text-right">@item.Name</td>
+                <td class="text-right">@(item.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</td>
+                <td class="price" dir="ltr">
+                    @((langType == LangType.Fa_En ? item.Price : item.Price_OthersLang).ToString("N0"))
+                </td>
+                <td>
+                    @if (item.OrderItemType == OrderItemType.PricingItem)
+                    {
+                        <div class="select-count">
+                            <select class="doc-count">
+                                @for (int j = 1; j <= 100; j++)
+                                {
+                                    <option value="@j" @(j == item.Count ? "selected" : "")>@j</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.OrderItemType == OrderItemType.PricingItem)
+                    {
+                        <div class="select-copy-count">
+                            <select class="copy-count">
+                                @for (int j = 0; j <= 100; j++)
+                                {
+                                    <option value="@j" @(j == item.Copy ? "selected" : "")>@j</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                </td>
+                <td class="total-copy-price">@(item.CalculateTotalCopyPrice(langType).ToString("N0")) </td>
+                <td dir="ltr" class="total-price">
+                    <input type="number" value=" @item.TotalPrice" />
+                </td>
+            </tr>
+        }
+        var disItem = Model.FirstOrDefault(x => x.OrderItemType == OrderItemType.DiscountItem);
+        if (disItem != null)
+        {
+            <tr class="item discount-item" data-IsPricingItem="@disItem.IsPricingItem" data-info="@(new {
+                                    orderItemId = disItem.OrderItemId,
+                                    pricingItemId = disItem.PricingItemId,
+                                    price = disItem.Price,
+                                    copyPrice = disItem.CopyPrice,
+                                    totalPrice = disItem.TotalPrice,
+                                    serverSideRemove = ((bool?)ViewBag.RemoveFromServer??true).ToString().ToLower()
+
+                                }.SerializeToJson())" data-id="@disItem.PricingItemId" data-order-item-id="@disItem.OrderItemId" data-changed="false">
+
+                <td class="remove"><i class="zmdi zmdi-close-circle"></i></td>
+                <td class="text-right">@disItem.Name</td>
+                <td class="text-right">@(disItem.PricingItemUnitText ?? PricingItemUnit.Page.GetLocalizeDescription())</td>
+                <td class="price" dir="ltr">@disItem.Price.ToString("N0")</td>
+                <td>1</td>
+                <td colspan="2"></td>
+                <td dir="ltr" class="total-price">
+                    <input type="number" value=" @disItem.TotalPrice" />
+                </td>
+            </tr>
+        }
+    }
+    <tr class="plus-wrapper">
+        <td class="plus-ico"><i class="zmdi zmdi-plus-circle"></i></td>
+        <td colspan="7" class="add-wrapper">
+            <input class="add-doc ajax-auto-complete text-right" type="text" value="" placeholder="@LocalMessage.AddNewPricingItem" data-url="@Url.Action(MVC.PricingItem.ActionNames.Get,MVC.PricingItem.Name,new { isPricingItem = ViewBag.Client })" />
+
+            <ul class="auto-complete-items">
+                <!-- ajax call result in here -->
+            </ul>
+        </td>
+    </tr>
+    @{
+        var excludeOfficialRecord = (bool)(ViewBag.ExcludeOfficialRecord ?? false);
+        if (!excludeOfficialRecord)
+        {
+            var oRItem = Model.FirstOrDefault(x => x.OrderItemType == OrderItemType.OfficialRecordItem);
+            if (oRItem != null)
+            {
+                <tr class="item official-record-item" data-editable="@((!(oRItem.OrderItemId == 0)).ToString().ToLower())" data-info="@(new {
+                                    orderItemId = oRItem.OrderItemId,
+                                    pricingItemId = oRItem.PricingItemId,
+                                    price = oRItem.Price,
+                                    totalPrice = oRItem.TotalPrice,
+                                }.SerializeToJson())">
+                    <td></td>
+                    <td class="text-right">@oRItem.Name</td>
+                    <td class="text-right">---</td>
+                    <td>@oRItem.Price.ToString("N0")</td>
+                    <td class="count">
+                        @if (oRItem.OrderItemId == 0)
+                        {
+                            <span> @oRItem.Count</span>
+                        }
+                        else
+                        {
+                            <select class="doc-count">
+                                @for (int i = 0; i < 99; i++)
+                                {
+                                    <option value="@i" @(i == oRItem.Count ? "selected" : "")>@i</option>
+                                }
+                            </select>
+                        }
+                    </td>
+                    <td class="copy text-right">
+                        @if (oRItem.OrderItemId == 0)
+                        {
+                            <span> @oRItem.Copy</span>
+                        }
+                        else
+                        {
+                            <select class="copy-count">
+                                @for (int i = 0; i < 99; i++)
+                                {
+                                    <option value="@i" @(i == oRItem.Copy ? "selected" : "")>@i</option>
+                                }
+                            </select>
+                        }
+                    </td>
+                    <td class="text-right">---</td>
+                    <td dir="ltr" class="total-price">
+                        <input type="number" value="@oRItem.TotalPrice" />
+                    </td>
+                </tr>
+            }
+        }
+
+        var totalSum = Model.Where(x => (excludeOfficialRecord ? x.OrderItemType != OrderItemType.OfficialRecordItem : true)).Sum(x => x.CalculateTotalPrice(langType));
+    }
+    <tr class="total-row">
+        <td></td>
+        <td colspan="4" class="font-bold"><div class="text-right"> </div> </td>
+        <td colspan="3" class="total-sum font-bold text-left" style="padding-left:25px" data-total-sum="@totalSum">تومان @totalSum.ToString("N0")</td>
+    </tr>
+</table>
+
+

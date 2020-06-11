@@ -1,0 +1,178 @@
+﻿@model GetTransactionModel
+
+@{
+    var transactionObject = new Transaction { InsertDateSh = PersianDateTime.Now.ToString(PersianDateTimeFormat.Date).ToString(), };
+}
+
+
+<div class="row">
+
+    @Html.Hidden("OrderId", Model.OrderId)
+
+    <div class="col-sm-6 m-b-20">
+        @Html.LabelFor(x => transactionObject.PaymentGatewayId)
+        <div class="form-group">
+            <div class="select">
+                @Html.DropDownListFor(x => transactionObject.PaymentGatewayId, (List<SelectListItem>)ViewBag.PaymentGateways, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 m-b-20">
+        @Html.LabelFor(x => transactionObject.BankCardId)
+        <div class="form-group">
+            <div class="select">
+                @Html.DropDownListFor(x => transactionObject.BankCardId, (List<SelectListItem>)ViewBag.BankCard, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 m-b-20">
+        <label>
+            مبلغ پرداختی
+        </label>
+        <div class="form-group">
+            @Html.TextBoxFor(x => transactionObject.Price, null, new { @class = "form-control ltr-dir only-digit" })
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="col-sm-6 m-b-20">
+        @Html.LabelFor(x => transactionObject.TrackingId)
+        <div class="form-group">
+            @Html.TextBoxFor(x => transactionObject.TrackingId, null, new { @class = "form-control ltr-dir" })
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="col-sm-6 m-b-20">
+        @Html.LabelFor(x => transactionObject.IsSuccess)
+        <div class="form-group">
+            <div class="select">
+                @Html.DropDownListFor(x => transactionObject.IsSuccess, (List<SelectListItem>)ViewBag.PaymentStatus, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 m-b-20">
+        @Html.LabelFor(x => transactionObject.InsertDateSh)
+        <div class="form-group">
+            @Html.TextBoxFor(x => transactionObject.InsertDateSh, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="col-sm-12 m-b-20">
+        @Html.LabelFor(x => transactionObject.Description)
+        <div class="form-group">
+            @Html.TextBoxFor(x => transactionObject.Description, new { @class = "form-control", })
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="col-sm-12 m-b-20 text-left">
+        <button class="btn-action rtl waves-effect" type="button" data-element-name="AddTransaction" data-post-url="@Url.Action(MVC.Transaction.ActionNames.AddTransaction, MVC.Transaction.Name)" style="font-size:10px; min-width:100px !important; width:100px;">
+            <div class="text">
+                @LocalMessage.Add
+            </div>
+            <div class="icon">
+                <i class="zmdi zmdi-save"></i>
+            </div>
+        </button>
+    </div>
+</div>
+
+<div class="table-responsive hidden-sm-down ">
+    <table class="table-striped table">
+        <thead class="thead-default">
+
+            <tr role="row">
+                <th tabindex="0" rowspan="1" colspan="1">#</th>
+                <th tabindex="0" rowspan="1" colspan="1">درگاه پرداخت</th>
+                <th tabindex="0" rowspan="1" colspan="1">به حساب</th>
+                <th tabindex="0" rowspan="1" colspan="1">مبلغ سفارش</th>
+                <th tabindex="0" rowspan="1" colspan="1">کد رهگیری</th>
+                <th tabindex="0" rowspan="1" colspan="1">وضعیت پرداخت</th>
+                <th tabindex="0" rowspan="1" colspan="1">تاریخ پرداخت</th>
+                <th tabindex="0" rowspan="1" colspan="1">توضیحات</th>
+                @if (Model.Removeable)
+                {
+                    <th tabindex="0" rowspan="1" colspan="1"></th>
+                }
+            </tr>
+
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Transactions != null && Model.Transactions.Count() > 0)
+            {
+                int count = 1;
+                foreach (var item in Model.Transactions)
+                {
+                    <tr class="transaction_@(item.TransactionId)_@(item.OrderId) f-s-11">
+                        <td class="sorting_1">@count</td>
+                        <td>
+                            <img src="~/Content/Images/BankName/@(item.PaymentGatewayId).png" class="w-48-px" />
+                        </td>
+                        <td>
+                            @item.BankCard
+                        </td>
+                        <td>@(item.Price.ToString("0,0"))</td>
+                        <td>@(item.TrackingId)</td>
+                        <td><span class="@(item.IsSuccess ? "color-green" : "color-red")">@(item.IsSuccess ? LocalMessage.Success : LocalMessage.UnSuccess)</span></td>
+                        <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateShortTime)}")</td>
+                        <td dir="ltr" align="right">@item.Description</td>
+
+                        @if (Model.Removeable)
+                        {
+                            <td>
+                                <a style="min-width:0px !important" class="btn-action rtl danger btnRemoveTransaction waves-effect float-left m-l-5" data-transactionId="@item.TransactionId" data-orderId="@item.OrderId">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-close"></i>
+                                    </div>
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                    count++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div class="hidden-sm-up m-t-10">
+    @if (Model != null && Model.Transactions != null && Model.Transactions.Count() > 0)
+    {
+        foreach (var item in Model.Transactions)
+        {
+            <div class="card card-margin-bottom-15 card-border">
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-cloud-outline f-s-20 m-l-5"></i>
+                        درگاه پرداختی :
+                        <img src="~/Content/Images/BankName/@(item.PaymentGatewayId).png" width="24" />
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-money f-s-20 m-l-5"></i>
+                        مبلغ پرداختی : @item.Price.ToString("0,0") تومان
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-code-setting f-s-20 m-l-5"></i>
+                        @($"کد رهگیری : {item.TrackingId}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-swap-alt f-s-20 m-l-5"></i>
+                        وضعیت پرداخت :
+                        <span class="@(item.IsSuccess ? "color-green" : "color-red")">@(item.IsSuccess ? LocalMessage.Success : LocalMessage.UnSuccess)</span>
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                        تاریخ پرداخت :
+                        @($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.FullDateFullTime)}")
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="empty-row">
+            @LocalMessage.RecordsNotFound
+        </div>
+    }
+</div>

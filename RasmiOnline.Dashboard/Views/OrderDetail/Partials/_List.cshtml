@@ -1,0 +1,49 @@
+﻿@model IEnumerable<OrderItem>
+
+@{
+    Layout = null;
+    OrderDetail orderDetail;
+}
+@if (Model != null && Model.Count(x => x.OrderItemType == OrderItemType.PricingItem) > 0)
+{
+    <table class="order-items table table-border text-center tbl-order-details table-gray">
+        <tr>
+            <th width="150px">@LocalMessage.Items</th>
+            <th width="50px">@LocalMessage.Row</th>
+            <th width="100px">@LocalMessage.Title</th>
+            <th width="70px">@Html.DisplayNameFor(x => x.Count)</th>
+            <th width="70px">@Html.DisplayNameFor(x => x.Copy)</th>
+            <th>@LocalMessage.Description</th>
+        </tr>
+        @foreach (var item in Model.Where(x => x.OrderItemType == OrderItemType.PricingItem))
+        {
+            orderDetail = null;
+            <tr class="order-item" data-id="@item.OrderItemId">
+                <td class="text-right" width="150px">@item.Name</td>
+                <td colspan="5">
+                    <table class="table order-details-table">
+                        @for (int i = 0; i < item.Count; i++)
+                        {
+                            if (item.OrderDetails != null && item.OrderDetails.Count() > 0)
+                            {
+                                orderDetail = item.OrderDetails.OrderByDescending(x => x.OrderDetailId).Skip(i).FirstOrDefault();
+                            }
+                            if (orderDetail == null)
+                            {
+                                orderDetail = new OrderDetail();
+                            }
+                            <tr class="order-detail" data-id="@orderDetail.OrderDetailId">
+                                <td width="50px">@(i + 1)</td>
+                                <td width="100px"><label>@orderDetail.Title</label></td>
+                                <td width="70px"><label>@orderDetail.Count</label></td>
+                                <td width="70px"><label>@orderDetail.Copy</label></td>
+                                <td><p>@orderDetail.Description</p></td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+
+        }
+    </table>
+}

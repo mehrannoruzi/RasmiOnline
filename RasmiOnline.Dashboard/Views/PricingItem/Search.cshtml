@@ -1,0 +1,44 @@
+﻿@model ActionResponse<List<PricingItem>>
+
+@{
+    ViewBag.Title = LocalMessage.PricingItemSearch;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.PricingItemSearch;
+}
+
+    @{
+        Html.RenderPartial(MVC.Shared.Views.Partials._AddButton, new AddButtonModel
+        {
+            ModalTitle = LocalMessage.AddPricingItem,
+            EntityName = nameof(PricingItem),
+            FormUrl = Url.Action(MVC.PricingItem.ActionNames.GetForm, MVC.PricingItem.Name, new { id = 0 }),
+            Title = LocalMessage.AddPricingItem
+        });
+    }
+ 
+@{
+    Html.RenderPartial(MVC.Shared.Views._SharedSearch, new SearchPartialModel
+    {
+        ActionUrl = Url.Action(MVC.PricingItem.ActionNames.Search, MVC.PricingItem.Name),
+        EntityName = nameof(PricingItem),
+        Model = new FilterPricingItemModel(),
+        PartialViewName = MVC.PricingItem.Views.Partials._SearchPricingItem
+    });
+
+    <div id="loadingOver" style="position:relative;">
+        <div id="@(nameof(PricingItem))_SearchResultContainer">
+            @if (Model.IsSuccessful)
+            {
+                Html.RenderPartial(MVC.PricingItem.Views.Partials._SearchList, Model.Result);
+            }
+        </div>
+    </div>
+}
+
+
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+    <script src="@Links.Scripts.Plugins.jquery_custom_search_js" type="text/javascript"></script>
+    <script src="@Links.Scripts.Plugins.jquery_custom_modal_js" type="text/javascript"></script>
+}

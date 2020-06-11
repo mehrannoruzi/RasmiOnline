@@ -1,0 +1,25 @@
+﻿body{
+    background:#d7d7d7;
+}
+.header{
+    padding:5px 15px;
+    overflow:hidden;
+    width:100%;
+    background-color:#fff;
+    margin-bottom:5px;
+}
+.header .logo{
+    width:60px;
+    height:50px;
+    background:url(/Content/Images/Logo/Logo.png) -108px center no-repeat;
+}
+.header p{
+    float:left;
+    padding:15px 0;
+    margin-bottom:0;
+}
+.main-content{
+    background-color:#fff;
+    padding:5px 15px;
+    min-height:660px;
+}

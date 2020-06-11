@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @RenderSection("BeforHeader", false)
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KSD53X2');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-180x180.png" />
+
+    @Styles.Render(Links.Bundles.Styles.DashboardStyles)
+    @RenderSection("Header", false)
+</head>
+<body data-ma-theme="orange">
+    <div class="signInPanel hide">
+        <a href="@Url.Action(MVC.OAuth.ActionNames.SignOutPanel,MVC.OAuth.Name)">
+          <span>
+            بازگشت به پنل اصلی
+              </span>
+            <i class="zmdi zmdi-chevron-left f-s-20"></i>
+        </a>
+        
+    </div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KSD53X2"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <main class="main">
+        <div class="page-loader" style="display: none;">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+                <div class="navigation-trigger__inner">
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>
+                    <i class="navigation-trigger__line"></i>
+                </div>
+            </div>
+            <a class="header__logo hidden-sm-down">
+                @*<img src="@Links.Content.Images.Logo.Logo_png" class="float-right " />*@
+            </a>
+
+            @{Html.RenderPartial(MVC.Shared.Views._Navbar); }
+        </header>
+
+        @{Html.RenderPartial(MVC.Shared.Views._Sidebar); }
+        <section class="content">
+            @RenderBody()
+        </section>
+    </main>
+    @Scripts.Render(Links.Bundles.Scripts.DashboardScripts)
+    @RenderSection("Scripts", false)
+    @Html.RenderJavaScripts()
+
+    <div class="modal fade" id="modal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "34ac150e-7894-45a0-b8ac-e678e0233774"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
+</body>
+</html>

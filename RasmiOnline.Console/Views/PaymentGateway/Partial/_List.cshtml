@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PaymentGateway>
+
+@{ Layout = null; }
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-12">
+            <div class="card-demo">
+                <div class="card">
+
+                    <div class="card-header">
+                        <img src="@($"/Content/Images/BankName/{item.BankName}.png")" alt="@item.BankName" class="float-right w-48-px m-l-10" style="margin-top: -10px;" />
+
+                        <h3 class="card-title">@(item.Name ?? "---")</h3>
+
+
+                        <div class="actions">
+                            <a href="" class="actions__item zmdi zmdi-check-circle @(item.IsActive ? "active-color" : "")" title="@LocalMessage.Active"></a>
+                            <div class="dropdown actions__item">
+                                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="" edit-item-modal="@($"{nameof(PaymentGateway)}")" data-edit-url="@(Url.Action(MVC.PaymentGateway.ActionNames.GetForm, MVC.PaymentGateway.Name, new { id = item.PaymentGatewayId }))" data-modal-title="@LocalMessage.EditPaymentGateway" class="dropdown-item"><i class="zmdi zmdi-edit"></i>&nbsp;@LocalMessage.Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-block">
+                        <div class="statndard-text m-b-20">
+                            <i class="zmdi zmdi-account-box-o f-s-20 "></i>
+                            شماره ترمینال : @((item.MerchantId ?? "---").CustomMask(new MaskOption
+                                        {
+                                            Mode = MaskMode.Middle,
+                                            MaskWith = '*',
+                                            MaskLength = item.MerchantId.Length - 10,
+                                            MaxMaskLength = 4
+                                        }))
+                        </div>
+                        <div class="statndard-text m-b-20">
+                            <i class="zmdi zmdi-lock f-s-20"></i>
+                            شماره پذیرنده : @item.Password
+                        </div>
+                        <div class="standard-item">
+                            <i class="zmdi zmdi-alarm f-s-20"></i>
+                            @($"{Html.DisplayNameFor(x => x.InsertDateSh)} : {item.InsertDateSh}")
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

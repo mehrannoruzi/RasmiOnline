@@ -1,0 +1,176 @@
+﻿@model Order
+@{
+    ViewBag.Title = LocalMessage.OrderDetail;
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.detail_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.order_item_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderName.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Attachment.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_css)" rel="stylesheet" />
+}
+
+<div class="card">
+    <div class="col-md-12 toolbar-head">
+        <div class="tab-container toolbar p-0 border-0">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0 active" data-toggle="tab" href="#Order" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-receipt icon-profile d-sm-none d-md-block"></i>
+                        توضیحات سفارش
+                    </a>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#OrderItems" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                        فاکتور سفارش
+
+                    </a>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#Transaction" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-money icon-profile d-sm-none d-md-block"></i>
+                        پرداخت های انجام شده
+                    </a>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#OrderFiles" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-money icon-profile d-sm-none d-md-block"></i>
+                        مدارک سفارش
+                    </a>
+                </li>
+
+                <li class="nav-item p-0">
+                    <a class="nav-link p-b-0" data-toggle="tab" href="#OrderNames" role="tab" aria-expanded="false">
+                        <i class="zmdi zmdi-money icon-profile d-sm-none d-md-block"></i>
+                        اسامی موجود در ترجمه
+                    </a>
+                </li>
+
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="tab-content p-20">
+        <div class="tab-pane fade active show" id="Order" role="tabpanel" aria-expanded="true">
+
+            <div class="row">
+                <div class="col-md-4 map-wrapper hidden-sm-down">
+                    <div class="google-map" data-type="static" data-location="@(Model.AddressId==null?ViewBag.Location:Model.Address.Location)">
+                    </div>
+                </div>
+                <div class="col-md-8 order-wrapper">
+                    @{ Html.RenderPartial(MVC.Order.Views.Partials._Show, Model);}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade show" id="OrderItems" role="tabpanel" aria-expanded="true">
+
+            @if (Model.OrderItems != null)
+            {
+                Html.RenderPartial(MVC.OrderItem.Views.Partials._List, Model.OrderItems.ToList());
+            }
+
+        </div>
+        <div class="tab-pane fade show" id="Transaction" role="tabpanel" aria-expanded="true">
+
+            @{Html.RenderPartial(MVC.Transaction.Views.Partials._List, Model.Transactions);}
+
+        </div>
+
+        <div class="tab-pane fade show" id="OrderFiles" role="tabpanel" aria-expanded="true">
+            @*<div class="dropzone-uploader" id="upload-identity-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.OrderFiles })">
+        </div>
+        <br />
+        <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.OrderFiles })">
+            @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.OrderFiles));}
+        </div>*@
+            <div class="row">
+                <div class="col-12 m-r-0 attachments-type">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn waves-effect active @(AttachmentType.OrderFiles) attachments-type-select" data-type="@(AttachmentType.OrderFiles)" aria-pressed="true">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked="">اسکن مدارک سفارش
+                        </label>
+                        <label class="btn waves-effect @(AttachmentType.Identity) attachments-type-select" data-type="@(AttachmentType.Identity)" aria-pressed="true">
+                            <input type="radio" name="options" id="option2" autocomplete="off">اسکن پاسپورت
+                        </label>
+                        <label class="btn waves-effect @(AttachmentType.Translation) attachments-type-select" data-type="@(AttachmentType.Translation)" aria-pressed="true">
+                            <input type="radio" name="options" id="option3" autocomplete="off">اسکن ترجمه
+                        </label>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="dropzone-uploader dropzone-uploader-@(AttachmentType.OrderFiles)" id="upload-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.OrderFiles })">
+                    </div>
+                    <div class="dropzone-uploader hide dropzone-uploader-@(AttachmentType.Identity)" id="upload-identity-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.Identity })">
+                    </div>
+                    <div class="dropzone-uploader hide dropzone-uploader-@(AttachmentType.Translation)" id="upload-translation-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.Translation })">
+                    </div>
+                </div>
+
+                <div class="col-12 attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.OrderFiles })">
+                    <div class="text-right m-t-20">
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        اسکن مدارک
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.OrderFiles));}
+                    </div>
+                    <div class="text-right m-t-20">
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        اسکن پاسپورت
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.Identity));}
+                    </div>
+                    <div class="text-right m-t-20">
+                        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+                        اسکن ترجمه
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.Translation));}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tab-pane fade show" id="OrderNames" role="tabpanel" aria-expanded="true">
+
+            <div class="row">
+                @{
+                    if (Model != null && Model.OrderNames.Count() > 0)
+                    {
+                        foreach (var item in Model.OrderNames)
+                        {
+                            Html.RenderPartial(MVC.OrderName.Views.Partials._ShowItem, item);
+                        }
+                    }
+                }
+                <div class="col-xs-12 col-sm-6 col-md-4 add-order-name">
+                    <div class="wrapper wrapper-border">
+                        @{Html.RenderPartial(MVC.OrderName.Views.Partials._OrderName, new OrderName { OrderId = Model.OrderId });}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_C42jDWvco-ZAni9pltEALfP9kQvv8g"></script>
+    <script>
+        $(document).ready(function () {
+            fireGoogleMap();
+        });
+    </script>
+    <script src="@Url.Content(Links.Scripts.Console.OrderName.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.fire_dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.detail_js)"></script>
+}
+

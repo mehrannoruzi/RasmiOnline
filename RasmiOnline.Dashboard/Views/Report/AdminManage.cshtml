@@ -1,0 +1,47 @@
+﻿@model ReportModel
+@{
+    ViewBag.Title = "AdminManage";
+}
+
+<div class="filters">
+    <form action="@Url.Action(MVC.Report.ActionNames.AdminManage, MVC.Report.Name)">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(x => x.FromDate)
+                @Html.TextBoxFor(x => x.FromDate, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(x => x.ToDate)
+                @Html.TextBoxFor(x => x.ToDate, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(x => x.OfficeUserId)
+                @Html.DropDownListFor(x => x.OfficeUserId,(IEnumerable<SelectListItem>)ViewBag.Offices,LocalMessage.PleaseSelect,new { })
+            </div>
+        </div>
+        <div class="actions">
+            <button class="btn btn-info export-excel btn-action rtl">
+                <div class="text">
+                    خروجی اکسل
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-file"></i>
+                </div>
+            </button>
+            <button class="btn btn-info filter-result btn-action rtl">
+                <div class="text">
+                    @LocalMessage.Search
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-search"></i>
+                </div>
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="result">
+    @{Html.RenderPartial(MVC.Report.Views.Partials._Orders, Model.Orders); }
+</div>

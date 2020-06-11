@@ -1,0 +1,51 @@
+﻿@model IActionResponse<IEnumerable<UserInRole>>
+@using Gnu.Framework.Core
+@{ Layout = null; }
+
+@if (Model.IsSuccessful)
+{
+    <div class="table-responsive">
+        <div class="dataTables_wrapper">
+            <table class="table-striped table table-bordered">
+                <thead class="thead-default">
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().RoleId)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().IsActive)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().ExpireDateSh)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@(LocalMessage.Action)</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    @{ int count = 1;}
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr role="row">
+                            <td class="sorting_1">@count</td>
+                            <td class="dir-ltr">@item.Role.RoleNameFa</td>
+                            <td><i class="zmdi zmdi-@(item.IsActive ? "check active-color" : "close deactive-color") f-s-20"></i></td>
+                            <td class="dir-ltr">@item.ExpireDateSh</td>
+                            <td>
+                                <a class="btn-action danger rtl waves-effect m-r-10" href="" data-user-in-role-delete-url="@Url.Action(MVC.Role.ActionNames.DeleteUserInRole, MVC.Role.Name, new { id=item.UserInRoleId })" style="font-size:10px; min-width:90px !important; width:90px;">
+                                    <div class="text">
+                                        @LocalMessage.Delete
+                                    </div>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-delete"></i>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                        count++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="empty-row">
+        @Model.Message
+    </div>
+}

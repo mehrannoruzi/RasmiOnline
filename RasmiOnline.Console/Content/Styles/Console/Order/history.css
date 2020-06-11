@@ -1,0 +1,120 @@
+﻿.icon-middle {
+    float: right;
+    margin-left: 5px !important;
+    margin-top: 4px;
+}
+
+.m-l-5 {
+    margin-left: 5px;
+}
+
+.card-header .actions, .card > .actions {
+    left: 5px;
+}
+
+.card-margin-bottom-15 {
+    margin-bottom: 15px !important;
+}
+
+.table tr:nth-of-type(even) {
+    background: transparent !important;
+}
+
+
+.record {
+    margin: 6px;
+}
+
+    .record.name {
+        background-color: #607D8B;
+        margin-top: 40px;
+        color: #fff;
+    }
+
+    .record > .row {
+        padding: 10px 30px;
+    }
+
+@media(max-width:768px) {
+    .record {
+        padding: 5px;
+    }
+}
+
+.record .field {
+    padding: 5px 0;
+}
+
+.operations {
+    text-align: left;
+    float: left;
+}
+
+    .operations > i {
+        padding: 0 15px;
+        cursor: pointer;
+        font-weight: 800;
+    }
+
+    .operations > ul {
+        display: none;
+    }
+
+    .operations.toggled > ul {
+        display: block;
+        position: absolute;
+        left: 0;
+        transition: 0.2s ease all;
+        background-color: #fff;
+        border-top: solid 1px #ccc;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        z-index: 999;
+    }
+
+    .operations.toggled ul li {
+        padding: 10px;
+    }
+
+    .operations.toggled ul a {
+        color: #707070;
+    }
+
+    .operations.toggled ul i {
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+    .operations.toggled ul a:hover {
+        color: blue;
+    }
+
+
+.WaitForPayment {
+    width: 10px;
+    height: 10px;
+    background-color: #2196f3;
+    border-radius: 50%;
+    margin-right: 6px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+    .WaitForPayment:before {
+        background-color: #2196f3;
+        animation: pulse 2s infinite;
+    }
+
+.WaitForPricing {
+    width: 10px;
+    height: 10px;
+    background-color: #ffd800;
+    border-radius: 50%;
+    margin-right: 6px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+    .WaitForPricing:before {
+        background-color: #ffd800;
+        animation: pulse 2s infinite;
+    }

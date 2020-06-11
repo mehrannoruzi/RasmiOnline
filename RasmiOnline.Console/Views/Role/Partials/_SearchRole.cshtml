@@ -1,0 +1,47 @@
+﻿@model FilterRoleModel
+
+@{
+<div class="row">
+
+    <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.RoleNameFa)
+            @Html.TextBoxFor(x => x.RoleNameFa, null, new { @class = "form-control" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.RoleNameFa) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.RoleNameEn)
+            @Html.TextBoxFor(x => x.RoleNameEn, null, new { @class = "form-control ltr-dir" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.RoleNameEn) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20">
+        <div class="form-group">
+            @Html.LabelFor(x => x.IsActive)
+            <div class="select">
+                @Html.DropDownListFor(x => x.IsActive, (List<SelectListItem>)ViewBag.ActiveStatus, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+                <small class="text-danger"> @Html.ValidationMessageFor(x => x.IsActive) </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20">
+        <div class="form-group">
+            @Html.LabelFor(x => x.IsDefault)
+            <div class="select">
+                @Html.DropDownListFor(x => x.IsDefault, (List<SelectListItem>)ViewBag.DefaultStatus, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+                <small class="text-danger"> @Html.ValidationMessageFor(x => x.IsDefault) </small>
+            </div>
+        </div>
+    </div>
+
+</div>
+}

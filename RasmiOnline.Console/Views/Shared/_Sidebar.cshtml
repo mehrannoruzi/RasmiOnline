@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+    var user = User as ICurrentUserPrincipal;
+}
+<aside class="sidebar">
+    <div class="scrollbar-inner scroll-content" style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 699.578px;">
+        <div class="user" id="user_info">
+            <div class="user__info">
+                <img class="user__img" src="@Url.Content(Links.Content.Images.avatar64_jpg)" alt="">
+                <a href="@Url.Action(MVC.User.ActionNames.Profile,MVC.User.Name)">
+                    <div class="user__name">
+                        @user.FullName
+                    </div>
+                    <div class="user__email">@user.UserName</div>
+                </a>
+            </div>
+        </div>
+        <ul class="navigation">
+            @{Html.RenderAction(MVC.User.ActionNames.GetMenu, MVC.User.Name, new { });}
+        </ul>
+    </div>
+</aside>

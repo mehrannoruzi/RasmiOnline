@@ -1,0 +1,138 @@
+﻿@model IEnumerable<PricingItem>
+@{
+    ViewBag.Title = "استعلام قیمت و ثبت سفارش";
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.detailed_add_mobile_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderItems.common_css)" rel="stylesheet" />
+
+    <link href="@Url.Content(Links.Content.Styles.Shared.flickity_min_css)" rel="stylesheet" />
+}
+
+<div class="order-row panels">
+    <div class="w-full panel active">
+        <div class="w-full sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            عنوان سفارش
+        </div>
+        <div class="w-full">
+            <div class="radio-wrapper w-full">
+                <input class="form-control type-fa rounded-input valid w-full" data-val="true" data-val-required="این فیلد اجباری می باشد" id="orderTitle" name="orderTitle" type="text" placeholder="اینجا بنویسید">
+            </div>
+        </div>
+
+        @if (!((bool)ViewBag.Client))
+            {
+            <input type="hidden" name="OfficeUserId" id="OfficeUserId" value="@((User as ICurrentUserPrincipal).UserId)" />
+        }
+
+        <div class="w-full sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            زبان ترجمه
+        </div>
+        <div class="w-full select-arrow">
+            <div class="lang-type-wrapper w-full" dir="rtl">
+                <div class="hint animated fadeIn">
+                    <i class="zmdi zmdi-alert-circle"></i>
+                    قیمتها تغییر کردند
+                </div>
+                @Html.DropDownList("LangType", (List<SelectListItem>)ViewBag.LangTypes, new { @class = "radio-wrapper w-full" })
+            </div>
+        </div>
+        <div class="w-full">
+            <button class="btn-show-modal">
+                <i class="zmdi zmdi-plus"></i>اضافه نمودن مدرک جدید
+
+            </button>
+        </div>
+
+        <div class="order-items w-full">
+            <div class="mobile-item official-record-item" data-info="@(new {
+                                    orderItemId = 0,
+                                    pricingItemId = 0,
+                                    price = ((Setting)ViewBag.Setting).OfficialRecordPrice,
+                                    totalPrice = 0,
+                                    serverSideRemove = false
+                                }.SerializeToJson())">
+                <div class="title">
+                    @*<i class="zmdi zmdi-close-circle remove"></i>*@
+                    <h5 class="text">هزینه دفتری</h5>
+                </div>
+                <div class="props">
+                    <div class="prop-group w-mob-half">
+                        <span class="lbl">واحد:</span>
+                        <span>---</span>
+                    </div>
+                    <div class="prop-group w-mob-half">
+                        <span class="lbl">قیمت واحد:</span>
+                        <span class="val price">@(((Setting)ViewBag.Setting).OfficialRecordPrice)</span>
+                    </div>
+                    <div class="prop-group w-mob-half">
+                        <span class="lbl">تعداد:</span>
+                        <div class="val count">
+                            1
+                        </div>
+                    </div>
+                    <div class="prop-group w-mob-half">
+                        <span class="lbl">نسخه اضافی:</span>
+                        <div class="val copy">
+                            0
+                        </div>
+                    </div>
+                    @*<div class="prop-group">
+                            <span class="lbl">هزینه نسخه اضافی:</span>
+                            <span class="val total-copy-price">0</span>
+                        </div>*@
+                </div>
+                <div class="total">
+                    <span class="lbl">قیمت کل (تومان):</span>
+                    <span class="val total-price">@(((Setting)ViewBag.Setting).OfficialRecordPrice)</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nav-actions m-t-10">
+            <div class="radio-wrapper w-full result">
+                <span class="lbl">قیمت کل:</span>
+                <span class="val total-sum">0</span>
+            </div>
+            <button class="btn-action rtl waves-effect save-order" type="button" data-strategy="save" data-url="@Url.Action(MVC.Order.ActionNames.DetailedAdd, MVC.Order.Name)">
+                <div class="text">
+                    ثبت سفارش
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-arrow-left"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="summary panel">
+        <!-- in this place summary partial will appear. -->
+        <div class="nav-actions m-t-10" >
+            <a class="btn-action rtl waves-effect" href="@Url.Action(MVC.Order.ActionNames.History,MVC.Order.Name)">
+                <div class="text">
+                    @LocalMessage.OrderHistory
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-long-arrow-return"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+@{Html.RenderPartial(MVC.Order.Views.Partials._AddOrderItem_Mobile); }
+@section Scripts{
+    <script type="text/javascript">
+        window.CRISP_READY_TRIGGER = () => {
+            $crisp.push(["do", "chat:hide"]);
+        };
+    </script>
+    <script src="@Url.Content(Links.Scripts.Plugins.Flickity.flickity_pkgd_min_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.detailed_add_mobile_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.order_item_js)"></script>
+}
+

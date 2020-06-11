@@ -1,0 +1,125 @@
+﻿/*--- security ---*/
+.change-pw-btn {
+    min-width: 75px;
+}
+
+.security .change-pw-btn .crisp-h5bnuo {
+    background-color: #fff !important;
+}
+
+.security .message {
+    min-height: 25px;
+    display: inline-block;
+    float: right;
+}
+
+.security .sec-desc {
+    color: #4374e0;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.security .message.error-msg {
+    color: red;
+}
+
+.security .message.success-msg {
+    color: green;
+}
+
+
+
+ul.spec-list span.technicalspecs-title {
+    background: #f0f1f2;
+    height: auto;
+    padding: 9px 15px;
+    text-align: right;
+}
+
+ul.spec-list span.technicalspecs-value, ul.spec-list span.technicalspecs-title {
+    display: block;
+    white-space: normal;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: 9px;
+}
+
+ul.spec-list span.technicalspecs-value {
+    background: #f7f9fa;
+    padding: 9px 21px;
+    height: auto;
+    color: #777;
+}
+
+ul.spec-list {
+    padding: 15px;
+}
+ul.spec-list:first-child{
+    padding-left:7.5px;
+}
+ul.spec-list:last-child{
+    padding-right:7.5px;
+}
+@media (max-width: 767px) {
+
+    .profile {
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
+.clearfix {
+    display: block;
+}
+
+ul.spec-list span.technicalspecs-value, ul.spec-list span.technicalspecs-title {
+    display: block;
+    white-space: normal;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+}
+
+.head-card {
+    padding: 10px;
+    color: #3f51b5;
+    font-size: 13px;
+    text-align: right;
+}
+
+.marked {
+    background: #f5fcf5 !important;
+    padding: 5px 20px !important;
+}
+
+.unmarked {
+    background: #ebccd1 !important;
+    padding: 5px 20px !important;
+}
+
+.unmarked i {
+    color: #a94442
+}
+
+.f-s-24 {
+    font-size: 24px;
+}
+.actions{
+    padding:10px 50px;
+}
+.alert{
+    font-weight:normal;
+}
+
+#Account .card, #Payment .card, #Order .card {
+    min-height: 250px;
+    box-shadow: 0px 4px 8px 3px rgba(99, 98, 98, 0.1);
+}
+
+.technicalspecs-value.success{
+
+}
+.technicalspecs-value.danger {
+}

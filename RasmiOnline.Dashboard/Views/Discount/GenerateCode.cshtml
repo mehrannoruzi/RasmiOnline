@@ -1,0 +1,24 @@
+﻿@model AddDiscountModel
+
+@{
+    ViewBag.Title = LocalMessage.AddDiscount;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.AddDiscountDescription;
+}
+
+@{
+    if (Model.IsNotNull())
+    {
+        Html.RenderPartial(MVC.Discount.Views.Partials._AddForm, Model);
+    }
+    else
+    {
+        <div class="text-center text-danger">@LocalMessage.BadRequest</div>
+    }
+}
+
+@section Scripts{
+
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+    <script src="@Links.Scripts.Own.DiscountController_js"></script>
+}

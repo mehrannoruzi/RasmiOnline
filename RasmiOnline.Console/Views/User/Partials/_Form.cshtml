@@ -1,0 +1,121 @@
+﻿@model ActionResponse<AddUserModel>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@LocalMessage.AddUser</h3>
+                <small class="card-subtitle">@LocalMessage.AddUserDescription</small>
+            </div>
+            <div class="card-block">
+
+                @if (Model.IsNotNull() && Model.IsSuccessful)
+                {
+                    <form id=@($"{nameof(AddUserModel)}_FormControls") data-submit-action="@Url.Action(MVC.User.ActionNames.FormSubmited, MVC.User.Name)" class="col-12">
+                        <div class="row">
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.FirstName)
+                                    @Html.TextBoxFor(x => x.Result.FirstName, null, new { @class = "form-control type-fa" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.FirstName) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.LastName)
+                                    @Html.TextBoxFor(x => x.Result.LastName, null, new { @class = "form-control type-fa" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.LastName) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.NationalCode)
+                                    @Html.TextBoxFor(x => x.Result.NationalCode, null, new { @class = "form-control ltr-dir only-digit" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.NationalCode) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.Email)
+                                    @Html.TextBoxFor(x => x.Result.Email, null, new { @class = "form-control ltr-dir" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Email) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.MobileNumber)
+                                    @Html.TextBoxFor(x => x.Result.MobileNumber, null, new { @class = "form-control ltr-dir only-digit", @placeholder = "9#########" , @maxlength = "11" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.MobileNumber) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.IsActive)
+                                    <div class="select">
+                                        @Html.DropDownListFor(x => x.Result.IsActive, (List<SelectListItem>)ViewBag.ActiveStatus, new { @class = "form-control" })
+                                        <i class="form-group__bar"></i>
+                                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.IsActive) </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.Password)
+                                    @Html.PasswordFor(x => x.Result.Password, new { @class = "form-control ltr-dir" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Password) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20" dir="rtl">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Result.RepeatePassword)
+                                    @Html.PasswordFor(x => x.Result.RepeatePassword, new { @class = "form-control ltr-dir" })
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.RepeatePassword) </small>
+                            </div>
+
+                            <div class="col-sm-6 m-b-20">
+                                <div class="form-group" dir="rtl">
+                                    @Html.LabelFor(x => x.Result.RoleId)
+                                    <div class="select">
+                                        @Html.DropDownListFor(x => x.Result.RoleId, (List<SelectListItem>)ViewBag.Roles, new { @class = "form-control" })
+                                        <i class="form-group__bar"></i>
+                                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.RoleId) </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-sm-12 text-left">
+                        <button class="btn-action rtl waves-effect next-panel" type="button" id="btnSubmitChange">
+                            <div class="text">
+                                @LocalMessage.Save
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-floppy"></i>
+                            </div>
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-row">@LocalMessage.BadRequest</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

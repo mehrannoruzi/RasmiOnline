@@ -1,0 +1,75 @@
+﻿@model ActionResponse<IEnumerable<Message>>
+
+@{ Layout = null; }
+
+@if (Model.IsSuccessful)
+{
+
+    <div class="card d-none d-md-block d-lg-block">
+        <div class="card-block">
+            <div class="table-responsive">
+                <div id="data-table_wrapper" class="dataTables_wrapper">
+                    <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                        <thead class="thead-default">
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().Receiver)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().Type)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().Content)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().InsertDateMi)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().State)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            @{ int count = 1;}
+                            @foreach (var item in Model.Result)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td>@item.Receiver</td>
+                                    <td>@item.Type.GetLocalizeDescription()</td>
+                                    <td title="@item.Content">@item.Content.CustomSubstring(50)</td>
+                                    <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateTime)}")</td>
+                                    <td class="@(item.State== StateType.Accepted ? "active-color" : (item.State == StateType.Failed ? "deactive-color" : string.Empty))">@item.State.GetLocalizeDescription()</td>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none d-768px">
+        <div class="toolbar">
+            <div class="toolbar__label">
+                @LocalMessage.SearchResult
+            </div>
+        </div>
+        @foreach (var item in Model.Result)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@($"{Html.DisplayNameFor(x => item.Receiver)} : {item.Receiver}")</h3>
+                    <small class="card-subtitle under-border">@(item.Type.GetLocalizeDescription())</small>
+                </div>
+
+                <div class="card-block">
+                    <div class="standard-item @(item.State== StateType.Accepted ? "active-color" : (item.State == StateType.Failed ? "deactive-color" : string.Empty))">
+                        <i class="zmdi zmdi-gamepad f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => item.State)} : {item.State.GetLocalizeDescription()}")
+                    </div>
+                    <div class="standard-item" title="@item.Content">
+                        <i class="zmdi zmdi-collection-text f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => item.Content)} : {(item.Content.CustomSubstring(150))}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => item.InsertDateMi)} : {PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.DateTime)}")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

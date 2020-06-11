@@ -1,0 +1,52 @@
+﻿@model FilterViewModel
+
+@{
+    <div class="row">
+
+        <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.ActionNameFa)
+                @Html.TextBoxFor(x => x.ActionNameFa, null, new { @class = "form-control type-fa" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ActionNameFa) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.ActionName)
+                @Html.TextBoxFor(x => x.ActionName, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ActionName) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.ControllerName)
+                @Html.TextBoxFor(x => x.ControllerName, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ControllerName) </small>
+        </div>
+
+        <div class="col-sm-12 col-md-3 m-b-20">
+            <div class="form-group">
+                @Html.LabelFor(x => x.IsVisible)
+                <div class="select">
+                    @Html.DropDownListFor(x => x.IsVisible, (List<SelectListItem>)ViewBag.VisibleStatus, new { @class = "form-control" })
+                    <i class="form-group__bar"></i>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.IsVisible) </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.LabelFor(x => x.ParentId)
+                @Html.DropDownListFor(x => x.ParentId, (List<SelectListItem>)ViewBag.AllViews, new { @class = "form-control select2 select2-hidden-accessible" , @aria_hidden = "true", @tabindex = "-1" })
+            </div>
+        </div>
+
+    </div>
+}

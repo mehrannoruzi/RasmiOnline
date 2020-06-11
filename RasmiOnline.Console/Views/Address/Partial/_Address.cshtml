@@ -1,0 +1,67 @@
+﻿@model Address
+@{
+    Layout = null;
+}
+
+
+<form class="row" action="@Url.Action((Model.AddressId==0?MVC.Address.ActionNames.Add:MVC.Address.ActionNames.Edit),MVC.Address.Name)" method="post" id="address-form">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.AddressId)
+    @Html.HiddenFor(x => x.Location)
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="col-sm-12 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.FullName)
+                @Html.TextBoxFor(x => x.FullName, null, new { @class = "form-control type-fa" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.FullName) </small>
+        </div>
+        <div class="col-sm-12 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.MobileNumber)
+                @Html.TextBoxFor(x => x.MobileNumber, null, new { @class = "form-control text-left dir-ltr only-digit" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.MobileNumber) </small>
+        </div>
+        <div class="col-sm-12 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.Tel)
+                @Html.TextBoxFor(x => x.Tel, null, new { @class = "form-control text-left dir-ltr only-digit" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Tel) </small>
+        </div>
+        <div class="col-sm-12 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.FullAddress, new { @style = "display:block;" })
+                @Html.TextAreaFor(x => x.FullAddress, new { @class = "form-control", @placeholder = "اینجا تایپ نمایید", @style = "width:100%;min-height:100px;" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.FullAddress) </small>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8">
+        <div id="location-selector" class="google-map" style="height:100%;width:100%;" data-type="dynamic" data-target="#@nameof(Model.Location)">
+
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 m-t-30">
+        <button class="btn-action rtl waves-effect" type="button">
+            <div class="text">
+                @if (Model.AddressId == 0)
+                {
+                    @LocalMessage.Add
+                }
+                else
+                {
+                    @LocalMessage.Edit
+                }
+            </div>
+            <div class="icon">
+                <i class="zmdi zmdi-plus"></i>
+            </div>
+        </button>
+    </div>
+</form>

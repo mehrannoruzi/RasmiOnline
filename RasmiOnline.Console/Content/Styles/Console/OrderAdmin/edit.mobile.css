@@ -1,0 +1,38 @@
+﻿.order-row {
+    margin: -15px;
+}
+
+.m-rl-30 {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.tab-content {
+    padding-top: 10px;
+}
+
+#order-detail .btn-action.dark {
+    float: right !important;
+}
+
+.tab-container.toolbar {
+    padding: 0;
+}
+
+.btn-modal-wrapper {
+    padding: 0 10px;
+}
+
+#LangType {
+    padding: 5px;
+}
+
+.radio-wrapper {
+    border-radius: 20px;
+    padding: 8px;
+    border: solid 1px #dadada;
+    height: 33px;
+    width: fit-content;
+    margin-bottom: 3px;
+    margin-left: 3px;
+}

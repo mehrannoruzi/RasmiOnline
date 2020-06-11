@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BankCard>
+
+@{
+    ViewBag.Title = LocalMessage.BankCardManagment;
+}
+
+<div class="text-left m-b-20 o-f-h add-bankcard-button" data-modal-url="@Url.Action(MVC.BankCard.ActionNames.GetForm,MVC.BankCard.Name)" data-modal-title="@LocalMessage.AddNewBankCard">
+    <a class="btn-action rtl waves-effect">
+        <div class="text">
+            @LocalMessage.AddNewBankCard
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-plus"></i>
+        </div>
+    </a>
+</div>
+
+@{
+    Html.RenderAction(MVC.BankCard.ActionNames.ShowList, MVC.BankCard.Name);
+}
+
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.BankCard.manage_js)"></script>
+}

@@ -1,0 +1,158 @@
+﻿.pull-right {
+    float: right;
+}
+
+.current-user {
+    padding: 25px;
+}
+
+.current-user .border-top {
+    border-top: 1px solid #f1f1f1;
+    padding-top: 10px;
+}
+
+.current-user .full-name {
+    margin-bottom: 15px;
+}
+
+.current-user ul {
+    list-style: none;
+    padding: 0;
+}
+
+.current-user ul.addresses li {
+    padding: 15px 0;
+}
+
+.current-user ul.addresses li i {
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.current-user ul.addresses a {
+    color: #707070;
+}
+
+.current-user .title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    /*position: relative;*/
+}
+
+.title i {
+    font-size: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+    .title i.zmdi-view-list {
+        transform: rotate(180deg);
+    }
+
+.current-user .title span {
+    background-color: #fff;
+}
+
+.current-user .title:after {
+    content: "";
+    display: inline-block;
+    height: 1px;
+    vertical-align: bottom;
+    width: 100%;
+    margin-left: -100%;
+    margin-right: 5px;
+    border-top: 1px solid #CCC;
+    vertical-align: middle;
+}
+/*.prop {
+    padding-top: 15px;
+    padding-bottom:15px;
+    position:relative;
+    margin-top:25px;
+}
+.prop label:first-child{
+    min-width:120px;
+}
+
+
+.current-user .nav-tabs > li {
+    padding:20px 10px;
+}
+.current-user .nav-tabs > li > a{
+    color:#000;
+}*/
+.prop label {
+    right: 15px;
+}
+
+.tab-content {
+    padding: 15px;
+    padding-top: 50px;
+}
+
+.current-user button {
+    min-width: 80px;
+}
+
+.current-user .header {
+    display: none;
+}
+
+/*--- addresses ---*/
+.address_list:before, .address_list:after {
+    display: none !important;
+}
+
+.address_item {
+    width: 48% !important;
+    margin-bottom: 15px;
+    margin-left: 1% !important;
+    margin-right: 1% !important;
+    height: 165px !important;
+}
+
+.address_list .address_item.selected {
+    border: 1px solid #cbcbcb !important;
+}
+
+.add-address-button {
+    float: right !important;
+    width: 98% !important;
+    height: 80px !important;
+    min-height: 0 !important;
+    text-align: center !important;
+}
+
+.address_list .add-address-button .add-address-button__text {
+    transform: none !important;
+    position: static !important;
+    margin-top: 25px;
+    display: inline-block;
+}
+
+.address_item__radio {
+    display: none !important;
+}
+
+._1st i {
+    vertical-align: middle;
+}
+.address_list .title{
+    display:none;
+}
+.flickity-enabled
+{
+    margin-right:0!important;
+    margin-left:0!important;
+}
+@media(max-width:576px) {
+    .current-user .full-name {
+        margin-top: 15px;
+    }
+
+    .address_item:not(:first-child) {
+        width: 98% !important;
+    }
+}

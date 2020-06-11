@@ -1,0 +1,27 @@
+﻿@model OrderComment
+@{
+    Layout = null;
+}
+
+<form class="inputs" action="@Url.Action(MVC.OrderComment.ActionNames.Add,MVC.OrderComment.Name , new { orderId = Model.OrderId })">
+ 
+
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.Title, new { @class = "form-control type-fa", @placeholder = Html.DisplayNameFor(x => x.Title) })
+        <i class="bar"></i>
+    </div>
+    <div class="form-group">
+        @Html.TextAreaFor(x => x.Comment, new { @class = "form-control type-fa",@rows="4", @placeholder = Html.DisplayNameFor(x => x.Comment) })
+        <i class="bar"></i>
+    </div>
+   
+    <button class="btn-action form-group rtl waves-effect btn-add-order-desc" type="button">
+        <div class="text">
+            @LocalMessage.Submit
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-arrow-left"></i>
+        </div>
+    </button>
+</form>
+

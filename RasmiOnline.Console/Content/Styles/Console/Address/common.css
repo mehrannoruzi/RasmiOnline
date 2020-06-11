@@ -1,0 +1,293 @@
+﻿
+#udpShipping {
+    width: 100%;
+}
+
+    #udpShipping .address__wrapper {
+        position: relative;
+        margin-top: 10px;
+    }
+
+.address_list .address_item {
+    border: 1px solid #cbcbcb;
+    border-radius: 2px;
+    height: 200px;
+    width: 415px;
+    float: right;
+    margin-left: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-right: 5px;
+}
+
+    .address_list .address_item.selected {
+        border: 1px solid #5dc35f;
+    }
+
+.address_list .address_item__name {
+    font-size: 12px;
+    background-color: #f2f2f2;
+}
+
+.clearfix {
+    display: block;
+}
+
+.address_list .address_item__detail {
+    padding: 0 15px;
+}
+
+.address_list .address_item.selected .address_item__radio {
+    background: #f7fff7;
+    border-top: 1px solid #c0f0c1 !important;
+}
+
+.address_list .address_item__radio {
+    padding: 4px 0 6px 0;
+    text-align: center;
+    background: #fbfbfb;
+    border-top: 1px solid #f0f0f0;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.address_list .add-address-button {
+    float: left;
+    width: 80px;
+    border: 2px dashed #cdcdcd;
+    box-sizing: border-box;
+    min-height: 200px;
+    cursor: pointer;
+    position: relative;
+}
+
+    .address_list .add-address-button .add-address-button__text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%) rotate(-90deg);
+        white-space: nowrap;
+        color: #767676;
+        font-size: 17px;
+        min-height: 32px;
+    }
+
+.flickity-button-icon {
+    fill: #546e7a !important;
+}
+
+.flickity-prev-next-button {
+    position: absolute;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+    .flickity-prev-next-button svg {
+        position: absolute;
+        left: 20%;
+        top: 20%;
+        width: 60%;
+        height: 60%;
+    }
+
+.address_list:before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -20px;
+    top: -10px;
+    bottom: -10px;
+    z-index: 3;
+    width: 10px;
+    border: 1px solid transparent;
+    /*box-shadow: -6px 0 7px -4px rgba(0,0,0,.2);*/
+}
+
+.address_list:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -20px;
+    top: -10px;
+    bottom: -10px;
+    z-index: 3;
+    width: 10px;
+    border: 1px solid transparent;
+    /*box-shadow:5px 0 5px -4px rgba(0,0,0,.2);*/
+}
+
+.arrow {
+    width: 70px;
+    height: 14px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -33px;
+    bottom: -13px;
+    opacity: 1;
+}
+
+.right:before {
+    visibility: hidden;
+}
+
+.state {
+    width: calc(100%/3 - 12px);
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.address_item__name {
+    font-size: 13px;
+    background-color: #fbfdfc;
+}
+
+    .address_item__name .reciever {
+        float: right;
+        padding: 7px 15px 5px 0;
+    }
+
+.address_item__detail .location {
+    padding: 10px 5px;
+    font-size: 12px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.address-edit, .address-remove, .address-update-status {
+    float: left;
+    width: 42px;
+    height: 35px;
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    text-align: center;
+}
+
+.v-a-m {
+    font-size: 16px !important;
+    color: #888;
+}
+
+.address {
+    font-size: 12px;
+    min-height: 40px;
+    margin-top: 5px;
+}
+
+    .address .map-hint {
+        display: inline-block;
+        padding: 5px 20px;
+        margin: 15px 0 0;
+        border-radius: 2px;
+        color: #7c6a26;
+        background: #fffcda;
+    }
+
+.tell {
+    padding: 10px 0px;
+    font-size: 12px;
+}
+
+.map-wrapper {
+    padding: 10px 0px 10px 0;
+    font-size: 12px;
+}
+
+    .map-wrapper .google-map {
+        height: 107px;
+        width: 100%;
+    }
+
+.phone, .emergency {
+    width: 50%;
+    float: right;
+}
+
+.address_item__radio .radio-control span {
+    vertical-align: 4px;
+    margin-right: 5px;
+}
+
+.radio-control label {
+    width: 14px;
+    height: 14px;
+    -ms-border-radius: 100%;
+    border-radius: 100%;
+    background: #fff;
+    display: block;
+    position: relative;
+    border: 1px solid #d4dbde;
+    -webkit-transition: 150ms ease;
+    -moz-transition: 150ms ease;
+    -ms-transition: 150ms ease;
+    -o-transition: 150ms ease;
+    transition: 150ms ease;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    right: 3px;
+    top: -18px !important;
+}
+
+    .radio-control label:after {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        content: "";
+        background: #fff;
+        width: 2px;
+        height: 2px;
+        border-radius: 100%;
+        border: 1px solid #fff;
+    }
+
+.radio-control {
+    display: inline-block;
+    position: relative;
+    height: 18px;
+    width: 18px;
+    padding: 0;
+    margin: 0;
+    top: 5px;
+}
+
+    .radio-control input[type=radio]:checked + label {
+        background: #2196f3;
+        border: 1px solid transparent;
+        width: 14px;
+        height: 14px;
+        top: -13px;
+        right: 3px;
+    }
+
+.modal .crisp-h5bnuo {
+    background-color: #000;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+    .modal-body form button {
+        min-width: 100px;
+    }
+
+.address_list .title > i {
+    margin-left: 5px;
+}
+
+.flickity-enabled {
+    margin-right: 30px;
+    margin-left: 30px;
+}

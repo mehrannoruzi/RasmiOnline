@@ -1,0 +1,61 @@
+﻿@model ActionResponse<ViewInRole>
+
+@{
+    <div class="row">
+        @if (Model.IsNotNull() && Model.IsSuccessful)
+        {
+            <form id=@($"{nameof(ViewInRole)}_FormControls") data-submit-action="@Url.Action(MVC.Role.ActionNames.AddViewInRole, MVC.Role.Name)" class="col-12">
+                <div class="row">
+
+                    @Html.HiddenFor(x => Model.Result.RoleId)
+
+                    <div class="col-sm-12 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.ViewId)
+                            @Html.DropDownListFor(x => x.Result.ViewId, (List<SelectListItem>)ViewBag.Views, new { @class = "form-control select2 select2-hidden-accessible", @aria_hidden = "true", @tabindex = "-1", @style = "width:100% !important;" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.ExpireDateSh)
+                            @Html.TextBoxFor(x => x.Result.ExpireDateSh, null, new { @class = "form-control ltr-dir pdate", @style = "padding-left: 40px;" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.ExpireDateSh) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.IsDefault)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.Result.IsDefault, (List<SelectListItem>)ViewBag.DefaultStatus, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.IsDefault) </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 m-b-20">
+                        <button id="AddViewInRoleSubmitForm" class="btn-action rtl waves-effect m-r-10" type="button">
+                            <div class="text">
+                                @LocalMessage.Save
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-floppy"></i>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="text-center text-danger">@LocalMessage.BadRequest</div>
+        }
+    </div>
+}
+
+
+@{ Html.RenderAction(MVC.Role.ActionNames.GetViewInRoleList, MVC.Role.Name, new { id = Model.Result.RoleId }); }

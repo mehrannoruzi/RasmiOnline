@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PricingItem>
+
+<div class="cols factore order-purpose">
+    <div class="row m-t-10 m-r-0 m-b-10">
+        <div class="col-sm-2 sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            @LocalMessage.Email
+        </div>
+        <div class="col-xs-12 col-sm-6 p-r-0">
+            <div class="radio-wrapper">
+                <input class="form-control rounded-input valid" data-val="true" data-val-email="ایمیل وارد شده صحیح نیست" data-val-required="این فیلد اجباری می باشد" id="Email" name="Email" type="text" placeholder="اینجا بنویسید">
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-10 m-r-0 m-b-10">
+        <div class="col-sm-2 sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            @LocalMessage.MobileNumber
+        </div>
+        <div class="col-xs-12 col-sm-6 p-r-0">
+            <div class="radio-wrapper">
+                <input class="form-control rounded-input valid" data-val="true" data-val-required="این فیلد اجباری می باشد" id="MobileNumber" name="MobileNumber" type="text" placeholder="اینجا بنویسید">
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-10 m-r-0 m-b-10">
+        <div class="col-sm-2 sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            عنوان سفارش
+        </div>
+        <div class="col-xs-12 col-sm-6 p-r-0">
+            <div class="radio-wrapper">
+                <input class="form-control type-fa rounded-input valid" data-val="true" data-val-required="این فیلد اجباری می باشد" id="OrderTitle" name="OrderTitle" type="text" placeholder="اینجا بنویسید">
+            </div>
+        </div>
+    </div>
+    <div class="row m-r-0">
+        <div class="col-sm-2 sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            زبان ترجمه
+        </div>
+        <div class="col-xs-12 col-sm-6 m-b-15 select-arrow  p-r-0">
+            <div class="lang-type-wrapper">
+                <div class="hint animated fadeIn">
+                    <i class="zmdi zmdi-alert-circle"></i>
+                    قیمتها تغییر کردند
+                </div>
+                @Html.DropDownList("LangType", (List<SelectListItem>)ViewBag.LangTypes, new { @class = " radio-wrapper" })
+            </div>
+
+        </div>
+    </div>
+    @*<div class="row m-r-0">
+        <div class="col-sm-2 sec-header">
+            <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+            اختصاص به دفتر ترجمه
+        </div>
+        <div class="col-xs-12 col-sm-6 m-b-15 select-arrow  p-r-0">
+            <div class="lang-type-wrapper">
+                <div class="hint animated fadeIn">
+                    <i class="zmdi zmdi-alert-circle"></i>
+                  
+                </div>
+                @Html.DropDownList("OfficeUserId", (List<SelectListItem>)ViewBag.OfficeUserId, new { @class = "w-100 radio-wrapper" })
+            </div>
+
+        </div>
+    </div>*@
+    <div class="day-to-delivery" style="padding: 8px;margin-bottom: 10px;border-radius: 25px;text-align: center;">
+        مدارک مورد نظر برای ترجمه را در جدول وارد نمایید:
+    </div>
+    @{ Html.RenderAction(MVC.PricingItem.ActionNames.MustlyUsed, MVC.PricingItem.Name);}
+    <div class="tab-content" id="tbl-order-items">
+        @{
+            IEnumerable<OrderItem> data = new[] { new OrderItem {
+                OrderItemId = 0,
+                Name = LocalMessage.OfficialPrice,
+                Copy = 0,
+                Count = 0,
+                PricingItemId = 0,
+                Price = ((Setting)ViewBag.Setting).OfficialRecordPrice,
+                Price_OthersLang = 0,
+                CopyPrice_OthersLang = 0,
+                PricingItemUnitText = "---",
+                OrderItemType = OrderItemType.OfficialRecordItem
+            } };
+            Html.RenderPartial(MVC.OrderAdmin.Views.Partials._ManageItem, data);
+        }
+    </div>
+</div>

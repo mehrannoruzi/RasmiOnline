@@ -1,0 +1,35 @@
+﻿@model OrderComment
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-4 order-name-item">
+        <div class="wrapper">
+            <h6 class="header m-b-30">
+                <i class="zmdi zmdi-text"></i>
+                <span>@Model.Title</span>
+                <span class="remove float-left" data-url="@Url.Action(MVC.OrderComment.ActionNames.Delete, MVC.OrderComment.Name, new { id = Model.OrderCommentId })">
+                    <i class="zmdi zmdi-close"></i>
+                </span>
+            </h6>
+            <div class="lbl-group">
+
+                <label class="val">
+                    <i class="zmdi zmdi-comment f-s-20 m-l-5"></i>
+                    @Model.Comment
+                </label>
+            </div>
+
+            <div class="lbl-group">
+
+                <label class="val">
+                    <i class="zmdi zmdi-calendar f-s-20 m-l-5"></i>
+                    @PersianDateTime.Parse(Model.InsertDateMi).ToString(PersianDateTimeFormat.FullDateFullTime)
+                </label>
+            </div>
+        </div>
+    </div>
+}
+

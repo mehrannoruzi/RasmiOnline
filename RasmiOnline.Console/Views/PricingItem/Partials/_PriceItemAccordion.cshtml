@@ -1,0 +1,57 @@
+﻿@model IActionResponse<IEnumerable<PricingItem>>
+
+@{
+    var accordionItems = EnumConvertor.GetEnumElements<PricingItemCategory>();
+    int accourdingNumber = 1;
+}
+
+<div id="accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+    @foreach (var accordion in accordionItems)
+    {
+    <div class="panel panel-default">
+        <div id="heading@(accordion.Name.ToString())" class="panel-heading" role="tab">
+            <h4 class="panel-title"><a role="button" href="#@(accordion.Name.ToString())" data-toggle="collapse" data-parent="#accordion" aria-expanded="@(accourdingNumber==1?"true":"false")" aria-ontrols="@(accordion.Name.ToString())" class="@(accourdingNumber==1?"":"collapsed")">@accordion.Description</a></h4>
+        </div>
+        <div id="@(accordion.Name.ToString())" class="panel-collapse collapse @(accourdingNumber==1 ? "in" : "" )" role="tabpanel" aria-labelledby="heading@(accordion.Name.ToString())" aria-expanded="false" style="@(accourdingNumber==1?"":"height: 0px;")">
+            @if (Model != null && Model.IsSuccessful)
+                {
+                    int rowCount = 1;
+                    var accordionType = (PricingItemCategory)Enum.Parse(typeof(PricingItemCategory), accordion.Name);
+
+                <table class="table table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Html.DisplayNameFor(x => Model.Result.First().DocumentType)</th>
+                            <th>@Html.DisplayNameFor(x => Model.Result.First().AboveReference)</th>
+                            <th>@Html.DisplayNameFor(x => Model.Result.First().PricingItemUnit)</th>
+                            <th>@Html.DisplayNameFor(x => Model.Result.First().Price)</th>
+                            <th>@Html.DisplayNameFor(x => Model.Result.First().CopyPrice)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Result.Where(x => x.CategoryId == accordionType))
+                            {
+                            <tr>
+                                <td>@rowCount</td>
+                                <td>@item.DocumentType</td>
+                                <td>@item.AboveReference</td>
+                                <td>@item.PricingItemUnit.GetLocalizeDescription()</td>
+                                <td>@item.Price.ToString("0,0")</td>
+                                <td>@item.CopyPrice.ToString("0,0")</td>
+                            </tr>
+
+                                rowCount++;
+                            }
+                    </tbody>
+                </table>
+                }
+                else
+                {
+                <div class="text-center">@LocalMessage.ThereIsNoRecord</div>
+                }
+        </div>
+    </div>
+        accourdingNumber = accourdingNumber + 1;
+    }
+</div>

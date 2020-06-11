@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PricingItem>
+@{
+    ViewBag.Title = $"{LocalMessage.Add} {LocalMessage.Order}";
+}
+
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderAdmin.add_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.order_item_css)" rel="stylesheet" />
+}
+<div class="order-row">
+    @{Html.RenderPartial(MVC.Order.Views.Partials._DetailedAddTimeLine, DetailedAddOrderTimeLine.SelectOrderItem);}
+    <div class="col-md-9 time-line-content">
+        <form action="@Url.Action(MVC.OrderOffice.ActionNames.Add,MVC.OrderOffice.Name)">
+            @{Html.RenderPartial(MVC.OrderOffice.Views.Partials._AddOrder, Model); }
+            <div class="nav-actions m-t-10">
+                <button class="btn-action rtl waves-effect submit-order" type="button" data-redirect-url="@Url.Action(MVC.OrderOffice.ActionNames.Edit,MVC.OrderOffice.Name)">
+                    <div class="text">
+                        ثبت نهایی سفارش
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-arrow-left"></i>
+                    </div>
+                </button>
+            </div>
+        </form>
+        @*<div class="add panel active">
+
+            </div>*@
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.OrderOffice.add_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.order_item_js)"></script>
+}
+

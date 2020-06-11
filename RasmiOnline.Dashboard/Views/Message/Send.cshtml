@@ -1,0 +1,25 @@
+﻿@model SendMessageModel
+
+@{
+    ViewBag.Title = LocalMessage.SendMessage;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.SendMessageToUserDescription;
+}
+
+@{
+    if (Model.IsNotNull())
+    {
+        Html.RenderPartial(MVC.Message.Views.Partials._SendForm, Model);
+    }
+    else
+    {
+        <div class="empty-row">
+            @LocalMessage.BadRequest
+        </div>
+    }
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+    <script src="@Links.Scripts.Own.SendMessageController_js"></script>
+}

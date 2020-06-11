@@ -1,0 +1,60 @@
+﻿@model Channel
+@{
+    Layout = null;
+}
+
+
+<form  action="@Url.Action((Model.ChannelId ==0?MVC.Channel.ActionNames.Add:MVC.Channel.ActionNames.Edit),MVC.Channel.Name)" method="post" id="channel-form">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.UserId)
+    @Html.HiddenFor(x => x.ChannelId)
+    <div class="row">
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.ReferralCode)
+                @Html.TextBoxFor(x => x.ReferralCode, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.ReferralCode) </small>
+        </div>
+        <div class="col-sm-6 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.Percent)
+                @Html.TextBoxFor(x => x.Percent, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Percent) </small>
+        </div>
+        <div class="col-sm-6 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.Label(LocalMessage.EnteredEmail)
+                @Html.TextBox("Result_SearchUserName", null, new { @class = "form-control ltr-dir", @placeholder = "exp : xxx@xxx.com", @data_action_url = Url.Action(MVC.User.ActionNames.FindUser, MVC.User.Name) })
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+        <div id="ShowUserFullName" class="col-sm-6 m-b-30" dir="rtl">
+            <div class="form-group has-warning">
+                <div class="form-control form-control-warning" style="margin-top:26px;padding-right:30px; border-bottom:0px;">
+                    @LocalMessage.UserNameNotEnter
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 m-t-30">
+        <button class="btn-action rtl waves-effect" type="button">
+            <div class="text">
+                @if (Model.ChannelId == 0)
+                {
+                    @LocalMessage.Add
+                }
+                else
+                {
+                    @LocalMessage.Edit
+                }
+            </div>
+            <div class="icon">
+                <i class="zmdi zmdi-plus"></i>
+            </div>
+        </button>
+    </div>
+</form>

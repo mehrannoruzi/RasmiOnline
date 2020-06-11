@@ -1,0 +1,186 @@
+﻿@model User
+@{
+    ViewBag.Title = LocalMessage.Profile;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.Profile;
+}
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.user_profile_css)" rel="stylesheet" />
+}
+<div class="content__inner">
+    <div class="row" style="margin:0px">
+        <div class="col-md-12 col-sm-12 p-r-0 p-l-4">
+            <div class="card profile m-b-30 p-r-0">
+                <div class="profile__info">
+                    <div class="head-card">
+                        <i class="zmdi zmdi-card"></i>
+                        اطلاعات شخصی
+                    </div>
+                    <div class="row">
+                        <ul class="spec-list col-sm-6">
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">نام و نام خانوادگی </span>
+                                <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                                    <span data-id="">
+                                        @Model.FirstName @Model.LastName
+                                    </span>
+                                </span>
+                            </li>
+
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">ایمیل </span>
+                                <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                                    <span data-id="">
+                                        @if (string.IsNullOrEmpty(Model.Email))
+                                        {
+                                            <a class="text-danger" id="">
+                                                @LocalMessage.EmailNotEntered
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            @Model.Email
+                                        }
+                                    </span>
+                                </span>
+                            </li>
+
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">شماره موبایل </span>
+                                <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                                    <span data-id="">
+                                        @if (Model.MobileNumber == 0)
+                                        {
+                                            <a class="text-danger" id="mobileNumberNotEntered" data-target="#MobileNumber_Modal">
+                                                @LocalMessage.MobileNumberNotEntered
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            @Model.MobileNumber.ToString()
+                                        }
+                                    </span>
+                                </span>
+                            </li>
+
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">کد ملی </span>
+                                <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                                    <span data-id="">
+                                        @if (string.IsNullOrEmpty(Model.NationalCode))
+                                        {
+                                            <a class="text-danger" id="">
+                                                @LocalMessage.NationalCodeNotEntered
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            @Model.NationalCode
+                                        }
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                        <ul class="spec-list col-sm-6">
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">فعال سازی حساب کاربری </span>
+                                <span class="technicalspecs-value  col-md-8 float-left @(Model.IsActive? "marked" : "unmarked")" data-id="">
+                                    <span>
+                                        @if (Model.IsActive)
+                                        {
+                                            <i class="zmdi zmdi-check f-s-24 green"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="zmdi zmdi-close f-s-24 red"></i>
+                                        }
+
+                                    </span>
+                                </span>
+                            </li>
+
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">تاریخ ثبت نام </span>
+                                <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                                    <span data-id="">
+                                        @PersianDateTime.Parse(Model.RegisterDateMi).ToString(PersianDateTimeFormat.DateShortTime)
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="clearfix">
+                                <span class="technicalspecs-title col-md-4 float-right" data-id="">آخرین لاگین </span>
+                                <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                                    <span data-id="">
+                                        @PersianDateTime.Parse(Model.LastLoginDateMi == null ? Model.RegisterDateMi : (DateTime)Model.LastLoginDateMi).ToString(PersianDateTimeFormat.DateShortTime)
+                                    </span>
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-container toolbar p-0">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#Profile" role="tab" aria-expanded="true">
+                    <i class="zmdi zmdi-account-o icon-profile d-sm-none d-md-block"></i>
+                    @LocalMessage.Profile
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Order" role="tab" aria-expanded="true">
+                    <i class="zmdi zmdi-money icon-profile d-sm-none d-md-block"></i>
+                    سفارشات
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#Security">
+                    <i class="zmdi zmdi-shield-security icon-profile d-sm-none d-md-block"></i>
+                    @LocalMessage.Security
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="">
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="Profile" role="tabpanel" aria-expanded="true">
+                    @{ Html.RenderPartial(MVC.User.Views.Partials._PersonalInfo, new PersonalInfo()
+                        {
+                            UserId = Model.UserId,
+                            NationalCode = Model.NationalCode,
+                            FirstName = Model.FirstName,
+                            LastName = Model.LastName,
+                            MobileNumber = Model.MobileNumber,
+                            Email = Model.Email,
+                            IsActive = Model.IsActive
+                        });}
+                </div>
+                <div class="tab-pane fade" id="Order" role="tabpanel" aria-expanded="false">
+                    @{
+                        Html.RenderAction(MVC.Order.ActionNames.ShowList, MVC.Order.Name, new { userId = Model.UserId });
+                    }
+                </div>
+                <div class="tab-pane fade" id="Security" role="tabpanel" aria-expanded="false">
+                    @{
+                        Html.RenderPartial(MVC.User.Views.Partials._ResetUserPassword, new ChangeUserPassword { UserId = Model.UserId });
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="@Links.Scripts.Console.common_js" type="text/javascript"></script>
+    <script src="@Url.Content(Links.Scripts.jquery_unobtrusive_ajax_min_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.User.user_profile_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Own.UserController_js)"></script>
+}

@@ -1,0 +1,99 @@
+﻿@model List<View>
+
+@{
+    Layout = null;
+}
+
+<div class="card d-none d-md-block d-lg-block">
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                    <thead class="thead-default">
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().Icon)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().ActionNameFa)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.Path</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().IsVisible)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().OrderPriority)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().ExpireDateSh)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            int count = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td><i class="@item.Icon f-s-20"></i></td>
+                                    <td>@item.ActionNameFa</td>
+                                    <td>@($"{item.Controller}/{item.ActionName}")</td>
+                                    <td><i class="zmdi zmdi-@(item.IsVisible ? "check active-color" : "close deactive-color") f-s-20"></i></td>
+                                    <td class="dir-ltr">@item.OrderPriority</td>
+                                    <td class="dir-ltr">@item.ExpireDateSh</td>
+                                    <td>
+                                        <div class="actions">
+                                            <div class="dropdown actions__item">
+                                                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="" edit-item-modal="@($"{nameof(View)}")" data-edit-url="@(Url.Action(MVC.View.ActionNames.GetForm,MVC.View.Name, new { id= item.ViewId}))" data-modal-title="@LocalMessage.EditView" class="dropdown-item"><i class="zmdi zmdi-edit"></i>&nbsp;@LocalMessage.Edit</a>
+                                                    <a href="" data-delete-url="@(Url.Action(MVC.View.ActionNames.Delete, MVC.View.Name, new { id= item.ViewId}))" data-modal-title="@LocalMessage.DeleteView" class="dropdown-item"><i class="zmdi zmdi-delete"></i>&nbsp;@LocalMessage.Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Any())
+{
+    <div class="d-none d-768px">
+        <div class="toolbar">
+            <div class="toolbar__label">
+                @LocalMessage.SearchResult
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title under-border">@(item.ActionNameFa ?? "---")</h3>
+                    <div class="actions">
+                        <div class="dropdown actions__item">
+                            <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="" edit-item-modal="@($"{nameof(View)}")" data-edit-url="@(Url.Action(MVC.View.ActionNames.GetForm,MVC.View.Name, new { id= item.ViewId}))" data-modal-title="@LocalMessage.EditView" class="dropdown-item f-s-12"><i class="zmdi zmdi-edit f-s-20"></i>&nbsp;@LocalMessage.Edit</a>
+                                <a href="" data-delete-url="@(Url.Action(MVC.View.ActionNames.Delete,MVC.View.Name, new { id= item.ViewId}))" data-modal-title="@LocalMessage.DeleteView" class="dropdown-item f-s-12"><i class="zmdi zmdi-delete f-s-20"></i>&nbsp;@LocalMessage.Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-arrow-merge f-s-20"></i>
+                        @($"{LocalMessage.Path} : {item.Controller}/{item.ActionName}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-texture f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().IsVisible)}")
+                        <i class="zmdi zmdi-@(item.IsVisible ? "check active-color" : "close deactive-color") f-s-20"></i>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<label for="PaymentDescription" class="sec-header col-sm-2">
+    <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+    نحوه پرداخت:
+</label>
+<div class="p-20">
+    <div class="row">
+        @{
+            foreach (var item in EnumConvertor.GetEnumElements<PaymentType>().ToList())
+            {
+                <div class="col-xs-12 col-sm-6 col-md-4 p-r-0">
+                    <div class="radio-wrapper @(item.Name == nameof(PaymentType.ByGateway) ? "activate" : "") ">
+                        <label class="custom-control custom-radio">
+                            <input type="radio" name="PaymentType" value="@item.Name" class="custom-control-input" @(item.Name == nameof(PaymentType.ByGateway) ? "checked" : "") />
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">@item.Description</span>
+                        </label>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="row">
+        @{Html.RenderPartial(MVC.PaymentGateway.Views.Partial._ListOfGateway, (IEnumerable<PaymentGateway>)ViewBag.PaymentGatewaies);}
+    </div>
+</div>
+
+

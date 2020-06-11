@@ -1,0 +1,101 @@
+﻿@model Transaction
+@using RasmiOnline.Console.Enum
+
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.order_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+}
+
+<div class="order-row">
+    @{Html.RenderPartial(MVC.Order.Views.Partials._DetailedAddTimeLine, DetailedAddOrderTimeLine.PaymentAllFactor);}
+    <aside class="col-md-9 time-line-content">
+        <div class="card" style="padding:25px 50px">
+            @* Details Of Transaction *@
+            @Html.Partial(MVC.Order.Views.Partials._SummaryHeader, new SummaryHeader
+       {
+           Message = ViewBag.ErrorMessage,
+           BGColor = "#ff5652d4",
+           Icon = "zmdi-close",
+           PaddingTop = "15px",
+           Color = "#fff"
+       })
+            <div class="row m-0">
+                <ul class="spec-list col-sm-12 p-r-0 p-l-0">
+                    <li class="d-flex">
+                        <span class="technicalspecs-title col-md-4 float-right d-block" data-id="">درگاه بانکی</span>
+                        <span class="technicalspecs-value col-md-8 float-left" data-id="">
+                            <span data-id="">
+                                <img src="~/Content/Images/BankName/@(ViewBag.PaymentGateway).png" class="w-48-px" />
+                            </span>
+                        </span>
+                    </li>
+                    <li class="clearfix">
+                        <span class="technicalspecs-title col-md-4 float-right" data-id="">تاریخ و ساعت تراکنش </span>
+                        <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+                            <span data-id="">
+                                @PersianDateTime.Now.ToString(PersianDateTimeFormat.FullDateFullTime)
+                            </span>
+                        </span>
+                    </li>
+                    <li class="d-flex">
+                        <span class="technicalspecs-title col-md-4 float-right" data-id="">شماره رهگیری </span>
+                        <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+
+                            @if (Model != null)
+                            {
+                                <span>
+                                    @Model.TrackingId
+                                </span>
+                            }
+
+                        </span>
+                    </li>
+                    <li class="clearfix">
+                        <span class="technicalspecs-title col-md-4 float-right" data-id="">شماره سفارش </span>
+                        <span class="technicalspecs-value  col-md-8 float-left" data-id="">
+
+                            @if (Model != null)
+                            {
+                            <span>
+                                @Model.OrderId
+                            </span>
+                            }
+
+                        </span>
+                    </li>
+                    <li class="clearfix">
+                        <span class="technicalspecs-title col-md-4 float-right" data-id="">مبلغ پرداختی </span>
+                        <span class="technicalspecs-value  col-md-8 float-left " data-id="">
+
+                            @if (Model != null)
+                            {
+                                <span>
+                                    @Model.Price
+                                </span>
+                            }
+
+                        </span>
+                    </li>
+                </ul>
+
+
+
+                <div class="nav-actions col-md-12 p-0">
+                    <a class="btn-action rtl waves-effect m-b-20 next-panel float-left" href="@Url.Action(MVC.Order.ActionNames.History, MVC.Order.Name)">
+                        <div class="text">
+                            @LocalMessage.OrderHistory
+                        </div>
+                        <div class="icon">
+                            <i class="zmdi zmdi-long-arrow-return"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+}

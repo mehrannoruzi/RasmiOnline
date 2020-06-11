@@ -1,0 +1,36 @@
+﻿@model OrderName
+@{
+    Layout = null;
+}
+
+<form class="inputs" action="@Url.Action(MVC.OrderName.ActionNames.Add,MVC.OrderName.Name , new { orderId = Model.OrderId })">
+    
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.FullName, new { @class = "form-control type-fa", @placeholder = Html.DisplayNameFor(x => x.FullName) })
+        <i class="bar"></i>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.FullNameEN, new { @class = "form-control p-h-r ltr-elm", @placeholder = Html.DisplayNameFor(x => x.FullNameEN) })
+        <i class="bar"></i>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.FatherName, new { @class = "form-control type-fa", @placeholder = Html.DisplayNameFor(x => x.FatherName) })
+        <i class="bar"></i>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.FatherNameEn, new { @class = "form-control p-h-r ltr-elm", @placeholder = Html.DisplayNameFor(x => x.FatherNameEn) })
+        <i class="bar"></i>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.BirthDateMi, new { @class = "form-control endate", @placeholder = "تاریخ تولد میلادی", @Value = "" })
+        <i class="bar"></i>
+    </div>
+    <button class="btn-action form-group rtl waves-effect btn-add-order-name" type="button">
+        <div class="text">
+            @LocalMessage.Submit
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-plus"></i>
+        </div>
+    </button>
+</form>

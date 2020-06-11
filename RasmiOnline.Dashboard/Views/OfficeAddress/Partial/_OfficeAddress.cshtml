@@ -1,0 +1,103 @@
+﻿@model OfficeAddress
+@{
+    Layout = null;
+    var mobileNumber = ((Dictionary<string, object>)(User as ICurrentUserPrincipal).CustomField).FirstOrDefault(X=>X.Key=="MobileNumber").Value;
+}
+
+<div class="setting col-xs-12 col-sm-12 no-padding m-t-10">
+    <div class="row">
+        <div class="col-12 col-xs-12 col-sm-6 simple-schema">
+            <div class="fields">
+                <div class="row active">
+                    <div class="col-xs-12 col-sm-12 title">
+                        آدرس دفتر رسمی آنلاین جهت مراجعه حضوری
+                    </div>
+                    <div class="inner row m-0">
+                        <div class="map-wrapper p-t-0 clearfix col-md-4">
+                            <div class="google-map" data-type="static" data-location="@Model.Location"></div>
+                        </div>
+                        <div class="col-md-8 props">
+                            <div class="col-md-12 p-r-5 tel">
+                                <span class="_1st"><i class="zmdi zmdi-phone v-a-m"></i></span>
+                                <span class="val p-r-5">@Html.DisplayFor(x => x.Tel)</span>
+                            </div>
+                            <div class="col-md-12 p-r-5 mobile">
+                                <span class="_1st"><i class="zmdi zmdi-walk v-a-m"></i></span>
+                                <span class="val p-r-5">@Html.DisplayFor(x => x.WorkHour)</span>
+                            </div>
+
+                            <div class="col-md-12 p-r-5 props address">
+                                <span class="_1st"><i class="zmdi zmdi-map v-a-m"></i></span>
+                                <span class="val p-r-5">@Html.DisplayFor(x => x.FullAddress)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 footer">
+                        <div class="radio-control">
+                            <input class="rdb-address-box" type="radio" checked />
+                            <label></label>
+                        </div>
+                        <span>مدارک را به این آدرس ارسال نمایید.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xs-12 col-sm-6 post-schema">
+            <div class="fields">
+                <div class="row active">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 col-sm-5 col-lg-3">
+                                <div class="img-wrapper" >
+                                    <img src="~/Content/Images/stamp.png" style="height:60px;width:60px;" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-7 col-lg-8">
+                                <p>@Model.FullAddress</p>
+                            </div>
+                            <div class="d-none d-sm-block seperator">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 props">
+                        <div class="col-md-12 p-r-5 tel">
+                            <span class="_1st"><i class="zmdi zmdi-phone v-a-m"></i></span>
+                            <span class="val p-r-5">@Html.DisplayFor(x => x.Tel)</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 mobile">
+                            <span class="_1st"><i class="zmdi zmdi-walk v-a-m"></i></span>
+                            <span class="val p-r-5">@Html.DisplayFor(x => x.WorkHour)</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xs-12 col-sm-6">
+            <div class="fields">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 title">
+                        @LocalMessage.IWantTheAddressToBeSMS
+                    </div>
+                    <div class="inner row m-0 p-20">
+                        <p>@string.Format(LocalMessage.SendSmsText, mobileNumber)</p>
+                        <p>@Model.FullAddress</p>
+                        <div class="col-md-12 text-left m-b-20">
+                            <form class="text-center" action="@Url.Action(MVC.Setting.ActionNames.SendAddressTo, MVC.Setting.Name)" method="post">
+                                @Html.Hidden("fullAddress", Model.FullAddress)
+                                <button class="btn-action info rtl waves-effect send-sms" type="button" data-strategy="save" data-url="@Url.Action(MVC.Order.ActionNames.DetailedAdd,MVC.Order.Name)">
+                                    <div class="text">
+                                        @LocalMessage.Send
+                                    </div>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-mail-send"></i>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

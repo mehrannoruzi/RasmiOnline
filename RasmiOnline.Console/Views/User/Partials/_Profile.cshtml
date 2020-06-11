@@ -1,0 +1,59 @@
+﻿@model ProfileModel
+@{
+    Layout = null;
+}
+
+<form class="row" action="@Url.Action(MVC.User.ActionNames.Profile,MVC.User.Name,new { })" id="profile-form">
+    @Html.AntiForgeryToken()
+
+
+    <div class="col-sm-6 m-b-20">
+        <div class="form-group" dir="rtl">
+            @Html.LabelFor(x => x.FirstName)
+            @Html.TextBoxFor(x => x.FirstName, null, new { @class = "form-control type-fa" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.FirstName) </small>
+    </div>
+
+    <div class="col-sm-6 m-b-20">
+        <div class="form-group" dir="rtl">
+            @Html.LabelFor(x => x.LastName)
+            @Html.TextBoxFor(x => x.LastName, null, new { @class = "form-control type-fa" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.LastName) </small>
+    </div>
+
+    <div class="col-sm-6 m-b-20">
+        <div class="form-group" dir="rtl">
+            @Html.LabelFor(x => x.NationalCode)
+            @Html.TextBoxFor(x => x.NationalCode, null, new { @class = "form-control text-left dir-ltr only-digit" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.NationalCode) </small>
+    </div>
+
+    <div class="col-sm-6 m-b-20">
+        <div class="form-group" dir="rtl">
+            @Html.LabelFor(x => x.MobileNumber)
+            @Html.TextBoxFor(x => x.MobileNumber, null, new { @class = "form-control text-left dir-ltr only-digit" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.MobileNumber) </small>
+    </div>
+
+    <div class="col-sm-12 m-b-15">
+        <button class="btn-action rtl waves-effect  next-panel" type="button">
+            <div class="text">
+                @LocalMessage.Edit
+            </div>
+            <div class="icon">
+                <i class="zmdi zmdi-edit"></i>
+            </div>
+        </button>
+    </div>
+
+
+</form>
+

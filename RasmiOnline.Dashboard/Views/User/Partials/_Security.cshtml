@@ -1,0 +1,59 @@
+﻿@model ChangeCurrentPassword
+@{
+    Layout = null;
+}
+<div class="row security">
+    <div class="col-lg-6  p-10 p-t-30">
+
+        <div class="content__title">
+            <h1 class="text-center">
+                <i class="zmdi zmdi-lock f-s-20"></i>
+                @LocalMessage.ChangePassword
+            </h1>
+           
+        </div>
+        <form action="@Url.Action(MVC.User.ActionNames.ChangePassword,MVC.User.Name)" method="post">
+            <div class="row">
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12 m-b-20" dir="rtl">
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.CurrentPassword, new { @class = "form-control text-left p-r dir-ltr", @placeholder = Html.DisplayNameFor(x => x.CurrentPassword) })
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.CurrentPassword) </small>
+                </div>
+                <div class="col-sm-12 m-b-20" dir="rtl">
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.Password, new { @class = "form-control text-left p-r dir-ltr", @placeholder = Html.DisplayNameFor(x => x.Password) })
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.Password) </small>
+                </div>
+                <div class="col-sm-12 m-b-20" dir="rtl">
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control text-left p-r dir-ltr", @placeholder = Html.DisplayNameFor(x => x.ConfirmPassword) })
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.ConfirmPassword) </small>
+                </div>
+
+                <div class="col-12 text-left">
+                    <div class="message">
+                        <small></small>
+                    </div>
+
+                    <button class="btn-action rtl waves-effect change-pw-btn" type="button" data-success-msg="@LocalMessage.ResetPasswordSuccesssMsg">
+                        <div class="text">
+                            @LocalMessage.Save
+                        </div>
+                        <div class="icon">
+                            <i class="zmdi zmdi-check"></i>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

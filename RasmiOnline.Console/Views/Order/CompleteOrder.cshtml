@@ -1,0 +1,106 @@
+﻿@model Order
+@using RasmiOnline.Console.Enum
+@{
+    ViewBag.Title = LocalMessage.CompleteOrder;
+    var block = (string)ViewBag.Block ?? "discount";
+}
+
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Shared.flickity_min_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Setting.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Address.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.complete_order_css)" rel="stylesheet" />
+
+}
+@Html.HiddenFor(x => x.OrderId)
+<div class="order-row">
+    @{
+        Html.RenderPartial(MVC.Order.Views.Partials._DetailedAddTimeLine, DetailedAddOrderTimeLine.ConfirmFactor);
+    }
+    <div class="col-md-9 time-line-content panels">
+
+        <div class="panel summary discount @(block=="discount"?"active":"")">
+            @Html.Partial(MVC.Order.Views.Partials._SummaryHeader, new SummaryHeader
+            {
+                Message = "سفارش شما آماده پرداخت می باشد . برای شروع فرایند ترجمه، لطفا مبلغ فاکتور را پرداخت نمایید",
+                BGColor = "#fff3b2",
+                Icon = "zmdi-info",
+                PaddingTop = "15px",
+                Color = "#4d4d4d",
+                IconColor = "#4d4d4d"
+            })
+            @{Html.RenderPartial(MVC.Order.Views.Partials._Summary, Model); }
+            <div class="row">
+                @{Html.RenderPartial(MVC.Discount.Views.Partials._AddToOrder, Model); }
+                <div class="col-md-5">
+                    <button class="btn-action rtl waves-effect float-left next-panel" type="button" data-strategy="reset-flickity-f" data-url="@Url.Action(MVC.Order.ActionNames.DetailedAdd,MVC.Order.Name)">
+                        <div class="text">
+                            @LocalMessage.NextStep
+                        </div>
+                        <div class="icon">
+                            <i class="zmdi zmdi zmdi-arrow-left"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel addresses @(block=="addresses"?"active":"")">
+            @{ Html.RenderPartial(MVC.Order.Views.Partials._SelectDeliveryType); }
+            <div class="nav-actions">
+
+                <button class="btn-action ltr dark waves-effect float-right prev-panel" type="button" data-strategy="b">
+                    <div class="text">
+                        @LocalMessage.PrevStep
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi zmdi-arrow-right"></i>
+                    </div>
+                </button>
+
+                <button class="btn-action rtl waves-effect float-left next-panel" type="button" data-strategy="f">
+                    <div class="text">
+                        @LocalMessage.NextStep
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi zmdi-arrow-left"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="panel gateway @(block=="gateway"?"active":"")">
+            @{Html.RenderPartial(MVC.Order.Views.Partials._SelectPaymentType);}
+            <div class="nav-actions">
+                <button class="btn-action ltr dark waves-effect float-right prev-panel" type="button" data-strategy="b">
+                    <div class="text">
+                        @LocalMessage.PrevStep
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi zmdi-arrow-right"></i>
+                    </div>
+                </button>
+
+
+                <button class="btn-action rtl waves-effect next-panel btn-complete-order float-left" type="button" data-url="@Url.Action(MVC.Order.ActionNames.SubmitCompleteOrder,MVC.Order.Name)">
+
+                    <div class="text">
+                        @LocalMessage.Submit
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi zmdi-card"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_C42jDWvco-ZAni9pltEALfP9kQvv8g"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.Flickity.flickity_pkgd_min_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.complete_order_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.address_js)"></script>
+
+}

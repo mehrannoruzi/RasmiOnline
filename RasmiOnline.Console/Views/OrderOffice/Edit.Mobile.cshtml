@@ -1,0 +1,178 @@
+﻿@model Order
+@{
+    ViewBag.Title = LocalMessage.OrderManagment;
+}
+@section Header{
+
+    <link href="@Url.Content(Links.Content.Styles.Console.Attachment.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderName.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderItems.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.OrderAdmin.edit_mobile_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Shared.flickity_min_css)" rel="stylesheet" />
+}
+@Html.HiddenFor(x => x.OrderId)
+<div class="order-row">
+    <div class="w-full m-t-20">
+        <div class="col-12 p-0">
+            <div class="tab-container toolbar border-0">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item p-0">
+                        <a class="nav-link active  p-b-0" data-toggle="tab" href="#order-detail" role="tab" aria-expanded="true">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            شرح سفارش
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#items-wrapper" role="tab" aria-expanded="true">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            آیتم ها
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#Transactions" role="tab">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            پرداخت ها
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#Docs" role="tab">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            اسکن مدارک
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#PassPort" role="tab">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            اسکن پاسپورت ها
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#Darft" role="tab">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            فایل های ترجمه (پیش نویس)
+                        </a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <a class="nav-link p-b-0" data-toggle="tab" href="#Names" role="tab">
+                            <i class="zmdi zmdi-grid icon-profile d-sm-none d-md-block"></i>
+                            اسامی موجود در ترجمه
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade active show " id="order-detail" role="tabpanel">
+                    @{Html.RenderPartial(MVC.OrderAdmin.Views.Partials._Order, Model);}
+                </div>
+                <div class="tab-pane fade" id="items-wrapper" role="tabpanel" aria-expanded="true" data-remove-url="@Url.Action(MVC.OrderItem.ActionNames.Delete,MVC.OrderItem.Name)">
+                    <div class="w-full btn-modal-wrapper">
+                        <button class="btn-show-modal">
+                            <i class="zmdi zmdi-plus"></i>اضافه نمودن مدرک جدید
+
+                        </button>
+                    </div>
+
+                    <div class="order-items w-full">
+                        @{Html.RenderPartial(MVC.OrderItem.Views.Partials._EditableList_Mobile, Model.OrderItems);}
+
+                    </div>
+
+                    <div class="nav-actions m-t-10">
+                        <div class="radio-wrapper w-full result">
+                            <span class="lbl">مجموع:</span>
+                            <span class="val total-sum">@Model.TotalPrice().ToString("N0")</span>
+                        </div>
+                        <button class="btn-action rtl waves-effect btn-submit-order-items" type="button" data-strategy="save" data-url="@Url.Action(MVC.OrderOffice.ActionNames.Edit, MVC.OrderOffice.Name, new { OrderId = Model.OrderId })">
+                            <div class="text">
+                                ثبت سفارش
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-arrow-left"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show " id="Transactions" role="tabpanel">
+                    <br />
+                    <br />
+                    @{Html.RenderAction(MVC.Transaction.ActionNames.AddableList, MVC.Transaction.Name, new { orderId = Model.OrderId });}
+                </div>
+                <div class="tab-pane fade" id="Docs" role="tabpanel">
+                    <br />
+                    <br />
+                    <div class="dropzone-uploader" id="upload-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.OrderFiles })">
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.OrderFiles })">
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.OrderFiles));}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="PassPort" role="tabpanel">
+                    <br />
+                    <br />
+                    <div class="dropzone-uploader" id="upload-identity-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.Identity })">
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.Identity })">
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.Identity));}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Draft" role="tabpanel">
+                    <br />
+                    <br />
+                    <div class="dropzone-uploader" id="upload-translation-attachments" data-upload-url="@Url.Action(MVC.Attachment.ActionNames.AddOrderAttachments, MVC.Attachment.Name, new { orderId = Model.OrderId ,attachmentType = AttachmentType.Translation })">
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="attchs-wrapper" data-url="@Url.Action(MVC.Attachment.ActionNames.GetOrderAttachments,MVC.Attachment.Name,new { orderId = Model.OrderId, attachmentType= AttachmentType.Translation })">
+                        @{Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x => x.AttachmentType == AttachmentType.Translation));}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Names" role="tabpanel">
+                    <br />
+                    <br />
+                    <div class="row">
+                        @{
+                            if (Model.OrderNames != null && Model.OrderNames.Count() > 0)
+                            {
+                                foreach (var item in Model.OrderNames)
+                                {
+                                    Html.RenderPartial(MVC.OrderName.Views.Partials._ShowItem, item);
+                                }
+                            }
+                        }
+                        <div class="col-xs-12 col-sm-6 col-md-4 add-order-name">
+                            <div class="wrapper wrapper-border">
+                                @{Html.RenderPartial(MVC.OrderName.Views.Partials._OrderName, new OrderName { OrderId = Model.OrderId });}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@{Html.RenderPartial(MVC.Order.Views.Partials._AddOrderItem_Mobile); }
+@section Scripts{
+    <script type="text/javascript">
+        window.CRISP_READY_TRIGGER = () => {
+            $crisp.push(["do", "chat:hide"]);
+        };
+    </script>
+    <script src="@Url.Content(Links.Scripts.Plugins.Flickity.flickity_pkgd_min_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.OrderAdmin.edit_mobile_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.OrderName.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.order_item_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.fire_dropzone_js)"></script>
+}

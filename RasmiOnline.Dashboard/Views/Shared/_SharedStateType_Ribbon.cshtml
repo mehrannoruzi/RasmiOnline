@@ -1,0 +1,26 @@
+﻿@model StateType
+
+@switch (Model)
+{
+    case StateType.Begin:
+        <span class="WaitForPayment-ribbon">
+            <i class="zmdi zmdi-card ribbon-i"></i>
+        </span>
+        break;
+    case StateType.InProcessing:
+        <span class="InProcessing-ribbon">
+            <i class="zmdi zmdi-rotate-right ribbon-i"></i>
+        </span>
+        break;
+    case StateType.Accepted:
+        <span class="Accepted-ribbon">
+            <i class="zmdi zmdi-check-all ribbon-i"></i>
+        </span>
+        break;
+    case StateType.Failed:
+        <span class="Failed-ribbon">
+            <i class="zmdi zmdi-close ribbon-i"></i>
+        </span>
+        break;
+}
+

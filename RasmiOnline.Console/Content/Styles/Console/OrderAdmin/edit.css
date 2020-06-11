@@ -1,0 +1,151 @@
+﻿.listview__item:nth-child(odd) {
+    background-color: #f3f3f4;
+}
+
+.toolbar-head {
+    padding: 5px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #c7c7c7;
+     
+    margin-bottom: 20px;
+    box-shadow: 1px 5px 5px #eee;
+}
+
+.nav-tabs .nav-link:before {
+    content: "";
+    height: 3px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -28px;
+    background-color: #03A9F4;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    transition: all .3s;
+}
+
+.warning-box {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    margin: 10px;
+    background-color: antiquewhite;
+}
+
+.attchs-wrapper {
+    text-align: center;
+    min-height: 200px;
+}
+
+.p-t-0 {
+    padding-top: 0px !important;
+}
+
+.attchs-wrapper > .crisp-1epg1l4 {
+    margin-top: 95px;
+    display: inline-block;
+}
+
+.attchs-wrapper .crisp-h5bnuo {
+    background-color: #000 !important;
+}
+
+.deliver-date label {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.deliver-date .input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+    .deliver-date .input-wrapper input {
+        text-align: left;
+        direction: ltr;
+        padding-left: 25px;
+    }
+
+button.Zebra_DatePicker_Icon {
+    top: 0 !important;
+    left: 0;
+}
+
+.deliver-date .date-error {
+    padding-right: 5px;
+}
+
+.m-l-0 {
+    margin-right: 0;
+}
+
+#LangType {
+    padding: 5px;
+}
+/*.lang-type-wrapper{
+    width:100px;
+}
+*/
+
+.attachments .overlay {
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    opacity: 0.6;
+    color: white;
+    font-size: 10px;
+}
+
+    .attachments .overlay i {
+        margin-right: 5px;
+    }
+
+.attachments-type-select {
+    cursor: pointer;
+}
+
+.attachments-type .activate.Identity {
+    border: 1px solid #47947c;
+}
+
+.attachments-type .activate.Translation {
+    border: 1px solid #ffd800;
+}
+
+.attachments-type .activate.OrderFiles {
+    border: 1px solid #4f5b97;
+}
+
+.attachments-type .activate.Identity .custom-control-indicator {
+    background-color: #47947c;
+    border: 2px solid #47947c;
+}
+
+.attachments-type .activate.Translation .custom-control-indicator {
+    background-color: #ffd800;
+    border: 2px solid #ffd800;
+}
+
+.attachments-type .activate.OrderFiles .custom-control-indicator {
+    background-color: #4f5b97;
+    border: 2px solid #4f5b97;
+}
+/*===================================
+                OrderOffice Edit
+=====================================*/
+.desc-wrapper .desc {
+    padding: 15px 10px;
+    border: solid 3px red;
+    margin-right:0!important;
+    margin-top:15px;
+}
+
+.total-row {
+    background-color: #e2e2e2!important;
+}
+    .total-row .lbl {
+        background-color: #989898!important;
+        color: #fff!important;
+    }

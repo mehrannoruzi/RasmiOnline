@@ -1,0 +1,150 @@
+﻿@model ActionResponse<List<Discount>>
+
+@{ Layout = null; }
+
+@if (Model.IsSuccessful)
+{
+    <div class="card d-none d-md-block d-lg-block">
+        <div class="card-block">
+            <div class="table-responsive">
+                <div id="data-table_wrapper" class="dataTables_wrapper">
+                    <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                        <thead class="thead-default">
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().UseForOnce)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().ForFirstUser)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().DiscountType)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().Code)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().Ceiling)</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.ValuePercent</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.ValidFrom</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.ValidTo</th>
+                                <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@(LocalMessage.Action)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            @{ int count = 1;}
+                            @foreach (var item in Model.Result)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td>@($"{(item.UseForOnce ? LocalMessage.OneTime : LocalMessage.MultipleTime)}")</td>
+                                    <td>@($"{(item.ForFirstUser ? LocalMessage.FirstTime : LocalMessage.FreeTime)}")</td>
+                                    <td>@item.DiscountType.GetLocalizeDescription()</td>
+                                    <td>@item.Code</td>
+                                    <td dir="ltr" align="right">@($"{item.Ceiling}")</td>
+                                    <td dir="ltr" align="right">@($"{item.Value}")</td>
+                                    <td dir="ltr" align="right">@($"{item.ValidFromDateSh}")</td>
+                                    <td dir="ltr" align="right">@($"{item.ValidToDateSh}")</td>
+                                    <td>
+                                        <div class="actions">
+                                            <div class="dropdown actions__item">
+                                                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="" data-discount-id="@item.DiscountId" data-discount-code="@item.Code" class="dropdown-item">
+                                                        <i class="zmdi zmdi-mail-send f-s-20">
+                                                        </i>
+                                                        <span class="p-r-5 m-t-5">@LocalMessage.SendDiscountCodeTitle</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none d-768px">
+        <div class="toolbar">
+            <div class="toolbar__label">
+                @LocalMessage.SearchResult
+            </div>
+        </div>
+        @foreach (var item in Model.Result)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@($"{Html.DisplayNameFor(x => item.Code)} : {item.Code}")</h3>
+                    <small class="card-subtitle under-border">@(item.DiscountType.GetLocalizeDescription())</small>
+                    <div class="actions">
+                        <div class="dropdown actions__item">
+                            <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="" data-discount-id="@item.DiscountId" data-discount-code="@item.Code" class="dropdown-item f-s-12"><i class="zmdi zmdi-mail-send f-s-20"></i>&nbsp;@LocalMessage.SendDiscountCodeTitle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-case-check f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => item.UseForOnce)} : {(item.UseForOnce ? LocalMessage.OneTime : LocalMessage.MultipleTime)}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-accounts-alt f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => item.ForFirstUser)} : {(item.ForFirstUser ? LocalMessage.FirstTime : LocalMessage.FreeTime)}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-eject-alt f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => item.Ceiling)} : {item.Ceiling}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-collection-item-9-plus f-s-20"></i>
+                        @($"{LocalMessage.ValuePercent} : {item.Value}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-check f-s-20"></i>
+                        @($"{LocalMessage.ValidFrom} : {item.ValidFromDateSh}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-check f-s-20"></i>
+                        @($"{LocalMessage.ValidTo} : {item.ValidToDateSh}")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="modal fade show animated zoomIn" id="modal-backdrop-ignore" data-modal-name="@($"{nameof(Discount)}_Modal")" tabindex="-1" style="display: none; padding-left: 20px;">
+        <div class="modal-dialog modal-lg" style="width:500px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title pull-left">@LocalMessage.SendDiscountCodeTitle</h5>
+                    <a class="float-left m-l-15" data-dismiss="modal">
+                        <i class="zmdi zmdi-close-circle" style="font-size:23px"></i>
+                    </a>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="col-md-12 m-b-20">
+                        <h3 id="discountCode">---</h3>
+                    </div>
+
+                    <div class="col-sm-12 m-b-20 m-t-30">
+                        <div class="form-group">
+                            <input id="MobileNumber" type="text" name="MobileNumber" class="form-control text-center only-digit" placeholder="@LocalMessage.MobileNumber" />
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 m-b-20 text-center">
+                        <button id="submitSendMobile" class="btn-action rtl waves-effect m-r-10" style="float:none;margin-right:auto;margin-left:auto;" type="button" data-send-discountCode-url="@(Url.Action(MVC.Discount.ActionNames.SendToMobile, MVC.Discount.Name))" data-discount-id>
+                            <div class="text">
+                                @LocalMessage.Send
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-mail-send"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

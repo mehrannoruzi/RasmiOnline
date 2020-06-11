@@ -1,0 +1,72 @@
+﻿/*---------------------------------
+    *              List
+    ----------------------------------*/
+.order-name-item, .add-order-name, .add-order-desc {
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+    .order-name-item.without-insert {
+        height: 330px;
+    }
+
+    .order-name-item .wrapper, .add-order-name .wrapper, .add-order-desc .wrapper {
+        border: solid 1px #e6e6e6;
+        border-radius: 3px;
+        height: 100%;
+        padding: 0px;
+    }
+
+    .add-order-desc .wrapper {
+        padding: 10px;
+    }
+
+.wrapper-border {
+    border: dashed 2px #e6e6e6 !important;
+}
+
+.order-name-item .header, .add-order-name .header {
+    background-color: #efefef !important;
+    color: #707070;
+    margin-bottom: 20px;
+}
+
+    .order-name-item .header i {
+        margin-left: 5px;
+        vertical-align: middle;
+        font-size: 20px;
+        color: #707383;
+    }
+
+.order-name-item .header, .order-name-item .lbl, .order-name-item .val, .add-order-name .header {
+    padding: 10px;
+}
+
+.order-name-item .lbl {
+    width: 130px;
+   
+}
+
+.add-order-name .header i {
+    margin-left: 5px;
+    vertical-align: middle;
+    font-size: 20px;
+    color: green;
+}
+
+.add-order-name .inputs {
+    padding-top: 15px;
+    position: relative;
+}
+
+    .add-order-name .inputs .form-group {
+        margin: 0 10px 15px 10px;
+    }
+
+.add-order-name button {
+    padding: 0;
+    display: inline-block;
+    height: 36px;
+    float: left;
+    margin-left: 10px;
+}

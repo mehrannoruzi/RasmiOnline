@@ -1,0 +1,82 @@
+.pigeon-wrapper {
+    direction: rtl;
+    text-align: right;
+    padding-top:15px;
+}
+
+.pigeon-input {
+    display: none;
+}
+
+.success.tooltip > .tooltip-inner {
+    border:solid 1px #18a185;
+    background-color: #d4edda;
+    color: #155724;
+}
+.success.tooltip .arrow::before {
+    border-top-color: #18a185 !important;
+}
+
+
+.danger.tooltip > .tooltip-inner {
+    border:solid 1px #f99191;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.danger.tooltip .arrow::before {
+    border-top-color: #f99191 !important;
+}
+
+.pigeon-record {
+    direction: ltr;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #b2b2b2;
+    font-weight: bold;
+    margin: 0 0 9px;
+    overflow-y: hidden;
+    padding: 4px 15px 4px 8px;
+    width: 100%;
+    outline: none;
+}
+
+    .pigeon-record.success {
+        border-color: green;
+    }
+
+        .pigeon-record.success i {
+            color: #155724;
+        }
+
+    .pigeon-record.danger {
+        border-color: red;
+    }
+
+        .pigeon-record.danger i {
+            color: #491217;
+            cursor: pointer;
+        }
+
+.progress-wrapper {
+    display: inline-block;
+}
+
+.pigeon-record .progress {
+    width: 90px;
+    border: solid 1px #0063ff;
+    padding: 2px;
+}
+
+.pigeon-details .name {
+    color: #15c;
+    margin-right: 5px;
+}
+.pigeon-record .pigeon-thumbnail{
+    max-height:50px;
+    max-width:70px;
+    margin-right:5px;
+}

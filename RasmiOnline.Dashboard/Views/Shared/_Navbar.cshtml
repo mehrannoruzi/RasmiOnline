@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+<ul class="top-nav">
+    @*<li class="dropdown">
+            <a href="#" data-toggle="dropdown"><i class="zmdi zmdi-email"></i></a>
+            <div class="dropdown-menu dropdown-menu-left dropdown-menu--block">
+                <div class="listview listview--hover">
+                    <div class="listview__header">
+                        تیکت ها
+
+                        <div class="actions">
+                        </div>
+                    </div>
+                    <a href="#" class="listview__item">
+                        <div class="listview__content">
+                            <div class="listview__heading">
+                                شما هیچ تیکتی ندارید
+                            </div>
+                            <p></p>
+                        </div>
+                    </a>
+
+
+                </div>
+            </div>
+        </li>
+        <li class="dropdown top-nav__notifications">
+            <a href="#" data-toggle="dropdown" class="top-nav__notify">
+                <i class="zmdi zmdi-notifications"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-left dropdown-menu--block">
+                <div class="listview listview--hover">
+                    <div class="listview__header">
+                        پیام های سیستم
+
+                        <div class="actions">
+                        </div>
+                    </div>
+
+                    <div class="scroll-wrapper listview__scroll scrollbar-inner" style="position: relative;">
+                        <div class="scroll-wrapper listview__scroll scrollbar-inner scroll-content" style="position: relative;">
+                            <div class="listview__scroll scrollbar-inner scroll-content" style="height: 100px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
+                                <a href="#" class="listview__item">
+
+                                    <div class="listview__content">
+                                        <div class="listview__heading"></div>
+                                        <p>شما هیچگونه پیامی ندارید</p>
+                                    </div>
+                                </a>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="p-1"></div>
+                </div>
+            </div>
+        </li>*@
+    <li class="d-none d-sm-inline-block">
+        @{Html.RenderAction(MVC.Setting.ActionNames.GetSupportNumber, MVC.Setting.Name);}
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.User.ActionNames.Profile,MVC.User.Name)" style="padding:11px">
+            @((User as ICurrentUserPrincipal).FullName)
+        </a>
+    </li>
+    <li>
+        <a class="signout" href="@Url.Action(MVC.OAuth.ActionNames.SignOut,MVC.OAuth.Name)" title="@LocalMessage.Signout"><i class="zmdi zmdi-power"></i></a>
+    </li>
+</ul>

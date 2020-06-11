@@ -1,0 +1,67 @@
+﻿@model ActionResponse<PaymentGateway>
+
+@{
+    <div class="row">
+        @if (Model.IsNotNull() && Model.IsSuccessful)
+        {
+            <form id=@($"{nameof(PaymentGateway)}_FormControls") data-submit-action="@Url.Action(MVC.PaymentGateway.ActionNames.FormSubmited, MVC.PaymentGateway.Name)" class="col-12">
+                @if (Model.Result.PaymentGatewayId > 0)
+                {
+                    @Html.HiddenFor(x => x.Result.PaymentGatewayId)
+                    @Html.HiddenFor(x => x.Result.BankName)
+                }
+
+                <div class="row">
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.Name)
+                            @Html.TextBoxFor(x => x.Result.Name, null, new { @class = "form-control type-fa" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Name) </small>
+                    </div>
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.Result.MerchantId)
+                            @Html.TextBoxFor(x => x.Result.MerchantId, null, new { @class = "form-control ltr-dir" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.MerchantId) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20" dir="rtl">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Result.Username)
+                            @Html.TextBoxFor(x => x.Result.Username, null, new { @class = "form-control type-fa" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Username) </small>
+                    </div>
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.Result.Password)
+                            @Html.TextBoxFor(x => x.Result.Password, null, new { @class = "form-control ltr-dir" })
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.Password) </small>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group" dir="rtl">
+                            @Html.LabelFor(x => x.Result.IsActive)
+                            <div class="select">
+                                @Html.DropDownListFor(x => x.Result.IsActive, (List<SelectListItem>)ViewBag.ActiveStatus, new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                <small class="text-danger"> @Html.ValidationMessageFor(x => x.Result.IsActive) </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="text-center text-danger">@LocalMessage.BadRequest</div>
+        }
+    </div>
+}

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = LocalMessage.LoginToSystem;
+    Layout = "~/Views/Shared/_PortalLayout.cshtml";
+}
+@section head{
+    @Styles.Render(Links.Bundles.Styles.OAuthStyles)
+
+}
+<div class="content">
+    <div class="head">
+        <h1 class="title-page">ثبت سفارش با جزئيات كامل</h1>
+    </div>
+    <p class="text-center"><br>برای ادامه مراحل ثبت سفارش لازم است عضو شده و يا وارد سايت شويد.</p>
+    <div class="cols col-xs-12 col-md-5">
+        <div class="text-center">
+            <a data-target="#signin-form" class="tab-btn btn btn-primary  @(ViewBag.ActiveTab=="signin"?"btn-active":"")">@LocalMessage.SignIn @LocalMessage.Users</a>
+            <a data-target="#signup-form" class="tab-btn btn btn-primary  @(ViewBag.ActiveTab=="signup"?"btn-active":"")">@LocalMessage.SignUp</a>
+        </div>
+
+        @{
+            Html.RenderPartial(MVC.OAuth.Views.Partials._SignIn, new SignInModel());
+            Html.RenderPartial(MVC.OAuth.Views.Partials._SignUp, new SignUpModel());
+            Html.RenderPartial(MVC.OAuth.Views.Partials._Verification, new ConfirmVerificationCode());
+        }
+    </div>
+</div>
+
+@section footer{
+    @Scripts.Render(Links.Bundles.Scripts.OAuthScripts)
+    <script>
+        $(document).scroll(function () {
+            var y = $(this).scrollTop();
+            if (y > 200) {
+                $('.btn-order').css({ 'margin-right': '90px' });
+            } else {
+                $('.btn-order').css({ 'margin-right': '1000px' });
+            }
+        });
+    </script>
+}

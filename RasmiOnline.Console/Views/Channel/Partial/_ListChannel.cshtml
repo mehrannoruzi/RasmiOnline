@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Channel>
+@{
+    Layout = null;
+}
+
+<div class="text-left m-b-20 o-f-h add-channel" data-modal-url="@Url.Action(MVC.Channel.ActionNames.Add,MVC.Channel.Name)" data-modal-title="@LocalMessage.AddNewChannel">
+    <a class="btn-action rtl waves-effect">
+        <div class="text">
+            @LocalMessage.AddNewChannel
+        </div>
+        <div class="icon">
+            <i class="zmdi zmdi-plus"></i>
+        </div>
+    </a>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-block">
+                    <div class="address_item__detail row m-0">
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi zmdi-account f-s-20 v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@(item.User.FullName)</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi zmdi-label f-s-20 v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@item.ReferralCode</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi zmdi-money f-s-20 v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@item.Percent درصد</span>
+                        </div>
+                        <div class="col-md-12 p-r-5 m-t-10">
+                            <span class="_1st"><i class="zmdi f-s-20 zmdi-globe-alt v-a-m"></i></span>
+                            <a class="_2nd tel p-r-5 " href="Http://RasmiOnline.com?ref=@item.ReferralCode" target="_blank" style="color:green">
+                                Http://RasmiOnline.com?ref=@item.ReferralCode
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

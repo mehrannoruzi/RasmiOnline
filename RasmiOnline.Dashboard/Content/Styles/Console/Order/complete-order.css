@@ -1,0 +1,108 @@
+﻿.total-table td:first-child {
+    padding-right: 20px;
+    text-align: right;
+}
+
+td > div:not(.select) > select {
+    width: auto !important;
+}
+
+.table tr:nth-child(even) {
+    background-color: transparent !important;
+}
+
+.table tr:nth-child(odd) {
+    background-color: transparent !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: transparent !important;
+}
+
+.table tr:last-child {
+    background: #efefef !important;
+}
+.table tr:last-child:hover {
+    background: #efefef !important;
+}
+
+/*--------- discount ----------*/
+.discount-wrapper {
+    padding: 0 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+    .discount-wrapper .lbl {
+        float: right;
+        padding: 7px 5px 7px 10px;
+    }
+
+.discount-input {
+    width: 200px;
+    border: solid 1px #ccc !important;
+    /*border-left: none !important;*/
+    padding: 7px 5px;
+    float: right;
+    height: 35px;
+    font-size: 12px;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    text-align: center;
+    direction: ltr;
+}
+
+.btn-discount {
+    cursor: pointer;
+    border: none;
+    background-color: green;
+    border-radius: 3px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0;
+    height: 35px;
+}
+
+.btn-discount {
+    color: #fff;
+    /*padding: 0 10px;*/
+    width: 68px;
+}
+.btn-discount .btn-loader{
+    width:100%;
+}
+.discount-message {
+    display: inline-block;
+    /*padding-right: 15px;*/
+    padding-top: 5px;
+    text-align: right;
+    color: red;
+}
+
+.discount-remove {
+    text-align: center;
+    color: #fff;
+    background-color: red;
+    margin-left: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    vertical-align: middle;
+    float: right;
+    margin-top: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.remove-tr:hover {
+    transform: scale(1.1);
+}
+
+@media(max-width:768px) {
+    .discount-message {
+        display: block;
+        padding-right: 120px;
+    }
+}

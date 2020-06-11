@@ -1,0 +1,121 @@
+﻿@model OfficeAddress
+@{
+    Layout = null;
+}
+
+
+<form class="row" action="@Url.Action((Model.OfficeAddressId==0?MVC.OfficeAddress.ActionNames.Add:MVC.OfficeAddress.ActionNames.Edit),MVC.OfficeAddress.Name)" method="post" id="address-form">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.OfficeAddressId)
+    @Html.HiddenFor(x => x.Location)
+    @Html.HiddenFor(x => x.UserId)
+
+    <div class="row">
+
+        <div class="col-sm-6 m-b-20" dir="rtl">
+            <div class="form-group">
+                @Html.Label(LocalMessage.EnteredEmail)
+                @Html.TextBox("Result_SearchUserName", null, new { @class = "form-control ltr-dir", @placeholder = "exp : xxx@xxx.com", @data_action_url = Url.Action(MVC.User.ActionNames.FindUser, MVC.User.Name) })
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+
+        <div id="ShowUserFullName" class="col-sm-6 m-b-30" dir="rtl">
+            <div class="form-group has-warning">
+                <div class="form-control form-control-warning" style="margin-top:26px;padding-right:30px; border-bottom:0px;">
+                    @if (Model.UserId != Guid.Empty)
+                    {
+
+                    }
+                    else
+                    {
+                        @LocalMessage.UserNameNotEnter
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.LangType)
+                <div class="select">
+                    @Html.DropDownListFor(x => x.LangType, (List<SelectListItem>)ViewBag.LangTypes, new { @class = "form-control" })
+                    <i class="form-group__bar"></i>
+                    <small class="text-danger">@Html.ValidationMessageFor(x => x.LangType) </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.DeliveryName)
+                @Html.TextBoxFor(x => x.DeliveryName, null, new { @class = "form-control type-fa" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.DeliveryName) </small>
+        </div>
+        <div class="col-sm-4 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.MobileNumber)
+                @Html.TextBoxFor(x => x.MobileNumber, null, new { @class = "form-control text-left dir-ltr only-digit" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.MobileNumber) </small>
+        </div>
+        <div class="col-sm-4 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.Tel)
+                @Html.TextBoxFor(x => x.Tel, null, new { @class = "form-control text-left dir-ltr only-digit" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.Tel) </small>
+        </div>
+        <div class="col-sm-4 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.WorkHour)
+                @Html.TextBoxFor(x => x.WorkHour, null, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.WorkHour) </small>
+        </div>
+        <div class="col-sm-4 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.IsActive)
+                <div class="select">
+                    @Html.DropDownListFor(x => x.IsActive, (List<SelectListItem>)ViewBag.ActivateStatus, new { @class = "form-control" })
+                    <i class="form-group__bar"></i>
+                    <small class="text-danger"> @Html.ValidationMessageFor(x => x.IsActive) </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 m-b-20">
+            <div class="form-group" dir="rtl">
+                @Html.LabelFor(x => x.FullAddress, new { @style = "display:block;" })
+                @Html.TextAreaFor(x => x.FullAddress, new { @class = "form-control", @placeholder = "اینجا تایپ نمایید", @style = "width:100%;" })
+                <i class="form-group__bar"></i>
+            </div>
+            <small class="text-danger"> @Html.ValidationMessageFor(x => x.FullAddress) </small>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div id="location-selector" class="google-map" style="height:150px;width:100%;" data-type="dynamic" data-target="#@nameof(Model.Location)">
+
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 m-t-30">
+        <button class="btn-action rtl waves-effect" type="button">
+            <div class="text">
+                @if (Model.OfficeAddressId == 0)
+                {
+                    @LocalMessage.Add
+                }
+                else
+                {
+                    @LocalMessage.Edit
+                }
+            </div>
+            <div class="icon">
+                <i class="zmdi zmdi-plus"></i>
+            </div>
+        </button>
+    </div>
+</form>

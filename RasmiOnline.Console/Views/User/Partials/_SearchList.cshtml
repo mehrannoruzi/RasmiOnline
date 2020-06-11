@@ -1,0 +1,111 @@
+﻿@model List<UserDetailsModel>
+
+@{
+    Layout = null;
+}
+
+<div class="card d-none d-md-block d-lg-block">
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <table id="data-table" class="table-striped table dataTable" role="grid" aria-describedby="data-table_info">
+                    <thead class="thead-default">
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().FullName)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().Email)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().MobileNumber)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().IsActive)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@(LocalMessage.RegisterationDate)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(item => item.FirstOrDefault().LastLoginDateMi)</th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@LocalMessage.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            int count = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr role="row">
+                                    <td class="sorting_1">@count</td>
+                                    <td>@item.FullName</td>
+                                    <td dir="ltr">@($"{item.Email}")</td>
+                                    <td dir="ltr">@($"{item.MobileNumber}")</td>
+                                    <td><i class="zmdi zmdi-@(item.IsActive ? "check active-color" : "close deactive-color") f-s-20"></i></td>
+                                    <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.RegisterDateMi).ToString(PersianDateTimeFormat.DateTime)}")</td>
+                                    <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.LastLoginDateMi).ToString(PersianDateTimeFormat.DateTime)}")</td>
+                                    <td>
+                                        <div class="actions">
+                                            <div class="dropdown actions__item">
+                                                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                                                <div class="dropdown-menu dropdown-menu-right text-center">
+                                                    <a href="@(Url.Action(MVC.User.ActionNames.UserProfile, MVC.User.Name, new { userId = item.UserId }))" class="dropdown-item">
+                                                    <i class="zmdi zmdi-edit f-s-20 v-a-m"></i>&nbsp;@LocalMessage.UserAccountInformation</a>
+                                                    <a class="SignInPanel" data-userId="@item.UserId">
+                                                        <i class="zmdi zmdi-sign-in f-s-20 v-a-m"></i>&nbsp;
+                                                        ورود به پنل کاربر
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Any())
+{
+    <div class="d-none d-768px m-t-45">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title under-border">@(item.FullName ?? "---")</h3>
+                    <div class="actions">
+                        <div class="dropdown actions__item">
+                            <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="@(Url.Action(MVC.User.ActionNames.UserProfile, MVC.User.Name, new { userId = item.UserId }))" class="dropdown-item f-s-12"><i class="zmdi zmdi-account-box f-s-20"></i>&nbsp;@LocalMessage.UserAccountInformation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-email f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().Email)} : {item.Email}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-smartphone-android f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().MobileNumber)} : {item.MobileNumber}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-texture f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().IsActive)}")
+                        <i class="zmdi zmdi-@(item.IsActive ? "check active-color" : "close deactive-color") f-s-20"></i>
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().RegisterDateMi)} : {PersianDateTime.Parse(item.RegisterDateMi).ToString(PersianDateTimeFormat.DateTime)}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-account-calendar f-s-20"></i>
+                        @($"{Html.DisplayNameFor(x => x.FirstOrDefault().LastLoginDateMi)} : {PersianDateTime.Parse(item.LastLoginDateMi).ToString(PersianDateTimeFormat.DateTime)}")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

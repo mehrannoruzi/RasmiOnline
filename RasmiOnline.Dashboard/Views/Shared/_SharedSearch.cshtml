@@ -1,0 +1,77 @@
+﻿@model SearchPartialModel
+
+@if (Model.IsNotNull())
+{
+    <div class="toolbar hidden-sm-up search-box-mobile" data-collapse-state="close">
+        <div class="toolbar__label label-accordion">
+            <span class="order-accordion-title">@LocalMessage.TouchForSearch</span>
+            <span>
+                <i class="zmdi zmdi-chevron-down search-collapsed-state"></i>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="menu-search-item orang-vertical-scroll hidden-sm-up">
+        <form id=@($"{Model.EntityName}_SearchFormControlsMobile") data-submit-action="@Model.ActionUrl" class="col-12">
+            @{Html.RenderPartial(Model.PartialViewName, Model.Model);}
+            <div class="col-md-12 text-left p-0 form-group">
+                <button class="btn-action rtl danger waves-effect m-r-10 hidden-sm-down" type="button" data-element-name="ResetSearchFormMobile" data-entity-name="@(Model.EntityName)" data-form-name="@($"{Model.EntityName}_SearchFormControlsMobile")">
+                    <div class="text">
+                        @LocalMessage.Reset
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-format-clear"></i>
+                    </div>
+                </button>
+                <button class="btn-action rtl detail waves-effect" type="button" data-element-name="SubmitSearchFormMobile" data-entity-name="@(Model.EntityName)" data-form-name="@($"{Model.EntityName}_SearchFormControlsMobile")">
+                    <div class="text">
+                        @LocalMessage.Search
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-search"></i>
+                    </div>
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+
+
+    <div class="card hidden-sm-down" id="@($"{Model.EntityName}_SearchFormContainer")">
+        <div class="card-header">
+            <h3 class="card-title">@LocalMessage.Search</h3>
+        </div>
+        <div class="card-block">
+            <div class="row">
+                <form id=@($"{Model.EntityName}_SearchFormControls") data-submit-action="@Model.ActionUrl" class="col-12">
+                    @{Html.RenderPartial(Model.PartialViewName, Model.Model);}
+                    <div class="col-md-12 text-left p-0 form-group">
+                        <button class="btn-action rtl danger waves-effect m-r-10 hidden-sm-down" type="button" data-element-name="ResetSearchForm" data-entity-name="@(Model.EntityName)" data-form-name="@($"{Model.EntityName}_SearchFormControls")">
+                            <div class="text">
+                                @LocalMessage.Reset
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-format-clear"></i>
+                            </div>
+                        </button>
+                        <button class="btn-action rtl detail waves-effect" type="button" data-element-name="SubmitSearchForm" data-entity-name="@(Model.EntityName)" data-form-name="@($"{Model.EntityName}_SearchFormControls")">
+                            <div class="text">
+                                @LocalMessage.Search
+                            </div>
+                            <div class="icon">
+                                <i class="zmdi zmdi-search"></i>
+                            </div>
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center text-danger">@LocalMessage.InvalidFormData</div>
+}

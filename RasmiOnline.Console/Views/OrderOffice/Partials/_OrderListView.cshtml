@@ -1,0 +1,113 @@
+﻿@model IActionResponse<IEnumerable<Order>>
+@using Gnu.Framework.Core
+@{ Layout = null; }
+
+@if (Model.IsSuccessful && Model.IsNotNull())
+{
+    <div class="table-responsive">
+        <div id="data-table_wrapper" class="dataTables_wrapper">
+            <table class="table-striped table">
+                <thead class="thead-default">
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending"></th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending">#</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().User.FullName)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderId)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().OrderTitle)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().LangType)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().InsertDateSh)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@Html.DisplayNameFor(x => Model.Result.First().DeliverFiles_DateSh)</th>
+                        <th class="sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1">@(LocalMessage.Action)</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    @{ int count = 1;}
+                    @foreach (var item in Model.Result)
+                    {
+                    <tr role="row">
+                        <td class="sorting_1">
+                            <div class="@item.OrderStatus">
+                            </div>
+                        </td>
+                        <td class="sorting_1">@count</td>
+                        <td align="right">
+                            <a target="_blank" href="@Url.Action(MVC.User.ActionNames.UserProfile, MVC.User.Name, new { userId = item.UserId })">@item.User.FullName</a>
+                        </td>
+                        <td dir="ltr" align="right">@($"{item.OrderId}")</td>
+                        <td>@item.OrderTitle.CustomSubstring(15)</td>
+                        <td>@item.LangType.GetLocalizeDescription()</td>
+                        <td dir="ltr" align="right">@($"{item.InsertDateSh}")</td>
+                        <td dir="rtl" align="right" class="@(item.DeliverFiles_DateSh == null ? "text-danger" : "")">@(item.DeliverFiles_DateSh == null ? $"{item.DayToDelivery} روز کاری" : item.DeliverFiles_DateSh)</td>
+                        
+                        <td>
+                            <a class="btn-action ltr waves-effect detail" href="@(@Url.Action(MVC.OrderOffice.ActionNames.Edit, MVC.OrderOffice.Name, new { orderId = item.OrderId }))" style="font-size:10px;">
+                                <div class="text">
+                                    @LocalMessage.OrderDetail
+                                </div>
+                                <div class="icon">
+                                    <i class="zmdi zmdi zmdi-apps"></i>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                        count++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-none d-768px" style="margin-top: 45px;">
+        @foreach (var item in Model.Result)
+        {
+            <div class="card card-margin-bottom-15">
+                <div class="card-header">
+                    <h3 class="card-title under-border">@($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderId)} : {item.OrderId}")</h3>
+                </div>
+                <div class="card-block">
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-account f-s-20 m-l-5"></i>
+                        <span>
+                            @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().User.FullName)} :")
+                            <a target="_blank" href="@Url.Action(MVC.User.ActionNames.UserProfile, MVC.User.Name, new { userId = item.UserId })">@item.User.FullName</a>
+                        </span>
+                    </div>
+
+
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-translate f-s-20 m-l-5"></i>
+                        @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().LangType)} : {item.LangType.GetLocalizeDescription()}")
+                    </div>
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                        @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().InsertDateSh)} : {item.InsertDateSh}")
+                    </div>
+                    <div class="standard-item @(item.DeliverFiles_DateSh == null ? "text-danger" : "")">
+                        <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                        @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().DeliverFiles_DateSh)} : {(item.DeliverFiles_DateSh == null ? string.Format(LocalMessage.DayToDeliveryFormat, item.DayToDelivery) : item.DeliverFiles_DateSh)}")
+                    </div>
+
+                    <div class="standard-item">
+                        <i class="zmdi zmdi-gamepad f-s-20 m-l-5"></i>
+                        <span>
+                            @($"{Html.DisplayNameFor(x => x.Result.FirstOrDefault().OrderStatus)} : {item.OrderStatus.GetLocalizeDescription()}")
+                        </span>
+                    </div>
+                </div>
+
+                <a href="@Url.Action(MVC.OrderOffice.ActionNames.Edit,MVC.OrderOffice.Name, new { orderId = item.OrderId })" class="card-status card-status-gray text-center">
+                    <i class="zmdi zmdi-apps"></i>
+                    <span>
+                        @LocalMessage.OrderDetail
+                    </span>
+                </a>
+            </div>
+        }
+    </div>
+                        }
+                        else
+                        {
+                            <div class="empty-row" style="margin-top: 10px;">
+                                @Model.Message
+                            </div>
+                        }

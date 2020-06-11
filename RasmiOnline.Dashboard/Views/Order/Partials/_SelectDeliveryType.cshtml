@@ -1,0 +1,37 @@
+﻿@{
+    var _userId = (User as ICurrentUserPrincipal).UserId;
+}
+<div class="card">
+    <!-- Selecting Delivery Type -->
+    <div class="col-sm-12 no-padding">
+        <div class="form-group" dir="rtl">
+            <label for="PaymentDescription" class="sec-header col-sm-2">
+                <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+                نحوه تحویل مدارک:
+            </label>
+            <div class="row m-r-0 ">
+
+                @{
+                    foreach (var item in EnumConvertor.GetEnumElements<DeliveryType>().ToList())
+                    {
+                        <div class="col-xs-12 col-sm-4 p-r-0 wrapper">
+                            <div class="radio-wrapper @(item.Name == nameof(DeliveryType.ByDeliveryMan) ? "activate" : "")  ">
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="DeliveryType" value="@item.Name" class="custom-control-input" @(item.Name == nameof(DeliveryType.ByDeliveryMan) ? "checked" : "") />
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">@item.Description</span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+    <!-- setting -->
+    @{Html.RenderPartial(MVC.OfficeAddress.Views.Partial._OfficeAddress, (OfficeAddress)ViewBag.OfficeAddress);}
+    <div class="addreses-wrapper">
+        @{Html.RenderAction(MVC.Address.ActionNames.ListOfAddress, MVC.Address.Name, new { userId = _userId });}
+    </div>
+</div>

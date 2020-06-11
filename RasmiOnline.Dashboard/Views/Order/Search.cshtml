@@ -1,0 +1,32 @@
+﻿@model ActionResponse<List<OrderDetailsModel>>
+
+@{
+    ViewBag.Title = LocalMessage.OrderSearch;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.OrderSearch;
+}
+
+@{
+    Html.RenderPartial(MVC.Shared.Views._SharedSearch, new SearchPartialModel
+    {
+        ActionUrl = Url.Action(MVC.Order.ActionNames.Search, MVC.Order.Name),
+        EntityName = nameof(Order),
+        Model = new FilterOrderModel(),
+        PartialViewName = MVC.Order.Views.Partials._SearchOrder
+    });
+
+    <div id="loadingOver" style="position:relative;">
+        <div id="@(nameof(Order))_SearchResultContainer">
+            @if (Model.IsNotNull())
+            {
+                Html.RenderPartial(MVC.Order.Views.Partials._SearchList, Model.Result);
+            }
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+    <script src="@Links.Scripts.Plugins.jquery_custom_search_js" type="text/javascript"></script>
+    <script src="@Links.Scripts.Own.OrderSearchController_js" type="text/javascript"></script>
+}

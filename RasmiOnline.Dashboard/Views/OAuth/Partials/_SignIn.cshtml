@@ -1,0 +1,60 @@
+﻿@model SignInModel
+@{
+    Layout = null;
+}
+
+<div class="form-block sign-in-form @(ViewBag.ActiveBlock=="signin"?"active":"")" id="signin-form">
+    <form class="oauth-form " action="@Url.Action(MVC.OAuth.ActionNames.SignIn)" >
+        <div class="group alert w-full" dir="rtl">
+            <small></small>
+        </div>
+
+        <div class="un-group wrap-input100 validate-input" data-validate="Username is required">
+            <div class="text-right input-title">
+                @Html.DisplayNameFor(x => x.UserName)
+            </div>
+            @Html.TextBoxFor(x => x.UserName, new { @class = "input100 p-h-r", @placeholder = Html.DisplayNameFor(x => x.UserName) })
+        </div>
+        <div class="w-full">
+            <small>@Html.ValidationMessageFor(x => x.UserName)</small>
+        </div>
+        <div class="pw-group wrap-input100 validate-input m-b-10" data-validate="Password is required">
+            <div class="text-right input-title">
+                @Html.DisplayNameFor(x => x.Password)
+            </div>
+            @Html.PasswordFor(x => x.Password, new { @class = "input100 p-h-r", @placeholder = Html.DisplayNameFor(x => x.Password), @data_trigger_click = "#btn-sign-in" })
+        </div>
+        <div class="w-full">
+            <small>@Html.ValidationMessageFor(x => x.Password)</small>
+        </div>
+        <div class="rememberme-group flex-sb-m w-full">
+            <div class="contact100-form-checkbox">
+                <input class="input-checkbox100" id="@nameof(Model.RememberMe)" type="checkbox" name="@nameof(Model.RememberMe)" @(Model.RememberMe ? "checked" : "") value="@Model.RememberMe.ToString()" />
+                <label class="label-checkbox100" for="@nameof(Model.RememberMe)">
+                    @Html.DisplayNameFor(x => x.RememberMe)
+                </label>
+            </div>
+            <div class="forgot-pw">
+                <a class="inner-nav txt1" dir="rtl" href="#recovery-form">@LocalMessage.ForgotPassword</a>
+            </div>
+        </div>
+                                       
+        <div class="container-login100-form-btn">
+            <button class="btn-action rtl waves-effect btn-sign-in" id="btn-sign-in" type="button">
+                <div class="text">
+                    @LocalMessage.SignIn
+                </div>
+                <div class="icon">
+                    <i class="zmdi zmdi-sign-in"></i>
+                </div>
+            </button>
+           
+        </div>
+    </form>
+    <div class="footer">
+        حساب کاربری ندارید؟ همین حالا
+        <a href="#signup-form" class="inner-nav goto-sign-up">ثبت نام کنید</a>
+        
+    </div>
+</div>
+

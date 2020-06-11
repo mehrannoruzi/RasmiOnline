@@ -1,0 +1,54 @@
+﻿@model FilterUserModel
+
+@{
+<div class="row">
+
+    <div class="col-sm-12 col-md-3 m-b-20 " dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.FirstName)
+            @Html.TextBoxFor(x => x.FirstName, null, new { @class = "form-control" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.FirstName) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.LastName)
+            @Html.TextBoxFor(x => x.LastName, null, new { @class = "form-control" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.LastName) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20" dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.MobileNumber)
+            @Html.TextBoxFor(x => x.MobileNumber, null, new { @class = "form-control ltr-dir only-digit", @placeholder = "09#########" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.MobileNumber) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20 hidden-xs-down" dir="rtl">
+        <div class="form-group">
+            @Html.LabelFor(x => x.NationalCode)
+            @Html.TextBoxFor(x => x.NationalCode, null, new { @class = "form-control ltr-dir nationalCode" })
+            <i class="form-group__bar"></i>
+        </div>
+        <small class="text-danger"> @Html.ValidationMessageFor(x => x.NationalCode) </small>
+    </div>
+
+    <div class="col-sm-12 col-md-3 m-b-20 hidden-xs-down">
+        <div class="form-group">
+            @Html.LabelFor(x => x.IsActive)
+            <div class="select">
+                @Html.DropDownListFor(x => x.IsActive, (List<SelectListItem>)ViewBag.ActiveStatus, new { @class = "form-control" })
+                <i class="form-group__bar"></i>
+                <small class="text-danger"> @Html.ValidationMessageFor(x => x.IsActive) </small>
+            </div>
+        </div>
+    </div>
+
+</div>
+}

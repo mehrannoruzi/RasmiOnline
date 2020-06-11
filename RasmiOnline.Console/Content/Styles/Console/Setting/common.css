@@ -1,0 +1,146 @@
+﻿/*-----------------------------------
+              setting
+------------------------------------*/
+.setting {
+    display: none;
+    margin-bottom: 15px;
+}
+
+    .setting .fields {
+        position: relative;
+        margin: 0 15px;
+    }
+
+    .setting .title {
+        background-color: #f2f2f2;
+        padding: 8px 15px;
+    }
+
+    .setting .inner {
+        width: 100%;
+        padding: 0px 15px;
+    }
+
+.p-20 {
+    padding: 20px !important;
+}
+
+.setting .fields > .row {
+    border: 1px solid #cbcbcb;
+    box-shadow: 1px 2px 3px rgba(0,0,0,.075);
+    min-height:240px;
+}
+
+    .setting .fields > .row.active {
+        border: 1px solid #8BC34A !important;
+        box-shadow: 1px 2px 3px rgba(0,0,0,.075);
+    }
+
+.setting .props {
+    padding: 10px 5px;
+}
+
+.setting .title + div > .row {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.setting .links {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+
+    .setting .links a {
+        float: left;
+        border: solid 1px #ccc;
+        padding: 7px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        margin-bottom: 5px;
+        border-radius: 3px;
+        clear: both;
+        color: black;
+    }
+
+        .setting .links a:hover {
+            color: #fff;
+            background-color: #ccc;
+            border-color: #59b0f4;
+        }
+
+        .setting .links a i {
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+.setting .footer {
+    text-align: center;
+    padding: 10px;
+    background: #f7fff7;
+    border-top: 1px solid #c0f0c1 !important;
+}
+
+.setting .map-wrapper .google-map {
+    height: 140px;
+    width: 100%;
+    position: relative;
+}
+
+.setting .send {
+    width: 100%;
+}
+
+    .setting .send .head {
+        text-align: right;
+    }
+
+        .setting .send .head .title-page {
+            margin-right: 20px;
+        }
+
+    .setting .send .contents {
+        padding: 0 !important;
+    }
+
+    .setting .send .content {
+        margin: 0 !important;
+        padding: 30px 15px 50px 15px;
+        margin-bottom: 15px;
+        border: 1px solid #dfdfdf !important;
+        height: 279px;
+    }
+
+.send-sms i {
+    transform: rotate(180deg);
+}
+
+.setting .title-page:before {
+    margin-top: 8px !important;
+}
+
+.setting .title-page:after {
+    margin-top: -8px;
+}
+.setting .post-schema{
+    display:none;
+}
+/*-------------------------------------------
+                    schema
+---------------------------------------------*/
+.setting .post-schema .fields > .row{
+    padding:15px;
+}
+.setting .post-schema .img-wrapper{
+    padding:5px;
+    display:flex;
+    text-align:center;
+    align-items:center;
+}
+.setting .seperator{
+    border-bottom:solid 1px #ccc;
+    width:100%;
+    height:1px;
+}

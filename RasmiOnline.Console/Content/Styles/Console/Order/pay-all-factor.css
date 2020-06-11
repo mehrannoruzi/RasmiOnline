@@ -1,0 +1,20 @@
+﻿.values .wrapper{
+    background-color:#d4edda;
+    margin-bottom:20px;
+}
+.values .wrapper .lbl{
+    display:inline-block;
+    background-color:#18a689;
+    color:#fff;
+    min-width:100px;
+    padding:10px;
+    font-size:11px;
+}
+.values .wrapper .val{
+ padding: 7px 20px;
+    text-align: center;
+    direction: ltr;
+    float: left;
+    font-size: 16px;
+    color: black;
+}

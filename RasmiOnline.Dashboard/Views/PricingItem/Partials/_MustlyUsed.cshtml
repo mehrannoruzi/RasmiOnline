@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PricingItem>
+@{
+    Layout = null;
+}
+
+<div class="row m-b-10 m-r-0 m-b-30">
+    <div class="col-sm-2 sec-header">
+        <i class="zmdi zmdi-chevron-left v-a-m f-s-20 color-blue"></i>
+        پرکاربردترین ها
+    </div>
+    <div class="col-md-9 p-0 row m-0">
+        @foreach (var item in Model)
+        {
+            <div class="radio-wrapper cursor-pointer m-l-5 mustly-used-item p-r-15" data-id="@item.PricingItemId" data-info="@item.SerializeToJson()">
+                @item.DocumentType
+            </div>
+        }
+    </div>
+</div>

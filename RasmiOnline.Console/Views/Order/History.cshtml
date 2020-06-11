@@ -1,0 +1,28 @@
+﻿@model IActionResponse<IEnumerable<Order>>
+
+@{
+    ViewBag.Title = LocalMessage.OrderHistory;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.OrderHistoryDescription;
+}
+
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.history_css)" rel="stylesheet" />
+}
+
+@{
+    if (Model.IsNotNull())
+    {
+        Html.RenderPartial(MVC.Order.Views.Partials._OrderList, Model);
+    }
+    else
+    {
+        <div class="empty-row">
+            @Model.Message
+        </div>
+    }
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+}

@@ -1,0 +1,71 @@
+﻿@model Order
+@{
+    /**/
+
+    ViewBag.Title = LocalMessage.ConfirmDraft;
+}
+
+@section Header{
+    <link href="@Url.Content(Links.Content.Styles.Shared.timeline_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Attachment.common_css)" rel="stylesheet" />
+    <link href="@Url.Content(Links.Content.Styles.Console.Order.confirm_draft_css)" rel="stylesheet" />
+}
+
+<div class="order-row confirm-draft">
+    @{Html.RenderPartial(MVC.Order.Views.Partials._DetailedAddTimeLine, DetailedAddOrderTimeLine.ConfirmDraft);}
+    <div class="col-md-9 time-line-content">
+        @Html.Partial(MVC.Order.Views.Partials._SummaryHeader, new SummaryHeader
+        {
+            Message = LocalMessage.ConfirmDraftText,
+            BGColor = "#fff3b2",
+            Icon = "zmdi-info",
+            PaddingTop = "12px",
+            Color = "#4d4d4d"
+        })
+        @{
+            ViewBag.RemoveFromServer = false;
+            Html.RenderPartial(MVC.Attachment.Views.Partials._List, Model.Attachments.Where(x=>x.AttachmentType == AttachmentType.Draft));
+        }
+        <hr />
+        <form action="/Order/ConfirmDraft" method="post">
+            @Html.HiddenFor(x => x.OrderId)
+            <div class="form-group">
+                <div class="form-group">
+                    @Html.TextAreaFor(x => x.ConfirmComment, new { @class = "form-control", @rows = "6", @placeholder = Html.DisplayNameFor(x => x.ConfirmComment) })
+                    <i class="form-group__bar"></i>
+                </div>
+                <br>
+            </div>
+            @*<label for="@nameof(Model.IsConfirmedByClient)">
+                پیش نویس مورد تایید می باشد
+                
+            </label>
+            <input id="@nameof(Model.IsConfirmedByClient)" name="@nameof(Model.IsConfirmedByClient)" type="checkbox" class="" @((Model.IsConfirmedByClient ?? false) ? "checked" : "") />*@
+            <label class="custom-control custom-checkbox">
+                <input id="@nameof(Model.IsConfirmedByClient)" name="@nameof(Model.IsConfirmedByClient)" type="checkbox" class="custom-control-input" @(Model.IsConfirmedByClient ? "checked" : "") value="@(Model.IsConfirmedByClient.ToString().ToLower())"/>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">پیش نویس مورد تایید می باشد</span>
+            </label>
+            <div class="nav-actions m-t-10">
+                <button class="btn-action rtl waves-effect" id="btn-confirm-draft" type="button">
+                    <div class="text">
+                        @LocalMessage.Submit
+                    </div>
+                    <div class="icon">
+                        <i class="zmdi zmdi-check-all"></i>
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="@Url.Content(Links.Scripts.Console.OrderName.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Attachment.upload_after_transaction_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Plugins.dropzone.fire_dropzone_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.common_js)"></script>
+    <script src="@Url.Content(Links.Scripts.Console.Order.confirm_draft_js)"></script>
+}

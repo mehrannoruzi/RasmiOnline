@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Address>
+@{
+    Layout = null;
+    int count = 1;
+}
+<div class="address_list">
+
+    <div class="flickity-enabled m-t-10">
+        <div class="address_item add-address-button" data-modal-url="@Url.Action(MVC.Address.ActionNames.Add,MVC.Address.Name)" data-modal-title="@LocalMessage.AddNewAddress">
+            <span class="add-address-button__text">@LocalMessage.AddNewAddress</span>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="address_item @(count==1?"selected":"")">
+                <div class="address_item__name clearfix">
+                    <div class="reciever">@item.FullName</div>
+                    <a class="address-remove" data-modal-title="حذف آدرس" data-url="@Url.Action(MVC.Address.ActionNames.Delete,MVC.Address.Name,new {addressId = item.AddressId })">
+                        <i class="zmdi zmdi-close color-red f-s-20"></i>
+                    </a>
+                    <a data-modal="#modal_@item.AddressId" class="address-edit" data-modal-title="ویرایش آدرس" data-modal-url="@Url.Action(MVC.Address.ActionNames.Edit,MVC.Address.Name,new {addressId = item.AddressId })">
+                        <i class="zmdi zmdi-edit color-green f-s-20"></i>
+                    </a>
+                </div>
+                <div class="address_item__detail row m-0">
+                    <div class="map-wrapper clearfix col-md-4">
+                        <div id="map_@item.AddressId" class="google-map" data-type="static" data-location="@item.Location"></div>
+                    </div>
+                    <div class="row location col-md-8">
+                        <div class="col-md-12 p-r-5">
+                            <span class="_1st"><i class="zmdi zmdi-phone v-a-m"></i></span>
+                            <span class="_2nd tel p-r-5">@item.Tel</span>
+                        </div>
+                        <div class="col-md-12 p-r-5">
+                            <span class="_1st"><i class="zmdi zmdi-smartphone v-a-m"></i></span>
+                            <span class="_2nd mobile p-r-5">@item.MobileNumber</span>
+                        </div>
+                        <div class="address col-md-12 p-r-5">
+                            <div class="compelete">
+                                <span class="_1st"><i class="zmdi zmdi-map v-a-m"></i></span>
+                                <span class="_2nd address p-r-5">@item.FullAddress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="address_item__radio" data-addressId="@item.AddressId">
+                    @if (count == 1)
+                    {
+                        @Html.Hidden("AddressId", item.AddressId)
+                    }
+                    <div class="radio-control">
+                        <input class="rdb-address-box" name="Address" type="radio" @(count == 1 ? "checked" : "")>
+                        <label></label>
+                    </div>
+                    <span>مدارک از این آدرس تحویل گرفته می شود</span>
+                </div>
+            </div>
+            count++;
+        }
+    </div>
+</div>

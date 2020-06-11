@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="http://rasmionline.com/wp-content/uploads/2018/05/cropped-favicon-180x180.png" />
+
+    @Styles.Render(Links.Bundles.Styles.OrderLayout)
+    @RenderSection("Header", false)
+
+</head>
+<body>
+    <section class="header f-w-normal">
+        <p class="float-right order-id">
+            <i class="zmdi zmdi-apps f-s-20"></i>
+            شماره سفارش: <span>@ViewBag.OrderId </span> (<span>@(((LangType)ViewBag.LangType).GetDescription())</span>)
+        </p>
+    </section>
+    @RenderBody()
+    @Scripts.Render(Links.Bundles.Scripts.OrderLayout)
+    @RenderSection("Scripts", false)
+    @Html.RenderJavaScripts()
+</body>
+</html>

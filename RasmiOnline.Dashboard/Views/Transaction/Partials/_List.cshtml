@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Transaction>
+
+
+<div class="table-responsive hidden-sm-down">
+    <table class="table-striped table">
+        <thead class="thead-default">
+            <tr role="row">
+                <th tabindex="0" rowspan="1" colspan="1">#</th>
+                <th tabindex="0" rowspan="1" colspan="1">درگاه بانکی</th>
+                <th tabindex="0" rowspan="1" colspan="1">مبلغ سفارش</th>
+                <th tabindex="0" rowspan="1" colspan="1">کد رهگیری</th>
+                <th tabindex="0" rowspan="1" colspan="1">وضعیت پرداخت</th>
+                <th tabindex="0" rowspan="1" colspan="1">تاریخ پرداخت</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                int count = 1;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="sorting_1">@count</td>
+                        <td>
+                            <img src="~/Content/Images/BankName/@(item.PaymentGatewayId).png" class="w-48-px" />
+                           
+                        </td>
+                        <td>@(item.Price.ToString("0,0"))</td>
+                        <td>@(item.TrackingId)</td>
+                        <td><span class="@(item.IsSuccess ? "color-green" : "color-red")">@(item.IsSuccess ? LocalMessage.Success : LocalMessage.UnSuccess)</span></td>
+                        <td dir="ltr" align="right">@($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.FullDateFullTime)}")</td>
+
+                       
+                    </tr>
+                    count++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="hidden-sm-up m-t-10">
+
+    @foreach (var item in Model)
+    {
+        <div class="card card-margin-bottom-15 card-border">
+            <div class="card-block">
+                <div class="standard-item">
+                    <i class="zmdi zmdi-cloud-outline f-s-20 m-l-5"></i>
+                    درگاه پرداختی : 
+                    <img src="~/Content/Images/BankName/@(item.PaymentGatewayId).png" width="24" />
+                </div>
+
+                <div class="standard-item">
+                    <i class="zmdi zmdi-money f-s-20 m-l-5"></i>
+                    @($"مبلغ : {item.Price.ToString("0,0")}")
+                </div>
+                <div class="standard-item">
+                    <i class="zmdi zmdi-code-setting f-s-20 m-l-5"></i>
+                    @($"کد رهگیری : {item.TrackingId}")
+                </div>
+                <div class="standard-item">
+                    <i class="zmdi zmdi-swap-alt f-s-20 m-l-5"></i>
+                    وضعیت پرداخت :
+                    <span class="@(item.IsSuccess ? "color-green" : "color-red")">@(item.IsSuccess ? LocalMessage.Success : LocalMessage.UnSuccess)</span>
+                </div>
+                <div class="standard-item">
+                    <i class="zmdi zmdi-calendar-alt f-s-20 m-l-5"></i>
+                    تاریخ پرداخت :
+                    @($"{PersianDateTime.Parse(item.InsertDateMi).ToString(PersianDateTimeFormat.FullDateFullTime)}")
+                </div>
+
+
+            </div>
+        </div>
+    }
+</div>

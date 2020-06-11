@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = LocalMessage.ExportAndDownloadExcelFile;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.ExportAndDownloadExcelFileDescription;
+}
+
+@{
+    Html.RenderPartial(MVC.Export.Views.Partials._ExportExcel, new ExportDataTableModel());
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+        let $eName = $("SELECT#entityName");
+        let $dFrom = $("INPUT#DateTimeFrom");
+        let $dTo = $("INPUT#DateTimeTo");
+        let $exportToExcelFile = $("FORM#ExportToExcelFile");
+
+        $(document).on("submit", $exportToExcelFile, function (e) {
+
+            if ($eName.val() === 'PleaseSelect') { $eName.focus(); return false; }
+            if ($dFrom.val() === '') { $dFrom.focus(); return false; }
+            if ($dTo.val() === '') { $dTo.focus(); return false; }
+        });
+    </script>
+}
+

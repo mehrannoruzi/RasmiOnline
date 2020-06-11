@@ -1,0 +1,35 @@
+﻿@model Order
+<ul class="order">
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.User.FullName) : <span>@Model.User.FullName</span></span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.OrderId) : <span>@Model.OrderId</span></span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.LangType) : <span>@Model.LangType.GetLocalizeDescription()</span></span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.InsertDateSh) : @Model.InsertDateSh</span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.DeliveryType) : @Model.DeliveryType.GetDescription()</span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.DocsBeenRecieved) : @(Model.DocsBeenRecieved ? LocalMessage.Yes : LocalMessage.No)</span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.PaymentType) : @Model.PaymentType.GetDescription()</span>
+    </li>
+    <li>
+        <i class="zmdi zmdi-chevron-left f-s-20 color-blue v-a-m"></i>
+        <span>@Html.DisplayNameFor(x => x.OrderTitle) : @Model.OrderTitle</span>
+    </li>
+</ul>

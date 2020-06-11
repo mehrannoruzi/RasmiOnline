@@ -1,0 +1,43 @@
+﻿@model ActionResponse<List<View>>
+
+@{
+    ViewBag.Title = LocalMessage.ViewSearch;
+    ViewBag.Keywords = "";
+    ViewBag.Description = LocalMessage.ViewSearch;
+}
+
+@{
+    Html.RenderPartial(MVC.Shared.Views.Partials._AddButton, new AddButtonModel
+    {
+        ModalTitle = LocalMessage.AddView,
+        EntityName = nameof(View),
+        FormUrl = Url.Action(MVC.View.ActionNames.GetForm, MVC.View.Name),
+        Title = LocalMessage.AddView
+    });
+}
+
+@{
+    Html.RenderPartial(MVC.Shared.Views._SharedSearch, new SearchPartialModel
+    {
+        ActionUrl = Url.Action(MVC.View.ActionNames.Search, MVC.View.Name),
+        EntityName = nameof(View),
+        Model = new FilterViewModel(),
+        PartialViewName = MVC.View.Views.Partials._SearchView
+    });
+
+    <div id="loadingOver" style="position:relative;">
+        <div id="@(nameof(View))_SearchResultContainer">
+            @if (Model.IsNotNull())
+            {
+                Html.RenderPartial(MVC.View.Views.Partials._SearchList, Model.Result);
+            }
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="@Links.Scripts.Plugins.jquery_dataTables_min_js"></script>
+    <script src="@Links.Scripts.Plugins.jquery_custom_search_js" type="text/javascript"></script>
+    <script src="@Links.Scripts.Plugins.jquery_custom_modal_js" type="text/javascript"></script>
+    <script src="@Links.Scripts.Own.ViewController_js" type="text/javascript"></script>
+}
