@@ -31,7 +31,6 @@
         public DbSet<OrderComment> OrderComment { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<PaymentGateway> PaymentGateway { get; set; }
-        public DbSet<ActivityLog> ActivityLog { get; set; }
         public DbSet<Attachment> Attachment { get; set; }
         public DbSet<OrderName> OrderName { get; set; }
         public DbSet<Discount> Discount { get; set; }

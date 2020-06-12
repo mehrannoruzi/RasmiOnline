@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Shared", ".Shared", "{6D3B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Console", ".Console", "{D4390200-530E-4EEF-B2B1-557534608D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RasmiOnline.Dashboard", "RasmiOnline.Dashboard\RasmiOnline.Dashboard.csproj", "{23A5F64E-2562-47A4-838C-33F98076664F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RasmiOnline.Console", "RasmiOnline.Console\RasmiOnline.Console.csproj", "{27DC0A03-0D99-4B25-AADC-48D33FDFF272}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RasmiOnline.Domain", "RasmiOnline.Domain\RasmiOnline.Domain.csproj", "{FB6CCBF6-0CCB-4A8F-BFEF-44A6D480C653}"
@@ -21,10 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RasmiOnline.Business", "Ras
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RasmiOnline.DependencyResolver", "RasmiOnline.DependencyResolver\RasmiOnline.DependencyResolver.csproj", "{A1D22858-ED19-4B4F-B0FC-8FE5AE7F38E4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".WinService", ".WinService", "{5077768D-A69F-447F-97D5-0FB1B283B9FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RasmiOnline.MessagingPool", "RasmiOnline.MessagingPool\RasmiOnline.MessagingPool.csproj", "{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,18 +29,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Debug|x64.Build.0 = Debug|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Debug|x86.Build.0 = Debug|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Release|x64.ActiveCfg = Release|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Release|x64.Build.0 = Release|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Release|x86.ActiveCfg = Release|Any CPU
-		{23A5F64E-2562-47A4-838C-33F98076664F}.Release|x86.Build.0 = Release|Any CPU
 		{27DC0A03-0D99-4B25-AADC-48D33FDFF272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27DC0A03-0D99-4B25-AADC-48D33FDFF272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27DC0A03-0D99-4B25-AADC-48D33FDFF272}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -119,101 +101,19 @@ Global
 		{A1D22858-ED19-4B4F-B0FC-8FE5AE7F38E4}.Release|x64.Build.0 = Release|Any CPU
 		{A1D22858-ED19-4B4F-B0FC-8FE5AE7F38E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{A1D22858-ED19-4B4F-B0FC-8FE5AE7F38E4}.Release|x86.Build.0 = Release|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Debug|x64.Build.0 = Debug|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Debug|x86.Build.0 = Debug|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Release|x64.ActiveCfg = Release|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Release|x64.Build.0 = Release|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Release|x86.ActiveCfg = Release|Any CPU
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{23A5F64E-2562-47A4-838C-33F98076664F} = {D4390200-530E-4EEF-B2B1-557534608D19}
 		{27DC0A03-0D99-4B25-AADC-48D33FDFF272} = {D4390200-530E-4EEF-B2B1-557534608D19}
 		{FB6CCBF6-0CCB-4A8F-BFEF-44A6D480C653} = {6D3B1AC1-AFA1-4A21-A6BE-2D07CB4F6F05}
 		{261D2408-3F55-46D2-A404-3D2F560FC6D2} = {6D3B1AC1-AFA1-4A21-A6BE-2D07CB4F6F05}
 		{C5C3F3F4-3D29-4A4C-B7B3-A53620C3ABB0} = {6D3B1AC1-AFA1-4A21-A6BE-2D07CB4F6F05}
 		{99E097BB-A9ED-4775-8265-1C817022B0C8} = {6D3B1AC1-AFA1-4A21-A6BE-2D07CB4F6F05}
 		{A1D22858-ED19-4B4F-B0FC-8FE5AE7F38E4} = {6D3B1AC1-AFA1-4A21-A6BE-2D07CB4F6F05}
-		{ACF1C6BB-B60A-45F6-A2ED-D4D3B7117CC1} = {5077768D-A69F-447F-97D5-0FB1B283B9FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A347A92-EE07-400B-9366-61610508C05A}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mhakarimi.visualstudio.com/
-		SccProjectUniqueName0 = RasmiOnline.Dashboard\\RasmiOnline.Dashboard.csproj
-		SccProjectTopLevelParentUniqueName0 = RasmiOnline.sln
-		SccProjectName0 = RasmiOnline.Dashboard
-		SccLocalPath0 = RasmiOnline.Dashboard
-		SccProjectUniqueName1 = RasmiOnline.Console\\RasmiOnline.Console.csproj
-		SccProjectTopLevelParentUniqueName1 = Rasmi724.sln
-		SccProjectName1 = RasmiOnline.Console
-		SccLocalPath1 = RasmiOnline.Console
-		SccProjectUniqueName2 = RasmiOnline.Domain\\RasmiOnline.Domain.csproj
-		SccProjectTopLevelParentUniqueName2 = Rasmi724.sln
-		SccProjectName2 = RasmiOnline.Domain
-		SccLocalPath2 = RasmiOnline.Domain
-		SccProjectUniqueName3 = RasmiOnline.Data\\RasmiOnline.Data.csproj
-		SccProjectTopLevelParentUniqueName3 = Rasmi724.sln
-		SccProjectName3 = RasmiOnline.Data
-		SccLocalPath3 = RasmiOnline.Data
-		SccProjectUniqueName4 = RasmiOnline.SharedPreference\\RasmiOnline.SharedPreference.csproj
-		SccProjectTopLevelParentUniqueName4 = Rasmi724.sln
-		SccProjectName4 = RasmiOnline.SharedPreference
-		SccLocalPath4 = RasmiOnline.SharedPreference
-		SccProjectUniqueName5 = RasmiOnline.Business\\RasmiOnline.Business.csproj
-		SccProjectTopLevelParentUniqueName5 = Rasmi724.sln
-		SccProjectName5 = RasmiOnline.Business
-		SccLocalPath5 = RasmiOnline.Business
-		SccProjectUniqueName6 = RasmiOnline.DependencyResolver\\RasmiOnline.DependencyResolver.csproj
-		SccProjectTopLevelParentUniqueName6 = Rasmi724.sln
-		SccProjectName6 = RasmiOnline.DependencyResolver
-		SccLocalPath6 = RasmiOnline.DependencyResolver
-		SccProjectUniqueName7 = RasmiOnline.MessagingPool\\RasmiOnline.MessagingPool.csproj
-		SccProjectTopLevelParentUniqueName7 = Rasmi724.sln
-		SccProjectName7 = RasmiOnline.MessagingPool
-		SccLocalPath7 = RasmiOnline.MessagingPool
-		SccLocalPath8 = .
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mhakarimi.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Rasmi724.Domain\\Rasmi724.Domain.csproj
-		SccProjectTopLevelParentUniqueName1 = Rasmi724.sln
-		SccProjectName1 = Rasmi724.Domain
-		SccLocalPath1 = Rasmi724.Domain
-		SccProjectUniqueName2 = Rasmi724.Data\\Rasmi724.Data.csproj
-		SccProjectTopLevelParentUniqueName2 = Rasmi724.sln
-		SccProjectName2 = Rasmi724.Data
-		SccLocalPath2 = Rasmi724.Data
-		SccProjectUniqueName3 = Rasmi724.DependencyResolver\\Rasmi724.DependencyResolver.csproj
-		SccProjectTopLevelParentUniqueName3 = Rasmi724.sln
-		SccProjectName3 = Rasmi724.DependencyResolver
-		SccLocalPath3 = Rasmi724.DependencyResolver
-		SccProjectUniqueName4 = Rasmi724.SharedPreference\\Rasmi724.SharedPreference.csproj
-		SccProjectTopLevelParentUniqueName4 = Rasmi724.sln
-		SccProjectName4 = Rasmi724.SharedPreference
-		SccLocalPath4 = Rasmi724.SharedPreference
-		SccProjectUniqueName5 = Rasmi724.Business\\Rasmi724.Business.csproj
-		SccProjectTopLevelParentUniqueName5 = Rasmi724.sln
-		SccProjectName5 = Rasmi724.Business
-		SccLocalPath5 = Rasmi724.Business
-		SccProjectUniqueName6 = Rasmi724.Console\\Rasmi724.Console.csproj
-		SccProjectTopLevelParentUniqueName6 = Rasmi724.sln
-		SccProjectName6 = Rasmi724.Console
-		SccLocalPath6 = Rasmi724.Console
 	EndGlobalSection
 EndGlobal
